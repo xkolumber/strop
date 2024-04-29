@@ -53,9 +53,9 @@ const Navbar = () => {
         <Image
           src={"/logo.svg"}
           alt="logo"
-          width={100}
+          width={0}
           height={0}
-          className="w-[150px] h-full  navbar_left object-contain"
+          className="w-[150px] h-[30px]  navbar_left object-contain"
         />
       </Link>
       <div className="hidden xl:flex flex-row gap-12 items-center">
