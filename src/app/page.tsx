@@ -4,6 +4,7 @@ import HomePagePanel from "./Components/HomePageComponents/HomePagePanel";
 import HomePageBratislava from "./Components/HomePageComponents/HomePageBratislava";
 import HomePageBlogSection from "./Components/HomePageComponents/HomePageBlogSection";
 import HomePageTechnical from "./Components/HomePageComponents/HomePageTechnical";
+import HomePageInfo from "./Components/HomePageComponents/HomePageInfo";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <HomePageBratislava />
       <HomePageBlogSection />
       <HomePageTechnical />
+      <HomePageInfo />
     </main>
   );
 }
