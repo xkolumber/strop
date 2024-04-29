@@ -3,6 +3,7 @@ import HomePageBestSolution from "./Components/HomePageComponents/HomePageBestSo
 import HomePageBuildFast from "./Components/HomePageComponents/HomePageBuildFast";
 import HomePagePanel from "./Components/HomePageComponents/HomePagePanel";
 import HomePageBratislava from "./Components/HomePageComponents/HomePageBratislava";
+import HomePageBlogSection from "./Components/HomePageComponents/HomePageBlogSection";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <HomePageBuildFast />
       <HomePagePanel />
       <HomePageBratislava />
+      <HomePageBlogSection />
     </main>
   );
 }
