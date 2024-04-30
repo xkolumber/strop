@@ -62,7 +62,7 @@ const Navbar = () => {
         <Link href={"/produkty"}>Domov</Link>
         <Link href={"/o-nas"}>O nás</Link>
         <Link href={"/kontakt"}>Stroné panely</Link>
-        <Link href={"/kontakt"}>Pre profesionálov</Link>
+        <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
         <Link href={"/kontakt"}>Blog</Link>
         <Link className="" href={"/kontakt"}>
           Kontakt
@@ -105,6 +105,7 @@ const Navbar = () => {
         >
           O nás
         </Link>
+        <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
         <Link
           href={"/kontakt"}
           className="nav__item"
