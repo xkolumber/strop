@@ -13,7 +13,7 @@ const IconArrow = ({ isHovered }: Props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={`-ml-1 transform ${
-        isHovered ? "-rotate-45" : "rotate-0"
+        isHovered ? "rotate-45" : "rotate-0"
       } cursor-pointer transition-transform ease-in duration-75`}
     >
       <path
