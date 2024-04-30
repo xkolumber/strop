@@ -1,13 +1,11 @@
 import Image from "next/image";
 import React from "react";
+import ButtonElement from "../ButtonElement";
 
 const HomePageBestSolution = () => {
   return (
     <div className="main_section additional_padding">
-      <div
-        className="flex flex-col md:flex-row justify-between
-      "
-      >
+      <div className="flex flex-col md:flex-row justify-between mb-8">
         <h2 className="md:w-[60%]">Najlepšie riešenie pre Vašu stavbu</h2>
 
         <div className="flex flex-col md:w-[40%]">
@@ -19,13 +17,8 @@ const HomePageBestSolution = () => {
             prístup ku každému klientovi.
           </p>
           <div className="flex flex-row gap-4">
-            <button
-              className="btn btn--tertiary
-          "
-            >
-              Produkty
-            </button>
-            <button className="btn btn--tertiary">Kontaktujte nás</button>
+            <ButtonElement text="Produkty" />
+            <ButtonElement text="Kontaktujte nás" />
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import OneBlogSection from "../OneBlogSection";
+import ButtonElement from "../ButtonElement";
 
 const HomePageBlogSection = () => {
   return (
@@ -10,7 +11,9 @@ const HomePageBlogSection = () => {
         <OneBlogSection />
         <OneBlogSection />
       </div>
-      <button className="btn btn--secondary">Všetky blogy</button>
+      <div className="mt-8">
+        <ButtonElement text="Všetky blogy" />
+      </div>
     </div>
   );
 };

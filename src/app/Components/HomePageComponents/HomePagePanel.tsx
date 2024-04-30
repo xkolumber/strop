@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import ButtonElement from "../ButtonElement";
 
 const HomePagePanel = () => {
   return (
@@ -30,7 +31,7 @@ const HomePagePanel = () => {
             kategóriách: základný model (200/1) zosilnený model (200/2) a
             najpevnejší panel (200/3).
           </p>
-          <button className="btn btn--secondary">Zistiť viac</button>
+          <ButtonElement text="Zistiť viac" />
           <p>Stropný panel</p>
           <p>Stropný panel</p>
           <p>Stropný panel</p>

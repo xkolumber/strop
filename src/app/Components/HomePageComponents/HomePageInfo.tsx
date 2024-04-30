@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import ButtonElement from "../ButtonElement";
 
 const HomePageInfo = () => {
   return (
@@ -31,7 +32,7 @@ const HomePageInfo = () => {
             Garantujeme efektívny prístup a komplexný servis vo váš prospech.
             Naším cieľom je vaša spokojnosť.
           </p>
-          <button className="btn btn--secondary">Zistiť viac</button>
+          <ButtonElement text="Zistiť viac" />
         </div>
         <Image
           src={"/panel.jpg"}

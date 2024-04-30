@@ -1,5 +1,23 @@
 import React from "react";
 import Image from "next/image";
+import ButtonElement from "../ButtonElement";
+
+const zakazky = [
+  { title: "Senec - Shell" },
+  { title: "Miloslav" },
+  { title: "Šamorín" },
+  { title: "Čavoj" },
+  { title: "Nová Ves" },
+  { title: "Trnava" },
+  { title: "Púchov" },
+  { title: "Senica" },
+  { title: "Nitrianske Pravno" },
+  { title: "Veľký Biel" },
+  { title: "Piešťany" },
+  { title: "Cabaj Čápor" },
+  { title: "Nemšová" },
+  { title: "Lubina" },
+];
 
 const HomePageBratislava = () => {
   return (
@@ -11,9 +29,12 @@ const HomePageBratislava = () => {
           sme sa stali stabilným partnerom stavebných spoločností na území
           celého Slovenska.
         </p>
-        <button className="btn btn--secondary">Zistiť viac</button>
-        <button className="btn btn--secondary">Zistiť viac</button>
-        <button className="btn btn--secondary">Zistiť viac</button>
+
+        <div className="flex flex-wrap gap-8">
+          {zakazky.map((object, index) => (
+            <ButtonElement text={object.title} key={index} />
+          ))}
+        </div>
       </div>
       <div className="grid grid-cols-3 md:w-1/2 gap-4">
         <Image src={"/bratislava1.jpg"} alt="panel" width={500} height={500} />{" "}
