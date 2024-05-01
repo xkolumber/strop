@@ -9,6 +9,8 @@ import IconHamburger from "./Icons/IconHamburger";
 import { useEffect, useRef, useState } from "react";
 
 import IconCloseButton from "./Icons/IconCloseButton";
+import ButtonElement from "./ButtonElement";
+import ButtonElementNavbar from "./ButtonElementNavbar";
 
 const Navbar = () => {
   const [openWindow, setOpenWindow] = useState(false);
@@ -68,9 +70,13 @@ const Navbar = () => {
           Kontakt
         </Link>
       </div>
-      <div className="navbar_second_group2 navbar_right">
+
+      <div className="navbar_second_group2 navbar_right  ">
+        <div className="hidden xl:flex">
+          <ButtonElementNavbar text="Kontaktujte nás" />
+        </div>
         <div
-          className={` xl:hidden cursor-pointer`}
+          className={`xl:hidden cursor-pointer ${closeClicked && "hidden"} `}
           onClick={() => clickedButtonClose()}
         >
           <IconHamburger />
@@ -85,7 +91,7 @@ const Navbar = () => {
       >
         <span className="nav__item">
           <div
-            className="icon icon--white nav__close-button"
+            className={`icon icon--white nav__close-button `}
             onClick={() => clickedButtonClose()}
           >
             <IconCloseButton />
