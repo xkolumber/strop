@@ -22,7 +22,7 @@ const zakazky = [
 const HomePageBratislava = () => {
   return (
     <div className="main_section flex flex-col md:flex-row bg-primary">
-      <div className="flex flex-col w-1/2">
+      <div className="flex flex-col md:w-1/2">
         <h2>Bratislava - Ružinov</h2>
         <p>
           Máme za sebou mnoho komplikovaných stavebných projektov, vďaka ktorým
@@ -30,7 +30,7 @@ const HomePageBratislava = () => {
           celého Slovenska.
         </p>
 
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap gap-8 mt-8 mb-8">
           {zakazky.map((object, index) => (
             <ButtonElement text={object.title} key={index} />
           ))}
