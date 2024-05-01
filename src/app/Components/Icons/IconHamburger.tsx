@@ -1,9 +1,7 @@
-"use client";
 import { usePathname } from "next/navigation";
 import React from "react";
 
 const IconHamburger = () => {
-  const pathname = usePathname();
   return (
     <svg
       width="31"
@@ -14,21 +12,21 @@ const IconHamburger = () => {
     >
       <path
         d="M1 1L61 1.00001"
-        stroke={`${pathname === "/" ? "white" : "black"} `}
+        stroke={`white  `}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M1 25L61 25"
-        stroke={`${pathname === "/" ? "white" : "black"} `}
+        stroke={`white  `}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M31 13L61 13"
-        stroke={`${pathname === "/" ? "white" : "black"} `}
+        stroke={`white  `}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

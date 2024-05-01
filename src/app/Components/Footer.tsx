@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="main_section bg-black  w-full">
+    <footer className="main_section bg-black  w-full">
       <div className="flex flex-col md:flex-row justify-between items-start">
         <Image
           src={"/logo.svg"}
@@ -29,7 +29,7 @@ const Footer = () => {
       <div className="mt-4 md:mt-12 border-white border-t">
         <h6 className="text-white pt-4">GDPR</h6>
       </div>
-    </div>
+    </footer>
   );
 };
 

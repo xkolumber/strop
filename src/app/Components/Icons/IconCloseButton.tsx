@@ -18,7 +18,7 @@ const IconCloseButton = () => {
         {" "}
         <path
           d="M5 5L19 19M5 19L19 5"
-          stroke="#000000"
+          stroke="white"
           strokeWidth="1"
           strokeLinecap="round"
           strokeLinejoin="round"
