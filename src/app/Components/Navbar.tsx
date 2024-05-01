@@ -61,7 +61,7 @@ const Navbar = () => {
       <div className="hidden xl:flex flex-row gap-12 items-center">
         <Link href={"/produkty"}>Domov</Link>
         <Link href={"/o-nas"}>O nás</Link>
-        <Link href={"/kontakt"}>Stroné panely</Link>
+        <Link href={"/stropne-panely"}>Stroné panely</Link>
         <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
         <Link href={"/kontakt"}>Blog</Link>
         <Link className="" href={"/kontakt"}>
@@ -104,6 +104,13 @@ const Navbar = () => {
           onClick={() => clickedButtonClose()}
         >
           O nás
+        </Link>
+        <Link
+          href={"/stropne-panely"}
+          className="nav__item"
+          onClick={() => clickedButtonClose()}
+        >
+          Stropné panely
         </Link>
         <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
         <Link
