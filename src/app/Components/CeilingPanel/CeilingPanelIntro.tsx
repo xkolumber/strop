@@ -1,8 +1,44 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import ButtonElement from "../ButtonElement";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { createSlug } from "../HomePageComponents/HomePagePanel";
+import ButtonElementPanel from "../ButtonElementPanel";
+
+const buttons = [
+  { typ: "200", nazov: "Stropný panel 200" },
+  { typ: "265", nazov: "Stropný panel 265" },
+  { typ: "320", nazov: "Stropný panel 320" },
+  { typ: "400", nazov: "Stropný panel 400" },
+];
 
 const CeilingPanelIntro = () => {
+  const router = useRouter();
+
+  const [choosenType, setChoosenType] = useState("");
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const search = searchParams.get("typ");
+    if (search === null) {
+      router.push("/error");
+    } else {
+      const match = search.match(/\d+/);
+      if (match != null) {
+        setChoosenType(match?.[0]);
+      }
+    }
+  }, [router]);
+
+  const handleClick = (nazov: string, typ: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("typ", `stropny-panel-` + typ);
+    window.history.replaceState({}, "", url.toString());
+
+    setChoosenType(typ);
+  };
+
   return (
     <div className="main_section additional_padding">
       <div className="flex flex-col md:flex-row justify-between mb-8">
@@ -20,10 +56,18 @@ const CeilingPanelIntro = () => {
         </div>
       </div>
       <div className="flex flex-row gap-4 mb-16">
-        <ButtonElement text="Typ 200" />
-        <ButtonElement text="Typ 265" />
-        <ButtonElement text="Typ 320" />
-        <ButtonElement text="Typ 400" />
+        {buttons.map((button, index) => (
+          <div
+            className=""
+            onClick={() => handleClick(button.nazov, button.typ)}
+            key={index}
+          >
+            <ButtonElementPanel
+              text={`Typ ${button.typ}`}
+              isChoosen={button.typ === choosenType}
+            />
+          </div>
+        ))}
       </div>
       <Image
         src={"/intro.jpg"}

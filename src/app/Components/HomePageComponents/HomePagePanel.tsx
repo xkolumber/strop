@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ButtonElement from "../ButtonElement";
 import IconPlus from "../Icons/IconPlus";
+import Link from "next/link";
 
 const panels = [
   {
@@ -35,6 +36,20 @@ const panels = [
   },
 ];
 
+export function createSlug(title: string): string {
+  const slug = title
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-");
+
+  return slug;
+}
+
 const HomePagePanel = () => {
   const [choosenIndex, setChoosenIndex] = useState(0);
 
@@ -55,13 +70,21 @@ const HomePagePanel = () => {
             <h2>{panels[choosenIndex].nazov}</h2>
             <p>{panels[choosenIndex].popis1}</p>
             <p className="mt-4">{panels[choosenIndex].popis2}</p>
-            <ButtonElement text="Zistiť viac" />
+            <Link
+              className=""
+              href={`stropne-panely?typ=${createSlug(
+                panels[choosenIndex].nazov
+              )}`}
+            >
+              <ButtonElement text="Zistiť viac" />
+            </Link>
           </div>
           <div className="flex flex-col">
             {panels.map((panel, index) => (
               <div
                 className="flex flex-row justify-between"
                 onClick={() => setChoosenIndex(index)}
+                key={index}
               >
                 {index != choosenIndex && (
                   <>
