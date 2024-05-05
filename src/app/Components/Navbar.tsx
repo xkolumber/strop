@@ -61,9 +61,9 @@ const Navbar = () => {
         />
       </Link>
       <div className="hidden xl:flex flex-row gap-12 items-center">
-        <Link href={"/produkty"}>Domov</Link>
+        <Link href={"/"}>Domov</Link>
         <Link href={"/o-nas"}>O nás</Link>
-        <Link href={"/stropne-panely"}>Stroné panely</Link>
+        <Link href={"/stropne-panely"}>Stropné panely</Link>
         <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
         <Link href={"/blog"}>Blog</Link>
         <Link className="" href={"/kontakt"}>
@@ -97,13 +97,7 @@ const Navbar = () => {
             <IconCloseButton />
           </div>
         </span>
-        <Link
-          href={"/produkty"}
-          className="nav__item"
-          onClick={() => clickedButtonClose()}
-        >
-          Produkty
-        </Link>
+
         <Link
           href={"/o-nas"}
           className="nav__item"

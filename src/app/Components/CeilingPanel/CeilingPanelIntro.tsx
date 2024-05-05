@@ -21,9 +21,7 @@ const CeilingPanelIntro = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const search = searchParams.get("typ");
-    if (search === null) {
-      router.push("/error");
-    } else {
+    if (search != null) {
       const match = search.match(/\d+/);
       if (match != null) {
         setChoosenType(match?.[0]);
