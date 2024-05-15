@@ -16,7 +16,7 @@ const ButtonElementNavbar = ({ text }: Props) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex border-white border-r h-full items-center   min-w-[90px]">
-        <p className="p-3 mr-6 line-clamp-1 whitespace-nowrap overflow-hidden">
+        <p className="p-3 mr-6 line-clamp-1 whitespace-nowrap overflow-hidden text-white">
           {text}
         </p>
       </div>

@@ -1,0 +1,161 @@
+import {
+  Body,
+  Column,
+  Container,
+  Heading,
+  Html,
+  Img,
+  Link,
+  Preview,
+  Row,
+  Section,
+  Text,
+} from "@react-email/components";
+import { Tailwind } from "@react-email/tailwind";
+
+const EmailSentPdfToUser = () => {
+  const data = [
+    {
+      column1: "Game Ready + bandáž koleno",
+      column2: "1 ks",
+      column3: "5€ / deň",
+    },
+    { column1: "Duálna hadica", column2: "1 ks", column3: "15€ / deň" },
+    { column1: "Bandáž kolenný kĺb", column2: "1 ks", column3: "5€ / deň" },
+  ];
+  return (
+    <Html>
+      <Tailwind
+        config={{
+          theme: {
+            extend: {
+              colors: {
+                brand: "#2250f4",
+                offwhite: "#fafbfb",
+              },
+              spacing: {
+                0: "0px",
+                20: "20px",
+                45: "45px",
+              },
+            },
+          },
+        }}
+      >
+        <Body className="bg-offwhite text-base font-sans">
+          <Container className="rounded-3xl ">
+            <Section>
+              <Img
+                src="https://firebasestorage.googleapis.com/v0/b/game-ready-cf008.appspot.com/o/fotky_email%2Fgr_logo.png?alt=media&token=1367f208-bd61-4c47-8501-8bfcf395b530"
+                width="120"
+                height="36"
+                alt="Slack"
+                className="mt-4 mb-4 object-contain"
+              />
+            </Section>
+
+            <Img
+              src="https://firebasestorage.googleapis.com/v0/b/game-ready-cf008.appspot.com/o/fotky_email%2Fgr_foto.jpg?alt=media&token=4cd465d7-86b5-4da7-a515-a5722b31d810"
+              alt="Popis"
+              className="object-contain rounded-t-3xl max-w-[100%]"
+            />
+            <Container className="bg-white rounded-b-3xl p-[25px]">
+              {/* <Heading className="text-center my-0 leading-8">
+                  Ďakujem za Vašu objednávku.
+                </Heading> */}
+
+              <Section className="text-center">
+                <Text style={paragraph} key={1}>
+                  Ďakujeme, že máte záujem o naše PDF súbory.
+                </Text>
+              </Section>
+
+              <Text style={paragraph} key={5}>
+                Vaše pdf súbory sa nachádzajú v prílohe. V prípade akýchkoľvek
+                otázok, neváhajte sa na nás obratiť.
+              </Text>
+
+              <Text style={paragraph} key={5}>
+                S pozdravom
+              </Text>
+              <Text style={paragraph} key={5}>
+                Tím Strop
+              </Text>
+            </Container>
+          </Container>
+
+          <Container className="text-center">
+            <Row style={categories.container}>
+              <Column align="center">
+                <Link href="https://www.facebook.com">
+                  <Img
+                    src="https://firebasestorage.googleapis.com/v0/b/website-4d9ed.appspot.com/o/logo%2Ffacebook_logo.png?alt=media&token=02dc67cf-c527-4355-8c72-7013319b6e65"
+                    className="w-6 h-6 object-contain rounded-lg"
+                  />
+                </Link>
+              </Column>
+              <Column align="center">
+                <Link href="https://www.instagram.com">
+                  <Img
+                    src="https://firebasestorage.googleapis.com/v0/b/website-4d9ed.appspot.com/o/logo%2Finstagram_logo.png?alt=media&token=51954141-8c2b-4f24-b286-ce45a898093a"
+                    className="w-6 h-6 object-contain"
+                  />
+                </Link>
+              </Column>
+              <Column align="center">
+                <a href="tel:+421903243393">
+                  <Img
+                    src="https://firebasestorage.googleapis.com/v0/b/website-4d9ed.appspot.com/o/logo%2Ftelephone.png?alt=media&token=bf11ac8d-99ee-4536-a62b-a98d3c1dace8"
+                    className="w-6 h-6 object-contain"
+                  />
+                </a>
+              </Column>
+            </Row>
+            <Text className="text-center text-gray-400 mb-45">
+              © 2024 | Strop, SLOVENSKO |{" "}
+              <Link
+                href="https://www.energysportrent.sk"
+                className=" text-gray-400"
+              >
+                www.strop.sk
+              </Link>
+            </Text>
+          </Container>
+        </Body>
+      </Tailwind>
+    </Html>
+  );
+};
+
+const paragraph = {
+  fontSize: 16,
+};
+
+const adresss = {
+  fontSize: 14,
+  margin: 0,
+};
+
+const container = {
+  padding: 0,
+};
+
+const containerStyle = {
+  backgroundColor: "white",
+  borderRadius: "20px",
+  padding: "20px", // Default padding for all screen sizes
+};
+
+const categories = {
+  container: {
+    width: "370px",
+    // margin: "auto",
+    paddingTop: "12px",
+  },
+  text: {
+    fontWeight: "500",
+    color: "#000",
+  },
+};
+
+export default EmailSentPdfToUser;

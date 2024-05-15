@@ -14,8 +14,8 @@ export async function POST(req: NextRequest) {
   });
   try {
     const data = await resend.emails.send({
-      from: "symbiom@symbiom.sk",
-      to: "symbiom@symbiom.sk",
+      from: "info@energysportrent.sk",
+      to: "lubosk158@gmail.com",
       subject: "Dotaz od klienta z webstránky",
       html: emailHtml,
     });

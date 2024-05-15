@@ -1,7 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import ButtonElement from "../ButtonElement";
 import IconDownload from "../Icons/IconDownload";
+import ButtonElementNavbar from "../ButtonElementNavbar";
+import IconCheck from "../Icons/IconCheck";
+import { ClipLoader } from "react-spinners";
 
 const downloads = [
   {
@@ -56,8 +63,96 @@ const downloads = [
 
 const ProfesionalDownload = () => {
   const [hoveredItem, setHoveredItem] = useState(-1);
+  const [clickedObject, setClickedObject] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [finalEmail, setFinalEmail] = useState("");
+  const popupRef = useRef<HTMLDivElement>(null);
+  const [choosenIndex, setChoosenIndex] = useState(-1);
+  const [popUpTrue, setPopUpTrue] = useState(false);
+  const [checkData, setCheckData] = useState(false);
+
+  const handleClickedObject = (index: number) => {
+    setChoosenIndex(index);
+    setPopUpTrue(true);
+  };
+
+  const link =
+    "https://firebasestorage.googleapis.com/v0/b/game-ready-cf008.appspot.com/o/hlavne_produkty%2FDu%C3%A1lna%20hadica%2FGame-Ready-Wrap-UM-Ankle-EN-704576B.pdf?alt=media&token=1b949d29-dae2-47c1-a0d4-62d7eeb79b99";
+
+  const { register, handleSubmit, reset } = useForm<FormData>();
+
+  const handleSendEmail = async () => {
+    console.log("zaciatok");
+
+    if (!checkData) {
+      toast.error("Zaškrtnite súhlas.");
+      return;
+    }
+
+    if (!finalEmail.includes("@")) {
+      toast.error("Email nemá správny tvar");
+      return;
+    }
+    if (finalEmail.length < 5) {
+      toast.error("Email nemá správny tvar");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/send-pdf-to-client", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: finalEmail,
+          link: link,
+        }),
+      });
+
+      if (response.ok) {
+        reset();
+        toast.success("Pdf súbory boli zaslané na Váš email.");
+        console.log("Email sent successfully!");
+        setIsLoading(false);
+        setFinalEmail("");
+        setPopUpTrue(false);
+        setCheckData(false);
+      } else {
+        console.error("Failed to send email");
+        setIsLoading(false);
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        setPopUpTrue(false);
+      }
+    };
+
+    if (popUpTrue) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [popUpTrue]);
+
   return (
     <div className="main_section bg-primary">
+      <Toaster />
       <p>[Na stiahnutie]</p>
       <h2>Na stiahnutie</h2>
       <p>
@@ -80,6 +175,7 @@ const ProfesionalDownload = () => {
             key={index}
             onMouseEnter={() => setHoveredItem(index)}
             onMouseLeave={() => setHoveredItem(-1)}
+            onClick={() => handleClickedObject(index)}
           >
             <p
               className={`${
@@ -93,6 +189,50 @@ const ProfesionalDownload = () => {
           </div>
         ))}
       </div>
+
+      {popUpTrue && (
+        <>
+          <div className="behind_card_background"></div>
+          <div className="popup_message" ref={popupRef}>
+            <form className="send_email">
+              <h4 className="text-center text-white mb-8">Zadajte e-mail</h4>
+
+              <input
+                type="email"
+                id="email"
+                value={finalEmail}
+                onChange={(e) => setFinalEmail(e.target.value)}
+                placeholder="*Email"
+                required
+                className="w-full"
+              />
+              <div className="flex flex-row gap-8 items-center pt-4">
+                <div className="">
+                  <div
+                    className="square cursor-pointer"
+                    onClick={() => setCheckData((prevState) => !prevState)}
+                  >
+                    {" "}
+                    <IconCheck deliveryAdress={checkData} />
+                  </div>
+                </div>
+                <p className="text-white">Súhlasím so spracovaním údajov</p>
+              </div>
+              <div className="flex flex-row gap-4 mt-4 w-full justify-center items-center">
+                <div
+                  className=" flex justify-center "
+                  onClick={() => handleSendEmail()}
+                >
+                  <ButtonElementNavbar text="Odoslať" />
+                </div>
+                {isLoading && (
+                  <ClipLoader size={20} color={"#ffffff"} loading={isLoading} />
+                )}
+              </div>
+            </form>
+          </div>
+        </>
+      )}
     </div>
   );
 };
