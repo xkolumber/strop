@@ -16,7 +16,7 @@ const HomePageBestSolution = () => {
             rozvíja. Sme presvedčení, že kľúčom k úspechu je individuálny
             prístup ku každému klientovi.
           </p>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-4 mt-4">
             <ButtonElement text="Produkty" />
             <ButtonElement text="Kontaktujte nás" />
           </div>

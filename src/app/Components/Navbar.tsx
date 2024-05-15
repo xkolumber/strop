@@ -72,9 +72,9 @@ const Navbar = () => {
       </div>
 
       <div className="navbar_second_group2 navbar_right  ">
-        <div className="hidden xl:flex">
+        <Link className="hidden xl:flex" href={"/kontakt"}>
           <ButtonElementNavbar text="Kontaktujte nás" />
-        </div>
+        </Link>
         <div
           className={`xl:hidden cursor-pointer ${closeClicked && "hidden"} `}
           onClick={() => clickedButtonClose()}
@@ -119,7 +119,9 @@ const Navbar = () => {
         >
           Blog
         </Link>
-        <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
+        <Link href={"/pre-profesionalov"} className="nav__item">
+          Pre profesionálov
+        </Link>
         <Link
           href={"/kontakt"}
           className="nav__item"

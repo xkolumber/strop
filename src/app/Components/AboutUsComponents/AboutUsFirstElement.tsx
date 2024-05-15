@@ -37,7 +37,7 @@ const AboutUsFirstElement = () => {
             moderné riešenia pre slovenský stavebný priemysel. Sme stabilným
             partnerom spoločností po celom Slovensku.
           </p>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-4 mt-4">
             <ButtonElement text="Kontaktujte nás" />
           </div>
         </div>
@@ -50,10 +50,10 @@ const AboutUsFirstElement = () => {
         height={1000}
         className="object-cover w-full h-full"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 border-t border-black">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4 ">
         {about_us_data.map((object, index) => (
           <div
-            className="flex flex-row gap-4  p-4 border-b border-black"
+            className="flex flex-row gap-4  p-4 items-center border-b border-black"
             key={index}
           >
             {object.icon}

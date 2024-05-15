@@ -70,6 +70,7 @@ const ProfesionalDownload = () => {
   const [choosenIndex, setChoosenIndex] = useState(-1);
   const [popUpTrue, setPopUpTrue] = useState(false);
   const [checkData, setCheckData] = useState(false);
+  const [finalMessage, setFinalMessage] = useState(false);
 
   const handleClickedObject = (index: number) => {
     setChoosenIndex(index);
@@ -113,12 +114,12 @@ const ProfesionalDownload = () => {
 
       if (response.ok) {
         reset();
-        toast.success("Pdf súbory boli zaslané na Váš email.");
         console.log("Email sent successfully!");
         setIsLoading(false);
         setFinalEmail("");
         setPopUpTrue(false);
         setCheckData(false);
+        setFinalMessage(true);
       } else {
         console.error("Failed to send email");
         setIsLoading(false);
@@ -228,6 +229,28 @@ const ProfesionalDownload = () => {
                 {isLoading && (
                   <ClipLoader size={20} color={"#ffffff"} loading={isLoading} />
                 )}
+              </div>
+            </form>
+          </div>
+        </>
+      )}
+
+      {finalMessage && (
+        <>
+          <div className="behind_card_background"></div>
+          <div className="popup_message" ref={popupRef}>
+            <form className="send_email">
+              <h4 className="text-center text-white mb-8">
+                Ďakujeme, PDF nájdete vo svojom inboxe :)
+              </h4>
+
+              <div className="flex flex-row gap-4 mt-4 w-full justify-center items-center">
+                <div
+                  className=" flex justify-center "
+                  onClick={() => setFinalMessage(false)}
+                >
+                  <ButtonElementNavbar text="Naspäť" />
+                </div>
               </div>
             </form>
           </div>

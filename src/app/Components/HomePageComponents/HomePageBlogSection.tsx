@@ -5,7 +5,7 @@ import ButtonElement from "../ButtonElement";
 const HomePageBlogSection = () => {
   return (
     <div className="main_section">
-      <p>[Blog]</p>
+      <p className="mb-4">[ Blog ]</p>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
         <OneBlogSection />
         <OneBlogSection />

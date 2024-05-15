@@ -1,16 +1,41 @@
 import React from "react";
 import Image from "next/image";
+import ButtonElement from "../ButtonElement";
+import IconStar from "../Icons/IconStar";
+import IconUser from "../Icons/IconUser";
+import IconBuilding from "../Icons/IconBuilding";
+import Link from "next/link";
 
 const HomePageBuildFast = () => {
+  const data = [
+    {
+      icon: <IconStar />,
+      text: "20 rokov na slovenskom trhu",
+    },
+    {
+      icon: <IconUser />,
+      text: "9 772 spokojných zákazníkov",
+    },
+    {
+      icon: <IconBuilding />,
+      text: "254 miest na Slovensku",
+    },
+    {
+      icon: <IconStar />,
+      text: "27 838 m² ročne",
+    },
+  ];
+
   return (
     <div className="bg-secondary">
       <div className="main_section ">
+        <p>[ O nás ]</p>
         <h2>
           Stavajte rýchlejšie a efektívnejšie vďaka novým predpätým stropným
           panelom. Prinášame nové riešenia do sveta stavieb!
         </h2>
         <div className="flex flex-col  md:flex-row">
-          <div className="md:w-[30%]">
+          <div className="md:w-[30%] flex flex-col justify-between">
             <p>
               Pomôžeme vám urýchliť proces stavby a ušetriť finančné
               prostriedky. Inšpirujte sa novými možnosťami stavebného priemyslu,
@@ -24,16 +49,26 @@ const HomePageBuildFast = () => {
               sú tu pre vás od projekcie až po technickú kontrolu správnosti
               zabudovania našich produktov.
             </p>
-            <button className="btn btn--tertiary">Cenová ponuka</button>
+            <Link className="mt-4" href={"/kontakt"}>
+              <ButtonElement text="Cenová ponuka" />
+            </Link>
+            <div className="flex flex-col gap-4 mt-8 mb-8">
+              {data.map((one_data, index) => (
+                <div className="flex flex-row gap-4 items-center" key={index}>
+                  <div className="w-10">{one_data.icon}</div>
+                  <p className="font-light">{one_data.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex flex-row md:w-[70%]">
+          <div className="flex flex-col md:flex-row md:w-[70%] gap-8">
             <Image
               src={"/build_faster1.jpg"}
               alt="Intro"
               width={100}
               height={100}
               quality={100}
-              className="object-contain w-full h-full"
+              className=" w-full h-[200px] object-cover md:h-full rounded-[8px]"
             />
             <Image
               src={"/build_faster2.jpg"}
@@ -41,7 +76,7 @@ const HomePageBuildFast = () => {
               width={100}
               height={1000}
               quality={100}
-              className="object-contain w-full h-full"
+              className="object-contai w-full h-[200px] md:h-full rounded-[8px]"
             />
           </div>
         </div>

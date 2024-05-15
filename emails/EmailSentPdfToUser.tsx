@@ -14,15 +14,6 @@ import {
 import { Tailwind } from "@react-email/tailwind";
 
 const EmailSentPdfToUser = () => {
-  const data = [
-    {
-      column1: "Game Ready + bandáž koleno",
-      column2: "1 ks",
-      column3: "5€ / deň",
-    },
-    { column1: "Duálna hadica", column2: "1 ks", column3: "15€ / deň" },
-    { column1: "Bandáž kolenný kĺb", column2: "1 ks", column3: "5€ / deň" },
-  ];
   return (
     <Html>
       <Tailwind

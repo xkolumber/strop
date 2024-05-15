@@ -11,7 +11,7 @@ const HomePageTechnical = () => {
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2 h-[300px] object-cover"
+          className="w-full md:w-1/2 h-[300px] object-cover hidden md:block rounded-[8px]"
         />
         <div
           className="w-full md:w-1/2
@@ -24,7 +24,16 @@ const HomePageTechnical = () => {
             vyplniť e-mail a my vám zašleme dokumenty s potrebnými technickými
             špecifikáciami a detailami.
           </p>{" "}
-          <ButtonElement text="Zistiť viac" />
+          <div className="mt-4">
+            <ButtonElement text="Zistiť viac" />
+          </div>
+          <Image
+            src={"/panel.jpg"}
+            alt="panel"
+            width={500}
+            height={500}
+            className="w-full md:w-1/2 h-[300px] object-cover  md:hidden mt-6 rounded-[8px]"
+          />
         </div>
       </div>
     </div>

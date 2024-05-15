@@ -61,7 +61,7 @@ const HomePagePanel = () => {
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 hidden md:block"
         />
 
         <div className="justify-between flex flex-col">
@@ -76,25 +76,37 @@ const HomePagePanel = () => {
                 panels[choosenIndex].nazov
               )}`}
             >
-              <ButtonElement text="Zistiť viac" />
+              <div className="mt-4 mb-4">
+                <ButtonElement text="Zistiť viac" />
+              </div>
             </Link>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col border-t border-black ">
             {panels.map((panel, index) => (
-              <div
-                className="flex flex-row justify-between"
-                onClick={() => setChoosenIndex(index)}
-                key={index}
-              >
+              <>
                 {index != choosenIndex && (
-                  <>
-                    <div className="p">{panel.nazov}</div>
-                    <IconPlus />
-                  </>
+                  <div
+                    className="flex flex-row justify-between border-b border-black p-4 items-center cursor-pointer"
+                    onClick={() => setChoosenIndex(index)}
+                    key={index}
+                  >
+                    {" "}
+                    <>
+                      <div className="p">{panel.nazov}</div>
+                      <IconPlus />
+                    </>
+                  </div>
                 )}
-              </div>
+              </>
             ))}
           </div>
+          <Image
+            src={"/panel.jpg"}
+            alt="panel"
+            width={500}
+            height={500}
+            className="w-full md:w-1/2  md:hidden mt-8"
+          />
         </div>
       </div>
     </div>

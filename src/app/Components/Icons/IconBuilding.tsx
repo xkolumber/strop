@@ -4,7 +4,7 @@ const IconBuilding = () => {
   return (
     <svg
       width="19"
-      height="26"
+      height="22"
       viewBox="0 0 19 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

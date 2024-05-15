@@ -32,14 +32,16 @@ const HomePageInfo = () => {
             Garantujeme efektívny prístup a komplexný servis vo váš prospech.
             Naším cieľom je vaša spokojnosť.
           </p>
-          <ButtonElement text="Zistiť viac" />
+          <div className="mt-4 mb-4">
+            <ButtonElement text="Zistiť viac" />
+          </div>
         </div>
         <Image
           src={"/panel.jpg"}
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2 h-[300px] object-cover"
+          className="w-full md:w-1/2 h-[300px] object-cover rounded-[8px]"
         />
       </div>
     </div>
