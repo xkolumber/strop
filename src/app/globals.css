@@ -568,3 +568,44 @@ textarea {
   height: 18px;
   background-color: white;
 }
+
+/*Admin section */
+.products_admin p {
+  color: black;
+}
+
+.products_admin input[type="text"],
+.products_admin input[type="number"] {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid black;
+  height: 4.5rem;
+  font-size: 1.4rem;
+  width: 75%;
+  border-radius: 0px;
+}
+
+.product_admin_row {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  /* margin-bottom: 2rem; */
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+@media screen and (min-width: 768px) {
+  .product_admin_row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
