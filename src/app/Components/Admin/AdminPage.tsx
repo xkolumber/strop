@@ -15,7 +15,7 @@ const AdminPage = ({ data }: Props) => {
       <Link href={"/admin/novy-panel"} className="text-black mb-8">
         Pridať nový panel
       </Link>
-      <div className="flex flex-row">
+      <div className="flex flex-row gap-4">
         {data.map((product, index) => (
           <Link
             className=""
