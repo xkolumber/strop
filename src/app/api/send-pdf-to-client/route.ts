@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import EmailSentPdfToUser from "../../../../emails/EmailSentPdfToUser";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY!); //zmenit api key..
 
 export async function POST(req: NextRequest) {
   const { email, link } = await req.json();
