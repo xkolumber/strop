@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import "./globals.css";
+import { AuthContextProvider } from "./auth/Provider";
 
 export const metadata: Metadata = {
   title: "Strop",
@@ -47,10 +48,12 @@ export default function RootLayout({
   return (
     <html lang="sk">
       <body className={own_font.className}>
-        <Navbar />
+        <AuthContextProvider>
+          <Navbar />
 
-        {children}
-        <Footer />
+          {children}
+          <Footer />
+        </AuthContextProvider>
       </body>
     </html>
   );
