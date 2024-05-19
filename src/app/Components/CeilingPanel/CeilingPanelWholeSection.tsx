@@ -15,7 +15,7 @@ const CeilingPanelWholeSection = ({ data }: Props) => {
   return (
     <div>
       <CeilingPanelIntro data={data} />
-      <ProfesionalDownload data={data} />
+      {/* <ProfesionalDownload /> */}
       <CeilingPanelCut />
       <CeilingPanelCalculate />
       <HomePageBratislava />

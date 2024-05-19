@@ -1,17 +1,15 @@
 "use client";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import ButtonElement from "../ButtonElement";
-import IconDownload from "../Icons/IconDownload";
-import ButtonElementNavbar from "../ButtonElementNavbar";
-import IconCheck from "../Icons/IconCheck";
-import { ClipLoader } from "react-spinners";
 import { DownloadPdf, PanelProduct } from "@/app/firebase/interface";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
+import ButtonElementNavbar from "../ButtonElementNavbar";
 import ButtonElementPanel from "../ButtonElementPanel";
+import IconCheck from "../Icons/IconCheck";
+import IconDownload from "../Icons/IconDownload";
 
 interface Props {
   data: PanelProduct[];
@@ -42,7 +40,7 @@ const ProfesionalDownload = ({ data }: Props) => {
     }
   };
 
-  const { register, handleSubmit, reset } = useForm<FormData>();
+  const { reset } = useForm<FormData>();
 
   const handleSendEmail = async () => {
     console.log("zaciatok");
@@ -125,8 +123,6 @@ const ProfesionalDownload = ({ data }: Props) => {
       }
     }
   }, [router]);
-
-  console.log(choosenPanel);
 
   const handleClick = (typ: string) => {
     const url = new URL(window.location.href);
