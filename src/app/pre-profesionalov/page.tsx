@@ -12,7 +12,7 @@ const page = () => {
       <ProfesionalIntro />
       <ProfesionalPanel />
       <ProfesionalCuts />
-      <ProfesionalDownload />
+      {/* <ProfesionalDownload /> */}
       <HomePageBlogSection />
       <HomePageInfo />
     </div>

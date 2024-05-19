@@ -5,15 +5,13 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createSlug } from "../HomePageComponents/HomePagePanel";
 import ButtonElementPanel from "../ButtonElementPanel";
+import { PanelProduct } from "@/app/firebase/interface";
 
-const buttons = [
-  { typ: "200", nazov: "Stropný panel 200" },
-  { typ: "265", nazov: "Stropný panel 265" },
-  { typ: "320", nazov: "Stropný panel 320" },
-  { typ: "400", nazov: "Stropný panel 400" },
-];
+interface Props {
+  data: PanelProduct[];
+}
 
-const CeilingPanelIntro = () => {
+const CeilingPanelIntro = ({ data }: Props) => {
   const router = useRouter();
 
   const [choosenType, setChoosenType] = useState("");
@@ -22,16 +20,13 @@ const CeilingPanelIntro = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const search = searchParams.get("typ");
     if (search != null) {
-      const match = search.match(/\d+/);
-      if (match != null) {
-        setChoosenType(match?.[0]);
-      }
+      setChoosenType(search);
     }
   }, [router]);
 
-  const handleClick = (nazov: string, typ: string) => {
+  const handleClick = (typ: string) => {
     const url = new URL(window.location.href);
-    url.searchParams.set("typ", `stropny-panel-` + typ);
+    url.searchParams.set("typ", typ);
     window.history.replaceState({}, "", url.toString());
 
     setChoosenType(typ);
@@ -54,15 +49,15 @@ const CeilingPanelIntro = () => {
         </div>
       </div>
       <div className="flex flex-row gap-4 mb-16">
-        {buttons.map((button, index) => (
+        {data.map((button, index) => (
           <div
             className=""
-            onClick={() => handleClick(button.nazov, button.typ)}
+            onClick={() => handleClick(button.slug)}
             key={index}
           >
             <ButtonElementPanel
-              text={`Typ ${button.typ}`}
-              isChoosen={button.typ === choosenType}
+              text={`${button.nazov}`}
+              isChoosen={button.slug === choosenType}
             />
           </div>
         ))}

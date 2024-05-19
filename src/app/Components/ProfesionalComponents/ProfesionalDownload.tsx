@@ -9,76 +9,38 @@ import IconDownload from "../Icons/IconDownload";
 import ButtonElementNavbar from "../ButtonElementNavbar";
 import IconCheck from "../Icons/IconCheck";
 import { ClipLoader } from "react-spinners";
+import { DownloadPdf, PanelProduct } from "@/app/firebase/interface";
+import { useRouter } from "next/navigation";
+import ButtonElementPanel from "../ButtonElementPanel";
 
-const downloads = [
-  {
-    title: "Predpätý stropný panel typu FF",
-    link: "",
-  },
-  {
-    title: "Stropný panel FF 200 A",
-    link: "",
-  },
-  {
-    title: "Stropný panel FF 200 B",
-    link: "",
-  },
-  {
-    title: "Stropný panel FF 200 C",
-    link: "",
-  },
-  {
-    title: "Stropný panel FF 200 D",
-    link: "",
-  },
-  {
-    title: "Jednostranná výmena k panelom FF200 / 900",
-    link: "",
-  },
-  {
-    title: "Obojstranná výmena k panelom FF200 / 900",
-    link: "",
-  },
-  {
-    title: "Jednostranná výmena k panelom FF200 / 1200",
-    link: "",
-  },
-  {
-    title: "Obojstranná výmena k panelom FF200 / 1200",
-    link: "",
-  },
-  {
-    title: "Výmena k panelom FF – materiál k výrobe",
-    link: "",
-  },
-  {
-    title: "STROP.SK certifikaty 1",
-    link: "",
-  },
-  {
-    title: "  STROP.SK certifikaty 2",
-    link: "",
-  },
-];
+interface Props {
+  data: PanelProduct[];
+}
 
-const ProfesionalDownload = () => {
+const ProfesionalDownload = ({ data }: Props) => {
   const [hoveredItem, setHoveredItem] = useState(-1);
-  const [clickedObject, setClickedObject] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [finalEmail, setFinalEmail] = useState("");
   const popupRef = useRef<HTMLDivElement>(null);
-  const [choosenIndex, setChoosenIndex] = useState(-1);
+  const [choosenLinks, setChoosenLinks] = useState<DownloadPdf[]>([]);
   const [popUpTrue, setPopUpTrue] = useState(false);
   const [checkData, setCheckData] = useState(false);
   const [finalMessage, setFinalMessage] = useState(false);
+  const router = useRouter();
+  const [choosenPanel, setChoosenPanel] = useState<PanelProduct>();
 
-  const handleClickedObject = (index: number) => {
-    setChoosenIndex(index);
-    setPopUpTrue(true);
+  const [choosenType, setChoosenType] = useState("");
+
+  const handleClickedObject = (link: string, nazov: string) => {
+    const find_link = choosenLinks.find((object) => object.pdf_link === link);
+    if (find_link) {
+      setChoosenLinks(
+        choosenLinks.filter((object) => object.pdf_link !== link)
+      );
+    } else {
+      setChoosenLinks([...choosenLinks, { nazov, pdf_link: link }]);
+    }
   };
-
-  const link =
-    "https://firebasestorage.googleapis.com/v0/b/game-ready-cf008.appspot.com/o/hlavne_produkty%2FDu%C3%A1lna%20hadica%2FGame-Ready-Wrap-UM-Ankle-EN-704576B.pdf?alt=media&token=1b949d29-dae2-47c1-a0d4-62d7eeb79b99";
 
   const { register, handleSubmit, reset } = useForm<FormData>();
 
@@ -108,7 +70,7 @@ const ProfesionalDownload = () => {
         },
         body: JSON.stringify({
           email: finalEmail,
-          link: link,
+          links: choosenLinks,
         }),
       });
 
@@ -120,6 +82,7 @@ const ProfesionalDownload = () => {
         setPopUpTrue(false);
         setCheckData(false);
         setFinalMessage(true);
+        setChoosenLinks([]);
       } else {
         console.error("Failed to send email");
         setIsLoading(false);
@@ -151,40 +114,97 @@ const ProfesionalDownload = () => {
     };
   }, [popUpTrue]);
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const search = searchParams.get("typ");
+    if (search != null) {
+      setChoosenType(search);
+      const panel = data.find((panel) => panel.slug === search);
+      if (panel) {
+        setChoosenPanel(panel);
+      }
+    }
+  }, [router]);
+
+  console.log(choosenPanel);
+
+  const handleClick = (typ: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("typ", typ);
+    window.history.replaceState({}, "", url.toString());
+
+    setChoosenType(typ);
+    const panel = data.find((panel) => panel.slug === typ);
+    if (panel) {
+      setChoosenPanel(panel);
+    }
+  };
+
   return (
     <div className="main_section bg-primary">
       <Toaster />
       <p>[Na stiahnutie]</p>
       <h2>Na stiahnutie</h2>
-      <p>
+      <p className="max-w-[600px]">
         Tieto dokumenty obsahujú podrobné údaje o našich výrobkoch, ich
         parametre, vlastnosti a iné technické podrobnosti, ktoré môžu byť pre
         vás dôležité pri projektoch. Stačí vyplniť e-mail a my vám zašleme
         vybrané dokumenty.
       </p>
-      <div className="flex flex-col md:flex-row gap-6">
-        <ButtonElement text="Typ FF20" />
-        <ButtonElement text="Typ FF20" />
-        <ButtonElement text="Typ FF20" />
-        <ButtonElement text="Typ FF20" />
+      <div className="flex flex-row gap-4 mb-8 mt-8">
+        {data.map((button, index) => (
+          <div
+            className=""
+            onClick={() => handleClick(button.slug)}
+            key={index}
+          >
+            <ButtonElementPanel
+              text={`${button.nazov}`}
+              isChoosen={button.slug === choosenType}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col">
+        <div className="flex flex-row">
+          <p>Počet vybraných pdf dokumentov: </p>
+          <p className="ml-2">{choosenLinks.length}</p>
+        </div>
+
+        <button
+          className={`btn btn--fourthtiary ${
+            choosenLinks.length === 0 && "disabledPrimaryBtn"
+          }`}
+          disabled={choosenLinks.length === 0}
+          onClick={() => setPopUpTrue(true)}
+        >
+          Odoslať na email
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-8  gap-4">
-        {downloads.map((one_object, index) => (
+        {choosenPanel?.download_file.map((one_object, index) => (
           <div
             className="border-black border rounded-[8px] p-4 2xl:p-7 flex flex-row justify-between items-center cursor-pointer"
             key={index}
             onMouseEnter={() => setHoveredItem(index)}
             onMouseLeave={() => setHoveredItem(-1)}
-            onClick={() => handleClickedObject(index)}
+            onClick={() =>
+              handleClickedObject(one_object.pdf_link, one_object.nazov)
+            }
           >
             <p
               className={`${
                 hoveredItem === index &&
                 "font-semibold  transition-transform ease-in duration-75"
-              }`}
+              } ${
+                choosenLinks.find(
+                  (object) => object.pdf_link === one_object.pdf_link
+                ) && "font-semibold"
+              } `}
             >
-              {one_object.title}
+              {one_object.nazov}
             </p>
             <IconDownload isHovered={hoveredItem === index} />
           </div>

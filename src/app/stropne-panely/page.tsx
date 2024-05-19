@@ -1,23 +1,42 @@
-import React from "react";
-import CeilingPanelIntro from "../Components/CeilingPanel/CeilingPanelIntro";
-import ProfesionalDownload from "../Components/ProfesionalComponents/ProfesionalDownload";
-import ProfesionalCuts from "../Components/ProfesionalComponents/ProfesionalCuts";
-import CeilingPanelCut from "../Components/CeilingPanel/CeilingPanelCut";
-import CeilingPanelCalculate from "../Components/CeilingPanel/CeilingPanelCalculate";
-import HomePageBratislava from "../Components/HomePageComponents/HomePageBratislava";
-import HomePageInfo from "../Components/HomePageComponents/HomePageInfo";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { unstable_noStore } from "next/cache";
+import { Suspense } from "react";
+import { ClipLoader } from "react-spinners";
+import CeilingPanelWholeSection from "../Components/CeilingPanel/CeilingPanelWholeSection";
+import { app } from "../firebase/config";
+import { PanelProduct } from "../firebase/interface";
 
-const page = () => {
+async function GetData() {
+  unstable_noStore();
+  const db = getFirestore(app);
+
+  try {
+    const panelyCollectionRef = collection(db, "panely");
+    const querySnapshot = await getDocs(panelyCollectionRef);
+
+    const panelyProducts: PanelProduct[] = querySnapshot.docs.map((doc) => ({
+      ...(doc.data() as PanelProduct),
+    }));
+
+    return <CeilingPanelWholeSection data={panelyProducts} />;
+  } catch (error) {
+    console.error("Error fetching photos:", error);
+    return [];
+  }
+}
+
+export default function Page() {
   return (
-    <div>
-      <CeilingPanelIntro />
-      <ProfesionalDownload />
-      <CeilingPanelCut />
-      <CeilingPanelCalculate />
-      <HomePageBratislava />
-      <HomePageInfo />
-    </div>
+    <>
+      <Suspense
+        fallback={
+          <div className="main_section additional_padding min-h-[600px]">
+            <ClipLoader size={20} color={"#00000"} loading={true} />
+          </div>
+        }
+      >
+        <GetData />
+      </Suspense>
+    </>
   );
-};
-
-export default page;
+}

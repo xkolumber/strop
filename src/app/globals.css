@@ -395,11 +395,10 @@ a {
 }
 .btn--fourthtiary {
   background: black;
-  color: var(--color-secondary);
+  color: white;
 }
 .btn--fourthtiary:hover {
-  background: white;
-  color: black;
+  color: var(--color-secondary);
 }
 .btn--fifthtiary {
   background: var(--color-primary);
@@ -480,7 +479,7 @@ a {
 
 .send_email input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px black inset !important;
-  -webkit-text-fill-color: gray !important;
+  -webkit-text-fill-color: white !important;
 }
 
 .contact_form input[type="text"]::placeholder {
