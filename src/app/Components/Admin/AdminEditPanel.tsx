@@ -25,21 +25,18 @@ import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
 interface Props {
-  slug: string;
+  data: PanelProduct;
 }
 
 export interface IsLoadingMap {
   [key: string]: boolean;
 }
 
-const EditMainProduct = ({ slug }: Props) => {
+const EditMainProduct = ({ data }: Props) => {
   const { user } = useAuth();
-  const [product, setProduct] = useState<PanelProduct | null>(null);
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
 
   const [success, setSuccess] = useState(false);
-  const [isLoadingAll, setIsLoadingAll] = useState(false);
-  const [changeSerialNumber, setChangeSerialNumber] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
 
   const [filePdf, setFilePdf] = useState<File | null>(null);
@@ -65,46 +62,46 @@ const EditMainProduct = ({ slug }: Props) => {
     download_file: [],
   });
 
+  // useEffect(() => {
+  //   const fetchCertainProduct = async () => {
+  //     try {
+  //       const db = getFirestore();
+  //       const q = query(collection(db, "panely"), where("slug", "==", slug));
+  //       const querySnapshot = await getDocs(q);
+
+  //       if (querySnapshot.empty) {
+  //         console.error("No product found with the specified slug.");
+  //         return;
+  //       }
+  //       querySnapshot.forEach((doc) => {
+  //         const data = doc.data() as PanelProduct;
+  //         setProduct(data);
+  //       });
+  //       setSuccess(true);
+  //     } catch (error) {
+  //       console.error("Error fetching product:", error);
+  //     }
+  //   };
+
+  //   if (user) {
+  //     fetchCertainProduct();
+  //   }
+  // }, [slug, user]);
+
   useEffect(() => {
-    const fetchCertainProduct = async () => {
-      try {
-        const db = getFirestore();
-        const q = query(collection(db, "panely"), where("slug", "==", slug));
-        const querySnapshot = await getDocs(q);
-
-        if (querySnapshot.empty) {
-          console.error("No product found with the specified slug.");
-          return;
-        }
-        querySnapshot.forEach((doc) => {
-          const data = doc.data() as PanelProduct;
-          setProduct(data);
-        });
-        setSuccess(true);
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      }
-    };
-
-    if (user) {
-      fetchCertainProduct();
-    }
-  }, [slug, user]);
-
-  useEffect(() => {
-    if (product) {
+    if (data) {
       setActualizeData((prevData) => ({
         ...prevData,
-        nazov: product.nazov,
-        otvory1: product.otvory1,
-        otvory2: product.otvory2,
-        predbezny_vypocet: product.predbezny_vypocet,
-        podrobny_vypocet: product.podrobny_vypocet,
-        popis1: product.popis1,
-        popis2: product.popis2,
-        rezy1: product.rezy1,
-        rezy2: product.rezy2,
-        slug: product.slug,
+        nazov: data.nazov,
+        otvory1: data.otvory1,
+        otvory2: data.otvory2,
+        predbezny_vypocet: data.predbezny_vypocet,
+        podrobny_vypocet: data.podrobny_vypocet,
+        popis1: data.popis1,
+        popis2: data.popis2,
+        rezy1: data.rezy1,
+        rezy2: data.rezy2,
+        slug: data.slug,
       }));
     }
   }, [success]);
@@ -151,7 +148,7 @@ const EditMainProduct = ({ slug }: Props) => {
     try {
       setIsLoadingMap((prevState) => ({ ...prevState, ["actualize"]: true }));
 
-      let url_foto = product?.foto || null;
+      let url_foto = data.foto;
       if (actualizeData.foto !== null) {
         const storage = getStorage();
         const storageRef = ref(
@@ -266,7 +263,6 @@ const EditMainProduct = ({ slug }: Props) => {
       const productDoc = querySnapshot.docs[0];
       const productData = productDoc.data();
 
-      // Update the specific item in the array
       const updatedDownloadFile = productData.download_file.map(
         (file: DownloadPdf, i: number) => {
           if (i === index) {
@@ -314,10 +310,10 @@ const EditMainProduct = ({ slug }: Props) => {
   }, [newPdf]);
 
   useEffect(() => {
-    if (product && product.download_file) {
-      setDownloadFiles(product.download_file);
+    if (data.download_file) {
+      setDownloadFiles(data.download_file);
     }
-  }, [product?.download_file]);
+  }, [data.download_file]);
 
   const handleChangePdfTitle = (index: number, newValue: string) => {
     const updatedFiles = [...downloadFiles];
@@ -346,7 +342,7 @@ const EditMainProduct = ({ slug }: Props) => {
       const db = getFirestore(auth.app);
 
       const querySnapshot = await getDocs(
-        query(collection(db, "panely"), where("slug", "==", product!.slug))
+        query(collection(db, "panely"), where("slug", "==", data.slug))
       );
 
       const productDoc = querySnapshot.docs[0];
@@ -390,167 +386,231 @@ const EditMainProduct = ({ slug }: Props) => {
               <p className="hover:underline ease-in">Späť</p>
             </Link>
 
-            {product && (
-              <>
-                <h4>Produkt {product.nazov}</h4>
-                <div className="product_admin_row">
-                  <p>Titulná fotka produktu:</p>
+            <h4>Produkt {data.nazov}</h4>
+            <div className="product_admin_row">
+              <p>Titulná fotka produktu:</p>
 
-                  <Image
-                    src={product.foto}
-                    alt="titulna fotka"
-                    width={400}
-                    height={400}
-                    className="w-40 h-40 object-contain"
+              <Image
+                src={data.foto}
+                alt="titulna fotka"
+                width={400}
+                height={400}
+                className="w-40 h-40 object-contain"
+              />
+
+              <input
+                type="file"
+                onChange={(event) => handlePhotoChange(event, "titulna_foto")}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Popis produktu1:</p>
+              <input
+                type="text"
+                name="popis1"
+                value={actualizeData.popis1}
+                onChange={handleChange}
+                className=""
+              />
+            </div>
+            <div className="product_admin_row">
+              <p>Popis produktu2:</p>
+              <input
+                type="text"
+                name="popis2"
+                value={actualizeData.popis2}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Rezy 1 :</p>
+              <input
+                type="text"
+                name="rezy1"
+                value={actualizeData.rezy1}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Rezy 2 :</p>
+              <input
+                type="text"
+                name="rezy2"
+                value={actualizeData.rezy2}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Otvor 1:</p>
+              <input
+                type="text"
+                name="otvory1"
+                value={actualizeData.otvory1}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Otvor 2:</p>
+              <input
+                type="text"
+                name="otvory2"
+                value={actualizeData.otvory2}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Predbežný výpočet:</p>
+              <input
+                type="text"
+                name="predbezny_vypocet"
+                value={actualizeData.predbezny_vypocet}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Podrobný výpočet:</p>
+              <input
+                type="text"
+                name="podrobny_vypocet"
+                value={actualizeData.podrobny_vypocet}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="product_admin_row">
+              <p>Požiarna odolnosť :</p>
+              <input
+                type="text"
+                name="poziarna_odolnost"
+                value={actualizeData.poziarna_odolnost}
+                onChange={handleChange}
+              />
+            </div>
+
+            <button
+              className="btn btn--primary"
+              onClick={handleActualizePanel}
+              disabled={isLoadingMap["actualize"]}
+            >
+              {isLoadingMap["actualize"] ? (
+                <ClipLoader
+                  size={20}
+                  color={"#00000"}
+                  loading={true}
+                  className="ml-16 mr-16"
+                />
+              ) : (
+                "Aktualizovať produkt"
+              )}
+            </button>
+
+            <div className="mt-16">
+              <h5>Pdf dokumenty</h5>
+
+              {data.download_file.map((pdf, index) => (
+                <div className="product_admin_row" key={index}>
+                  <input
+                    type="text"
+                    name={`pdf-nazov-${index}`}
+                    value={pdf.nazov}
+                    onChange={(e) =>
+                      handleChangePdfTitle(index, e.target.value)
+                    }
+                    className="!w-[200px]"
                   />
-
+                  <Link
+                    href={`${pdf.pdf_link}`}
+                    className="underline text-black"
+                  >
+                    Link pdf
+                  </Link>
                   <input
                     type="file"
-                    onChange={(event) =>
-                      handlePhotoChange(event, "titulna_foto")
+                    onChange={(event) => handleLoadPdf(event)}
+                  />
+                  <button
+                    className="btn btn--primary"
+                    onClick={() =>
+                      handleActualizePdf(data.slug, pdf.nazov, index)
                     }
-                  />
+                    disabled={isLoadingMap["actualize_pdf"]}
+                  >
+                    {isLoadingMap["actualize_pdf"] ? (
+                      <ClipLoader
+                        size={20}
+                        color={"#00000"}
+                        loading={true}
+                        className="ml-16 mr-16"
+                      />
+                    ) : (
+                      "Aktualizovať"
+                    )}
+                  </button>
+                  <button
+                    className="btn btn--secondary"
+                    onClick={() => handleDeletePdf(data.slug, pdf.nazov)}
+                    disabled={isLoadingMap["delete"]}
+                  >
+                    {isLoadingMap["delete"] ? (
+                      <ClipLoader
+                        size={20}
+                        color={"#00000"}
+                        loading={true}
+                        className="ml-16 mr-16"
+                      />
+                    ) : (
+                      "Odstrániť"
+                    )}
+                  </button>
                 </div>
+              ))}
 
-                <div className="product_admin_row">
-                  <p>Popis produktu1:</p>
-                  <input
-                    type="text"
-                    name="popis1"
-                    value={actualizeData.popis1}
-                    onChange={handleChange}
-                    className=""
-                  />
-                </div>
-                <div className="product_admin_row">
-                  <p>Popis produktu2:</p>
-                  <input
-                    type="text"
-                    name="popis2"
-                    value={actualizeData.popis2}
-                    onChange={handleChange}
-                  />
-                </div>
+              <h6
+                className="underline mt-16 cursor-pointer"
+                onClick={() => setNewPdf(true)}
+              >
+                Pridať nový PDF dokument
+              </h6>
 
-                <div className="product_admin_row">
-                  <p>Rezy 1 :</p>
-                  <input
-                    type="text"
-                    name="rezy1"
-                    value={actualizeData.rezy1}
-                    onChange={handleChange}
-                  />
-                </div>
+              {newPdf && (
+                <>
+                  <div className="behind_card_background"></div>
+                  <div className="popup_message " ref={popupRef}>
+                    <form className="flex flex-col justify-center items-center products_admin">
+                      <h4 className="text-center text-white mb-8">
+                        Nový pdf dokument
+                      </h4>
 
-                <div className="product_admin_row">
-                  <p>Rezy 2 :</p>
-                  <input
-                    type="text"
-                    name="rezy2"
-                    value={actualizeData.rezy2}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="product_admin_row">
-                  <p>Otvor 1:</p>
-                  <input
-                    type="text"
-                    name="otvory1"
-                    value={actualizeData.otvory1}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="product_admin_row">
-                  <p>Otvor 2:</p>
-                  <input
-                    type="text"
-                    name="otvory2"
-                    value={actualizeData.otvory2}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="product_admin_row">
-                  <p>Predbežný výpočet:</p>
-                  <input
-                    type="text"
-                    name="predbezny_vypocet"
-                    value={actualizeData.predbezny_vypocet}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="product_admin_row">
-                  <p>Podrobný výpočet:</p>
-                  <input
-                    type="text"
-                    name="podrobny_vypocet"
-                    value={actualizeData.podrobny_vypocet}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="product_admin_row">
-                  <p>Požiarna odolnosť :</p>
-                  <input
-                    type="text"
-                    name="poziarna_odolnost"
-                    value={actualizeData.poziarna_odolnost}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <button
-                  className="btn btn--primary"
-                  onClick={handleActualizePanel}
-                  disabled={isLoadingMap["actualize"]}
-                >
-                  {isLoadingMap["actualize"] ? (
-                    <ClipLoader
-                      size={20}
-                      color={"#00000"}
-                      loading={true}
-                      className="ml-16 mr-16"
-                    />
-                  ) : (
-                    "Aktualizovať produkt"
-                  )}
-                </button>
-
-                <div className="mt-16">
-                  <h5>Pdf dokumenty</h5>
-
-                  {product.download_file.map((pdf, index) => (
-                    <div className="product_admin_row" key={index}>
                       <input
                         type="text"
-                        name={`pdf-nazov-${index}`}
-                        value={pdf.nazov}
-                        onChange={(e) =>
-                          handleChangePdfTitle(index, e.target.value)
-                        }
-                        className="!w-[200px]"
+                        id="nazov_dokument"
+                        value={newPdfTitle}
+                        onChange={(e) => setNewPdfTitle(e.target.value)}
+                        placeholder="*Názov dokumentu"
+                        required
+                        className="!w-full"
                       />
-                      <Link
-                        href={`${pdf.pdf_link}`}
-                        className="underline text-black"
-                      >
-                        Link pdf
-                      </Link>
+
                       <input
                         type="file"
-                        onChange={(event) => handleLoadPdf(event)}
+                        onChange={(event) =>
+                          setNewFilePdf(event.target.files?.[0] || null)
+                        }
+                        required
                       />
                       <button
                         className="btn btn--primary"
-                        onClick={() =>
-                          handleActualizePdf(product.slug, pdf.nazov, index)
-                        }
-                        disabled={isLoadingMap["actualize_pdf"]}
+                        onClick={handleAddNewPdfObject}
+                        disabled={isLoadingMap["new_pdf_object"]}
                       >
-                        {isLoadingMap["actualize_pdf"] ? (
+                        {isLoadingMap["new_pdf_object"] ? (
                           <ClipLoader
                             size={20}
                             color={"#00000"}
@@ -558,84 +618,14 @@ const EditMainProduct = ({ slug }: Props) => {
                             className="ml-16 mr-16"
                           />
                         ) : (
-                          "Aktualizovať"
+                          "Pridať"
                         )}
                       </button>
-                      <button
-                        className="btn btn--secondary"
-                        onClick={() => handleDeletePdf(product.slug, pdf.nazov)}
-                        disabled={isLoadingMap["actualize_pdf"]}
-                      >
-                        {isLoadingMap["actualize_pdf"] ? (
-                          <ClipLoader
-                            size={20}
-                            color={"#00000"}
-                            loading={true}
-                            className="ml-16 mr-16"
-                          />
-                        ) : (
-                          "Odstrániť"
-                        )}
-                      </button>
-                    </div>
-                  ))}
-
-                  <h6
-                    className="underline mt-16 cursor-pointer"
-                    onClick={() => setNewPdf(true)}
-                  >
-                    Pridať nový PDF dokument
-                  </h6>
-
-                  {newPdf && (
-                    <>
-                      <div className="behind_card_background"></div>
-                      <div className="popup_message " ref={popupRef}>
-                        <form className="flex flex-col justify-center items-center products_admin">
-                          <h4 className="text-center text-white mb-8">
-                            Nový pdf dokument
-                          </h4>
-
-                          <input
-                            type="text"
-                            id="nazov_dokument"
-                            value={newPdfTitle}
-                            onChange={(e) => setNewPdfTitle(e.target.value)}
-                            placeholder="*Názov dokumentu"
-                            required
-                            className="!w-full"
-                          />
-
-                          <input
-                            type="file"
-                            onChange={(event) =>
-                              setNewFilePdf(event.target.files?.[0] || null)
-                            }
-                            required
-                          />
-                          <button
-                            className="btn btn--primary"
-                            onClick={handleAddNewPdfObject}
-                            disabled={isLoadingMap["new_pdf_object"]}
-                          >
-                            {isLoadingMap["new_pdf_object"] ? (
-                              <ClipLoader
-                                size={20}
-                                color={"#00000"}
-                                loading={true}
-                                className="ml-16 mr-16"
-                              />
-                            ) : (
-                              "Pridať"
-                            )}
-                          </button>
-                        </form>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </>
-            )}
+                    </form>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </>
       )}

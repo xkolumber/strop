@@ -7,8 +7,18 @@ import { ClipLoader } from "react-spinners";
 import AdminNewPanel from "@/app/Components/Admin/AdminNewPanel";
 import NotAuthorized from "@/app/Components/Admin/NotAuthorized";
 import AdminEditPanel from "@/app/Components/Admin/AdminEditPanel";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
+import { app } from "@/app/firebase/config";
+import { PanelProduct } from "@/app/firebase/interface";
+import { unstable_noStore } from "next/cache";
 
-async function GetToken({ params }: Props) {
+async function GetData({ params }: Props) {
   const cookieStore = cookies();
 
   const authTokenCookie = cookieStore.get("FirebaseIdToken");
@@ -26,7 +36,22 @@ async function GetToken({ params }: Props) {
     const browser_uid = decodedToken.user_id;
 
     if (browser_uid === process.env.ADMIN_UID) {
-      return <AdminEditPanel slug={params.slug} />;
+      unstable_noStore();
+      const db = getFirestore(app);
+      const q = query(
+        collection(db, "panely"),
+        where("slug", "==", params.slug)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.error("No product found with the specified slug.");
+        return;
+      }
+      const doc = querySnapshot.docs[0];
+      const productData = doc.data() as PanelProduct;
+
+      return <AdminEditPanel data={productData} />;
     } else {
       return <NotAuthorized />;
     }
@@ -42,12 +67,12 @@ const Page = ({ params }: Props) => {
     <>
       <Suspense
         fallback={
-          <div className="main_section additional_padding">
+          <div className="main_section additional_padding min-h-[600px]">
             <ClipLoader size={20} color={"#00000"} loading={true} />
           </div>
         }
       >
-        <GetToken
+        <GetData
           params={{
             slug: params.slug,
           }}
