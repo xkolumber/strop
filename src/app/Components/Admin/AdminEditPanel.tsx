@@ -62,49 +62,21 @@ const EditMainProduct = ({ data }: Props) => {
     download_file: [],
   });
 
-  // useEffect(() => {
-  //   const fetchCertainProduct = async () => {
-  //     try {
-  //       const db = getFirestore();
-  //       const q = query(collection(db, "panely"), where("slug", "==", slug));
-  //       const querySnapshot = await getDocs(q);
-
-  //       if (querySnapshot.empty) {
-  //         console.error("No product found with the specified slug.");
-  //         return;
-  //       }
-  //       querySnapshot.forEach((doc) => {
-  //         const data = doc.data() as PanelProduct;
-  //         setProduct(data);
-  //       });
-  //       setSuccess(true);
-  //     } catch (error) {
-  //       console.error("Error fetching product:", error);
-  //     }
-  //   };
-
-  //   if (user) {
-  //     fetchCertainProduct();
-  //   }
-  // }, [slug, user]);
-
   useEffect(() => {
-    if (data) {
-      setActualizeData((prevData) => ({
-        ...prevData,
-        nazov: data.nazov,
-        otvory1: data.otvory1,
-        otvory2: data.otvory2,
-        predbezny_vypocet: data.predbezny_vypocet,
-        podrobny_vypocet: data.podrobny_vypocet,
-        popis1: data.popis1,
-        popis2: data.popis2,
-        rezy1: data.rezy1,
-        rezy2: data.rezy2,
-        slug: data.slug,
-      }));
-    }
-  }, [success]);
+    setActualizeData((prevData) => ({
+      ...prevData,
+      nazov: data.nazov,
+      otvory1: data.otvory1,
+      otvory2: data.otvory2,
+      predbezny_vypocet: data.predbezny_vypocet,
+      podrobny_vypocet: data.podrobny_vypocet,
+      popis1: data.popis1,
+      popis2: data.popis2,
+      rezy1: data.rezy1,
+      rezy2: data.rezy2,
+      slug: data.slug,
+    }));
+  }, []);
 
   const handlePhotoChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -211,8 +183,15 @@ const EditMainProduct = ({ data }: Props) => {
     return slug;
   }
 
-  const handleDeletePdf = async (slug: string, nazov: string) => {
-    setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: true }));
+  const handleDeletePdf = async (
+    slug: string,
+    nazov: string,
+    index: number
+  ) => {
+    setIsLoadingMap((prevState) => ({
+      ...prevState,
+      [`delete-${index}`]: true,
+    }));
     try {
       const db = getFirestore(auth.app);
 
@@ -232,19 +211,24 @@ const EditMainProduct = ({ data }: Props) => {
       console.log("Supported products deleted successfully.");
       window.location.reload();
     } catch (error) {
-      setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: false }));
+      setIsLoadingMap((prevState) => ({
+        ...prevState,
+        [`delete-${index}`]: false,
+      }));
       console.error("Error deleting promo code(s):", error);
     } finally {
-      setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: false }));
+      setIsLoadingMap((prevState) => ({
+        ...prevState,
+        [`delete-${index}`]: false,
+      }));
     }
   };
 
-  const handleActualizePdf = async (
-    slug: string,
-    nazov: string,
-    index: number
-  ) => {
-    setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: true }));
+  const handleActualizePdf = async (slug: string, index: number) => {
+    setIsLoadingMap((prevState) => ({
+      ...prevState,
+      [`actualize-${index}`]: true,
+    }));
     try {
       const db = getFirestore(auth.app);
 
@@ -281,10 +265,16 @@ const EditMainProduct = ({ data }: Props) => {
       console.log("Supported products updated successfully.");
       window.location.reload();
     } catch (error) {
-      setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: false }));
+      setIsLoadingMap((prevState) => ({
+        ...prevState,
+        [`actualize-${index}`]: false,
+      }));
       console.error("Error updating product:", error);
     } finally {
-      setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: false }));
+      setIsLoadingMap((prevState) => ({
+        ...prevState,
+        [`actualize-${index}`]: false,
+      }));
     }
   };
 
@@ -537,17 +527,15 @@ const EditMainProduct = ({ data }: Props) => {
                   />
                   <button
                     className="btn btn--primary"
-                    onClick={() =>
-                      handleActualizePdf(data.slug, pdf.nazov, index)
-                    }
-                    disabled={isLoadingMap["actualize_pdf"]}
+                    onClick={() => handleActualizePdf(data.slug, index)}
+                    disabled={isLoadingMap[`actualize-${index}`]}
                   >
-                    {isLoadingMap["actualize_pdf"] ? (
+                    {isLoadingMap[`actualize-${index}`] ? (
                       <ClipLoader
                         size={20}
                         color={"#00000"}
                         loading={true}
-                        className="ml-16 mr-16"
+                        className="ml-10 mr-10"
                       />
                     ) : (
                       "Aktualizovať"
@@ -555,15 +543,15 @@ const EditMainProduct = ({ data }: Props) => {
                   </button>
                   <button
                     className="btn btn--secondary"
-                    onClick={() => handleDeletePdf(data.slug, pdf.nazov)}
-                    disabled={isLoadingMap["delete"]}
+                    onClick={() => handleDeletePdf(data.slug, pdf.nazov, index)}
+                    disabled={isLoadingMap[`delete-${index}`]}
                   >
-                    {isLoadingMap["delete"] ? (
+                    {isLoadingMap[`delete-${index}`] ? (
                       <ClipLoader
                         size={20}
                         color={"#00000"}
                         loading={true}
-                        className="ml-16 mr-16"
+                        className="ml-8 mr-8"
                       />
                     ) : (
                       "Odstrániť"
@@ -603,6 +591,7 @@ const EditMainProduct = ({ data }: Props) => {
                         onChange={(event) =>
                           setNewFilePdf(event.target.files?.[0] || null)
                         }
+                        className="!w-full mt-4"
                         required
                       />
                       <button
@@ -615,7 +604,7 @@ const EditMainProduct = ({ data }: Props) => {
                             size={20}
                             color={"#00000"}
                             loading={true}
-                            className="ml-16 mr-16"
+                            className="ml-4 mr-4"
                           />
                         ) : (
                           "Pridať"

@@ -26,7 +26,8 @@ const Login = () => {
 
     try {
       await login(data.email, data.password);
-      router.push("/admin");
+      window.location.href = "/admin";
+      // router.push("/admin");
     } catch (err) {
       toast.error("Nesprávne email alebo heslo");
       // console.log(err);
