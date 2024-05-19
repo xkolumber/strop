@@ -248,15 +248,6 @@ const AdminNewPanel = () => {
               />
             </div>
 
-            {/* <div className="product_admin_row">
-              <p>Pdf produktu:</p>
-
-              <input
-                type="file"
-                onChange={(event) => handlePhotoChange(event, "pdf")}
-              />
-            </div> */}
-
             <button
               className="btn btn--primary"
               onClick={handleSaveProduct}

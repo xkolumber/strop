@@ -10,7 +10,7 @@ interface Props {
 const AdminPage = ({ data }: Props) => {
   console.log(data);
   return (
-    <div className="main_section additional_padding">
+    <div className="main_section additional_padding min-h-[600px]">
       <h4>Admin</h4>
       <Link href={"/admin/novy-panel"} className="text-black mb-8">
         Pridať nový panel

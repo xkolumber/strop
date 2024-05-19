@@ -8,7 +8,7 @@ import AdminNewPanel from "@/app/Components/Admin/AdminNewPanel";
 import NotAuthorized from "@/app/Components/Admin/NotAuthorized";
 import AdminEditPanel from "@/app/Components/Admin/AdminEditPanel";
 
-async function GetToken() {
+async function GetToken({ params }: Props) {
   const cookieStore = cookies();
 
   const authTokenCookie = cookieStore.get("FirebaseIdToken");
@@ -26,14 +26,18 @@ async function GetToken() {
     const browser_uid = decodedToken.user_id;
 
     if (browser_uid === process.env.ADMIN_UID) {
-      return <AdminEditPanel />;
+      return <AdminEditPanel slug={params.slug} />;
     } else {
       return <NotAuthorized />;
     }
   }
 }
 
-export default function Page() {
+type Props = {
+  params: { slug: string };
+};
+
+const Page = ({ params }: Props) => {
   return (
     <>
       <Suspense
@@ -43,8 +47,14 @@ export default function Page() {
           </div>
         }
       >
-        <GetToken />
+        <GetToken
+          params={{
+            slug: params.slug,
+          }}
+        />
       </Suspense>
     </>
   );
-}
+};
+
+export default Page;
