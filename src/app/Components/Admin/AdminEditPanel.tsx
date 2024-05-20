@@ -143,7 +143,6 @@ const EditMainProduct = ({ data }: Props) => {
 
       const productDocRef = productQuerySnapshot.docs[0].ref;
 
-      console.log(productDocRef);
       await updateDoc(productDocRef, {
         foto: url_foto,
         nazov: actualizeData.nazov,

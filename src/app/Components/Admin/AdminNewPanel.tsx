@@ -42,9 +42,6 @@ const AdminNewPanel = () => {
     download_file: [],
   });
 
-  const sizes = ["M", "L", "XL"];
-  console.log(actualizeData);
-
   const handlePhotoChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     photo_description: string
@@ -88,7 +85,7 @@ const AdminNewPanel = () => {
         rezy1: actualizeData.rezy1,
         rezy2: actualizeData.rezy2,
         slug: createSlug(actualizeData.nazov),
-        download_file: null,
+        download_file: [],
       });
 
       console.log("Product added successfully with ID: ");
@@ -164,7 +161,6 @@ const AdminNewPanel = () => {
                 name="popis1"
                 value={actualizeData.popis1}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -174,7 +170,6 @@ const AdminNewPanel = () => {
                 name="popis2"
                 value={actualizeData.popis2}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -184,7 +179,6 @@ const AdminNewPanel = () => {
                 name="rezy1"
                 value={actualizeData.rezy1}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -194,7 +188,6 @@ const AdminNewPanel = () => {
                 name="rezy2"
                 value={actualizeData.rezy2}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -204,7 +197,6 @@ const AdminNewPanel = () => {
                 name="otvory1"
                 value={actualizeData.otvory1}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -214,7 +206,6 @@ const AdminNewPanel = () => {
                 name="otvory2"
                 value={actualizeData.otvory2}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -224,7 +215,6 @@ const AdminNewPanel = () => {
                 name="predbezny_vypocet"
                 value={actualizeData.predbezny_vypocet}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -234,7 +224,6 @@ const AdminNewPanel = () => {
                 name="podrobny_vypocet"
                 value={actualizeData.podrobny_vypocet}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
             <div className="product_admin_row">
@@ -244,7 +233,6 @@ const AdminNewPanel = () => {
                 name="poziarna_odolnost"
                 value={actualizeData.poziarna_odolnost}
                 onChange={handleChange}
-                className="!w-[450px]"
               />
             </div>
 
