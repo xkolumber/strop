@@ -1,3 +1,12 @@
+import imageUrlBuilder from "@sanity/image-url";
+import { client } from "../sanity-setting/sanity";
+
+const builder = imageUrlBuilder(client);
+
+export function urlFor(source: any) {
+  return builder.image(source);
+}
+
 export interface PanelProduct {
   foto: string;
   nazov: string;
@@ -43,4 +52,21 @@ export interface DownloadPdf {
 export interface DownloadPdfLoad {
   nazov: string;
   pdf_link: File | null;
+}
+
+export interface Blog {
+  title: string;
+  _id: string;
+  slug: {
+    current: string;
+  };
+  _createdAt: string;
+  photo: string;
+  content: any;
+  photo2: string;
+  photo3: string;
+  content2: any;
+  photo4: string;
+  content3: any;
+  photo5: string;
 }
