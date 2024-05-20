@@ -15,7 +15,8 @@ const BlogAll = ({ data }: Props) => {
           <OneBlogSection
             photo={object.photo}
             title={object.title}
-            description={"sfsd"}
+            slug={object.slug.current}
+            description={object.content[0].children[0].text}
             key={index}
           />
         ))}

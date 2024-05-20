@@ -1,23 +1,27 @@
 import { Suspense } from "react";
 import { ClipLoader } from "react-spinners";
-import { client } from "../sanity-setting/sanity";
-import BlogAll from "../Components/BlogAll";
 import { unstable_noStore } from "next/cache";
+import { client } from "@/app/sanity-setting/sanity";
+import BlogPage from "@/app/Components/BlogPage";
 
-async function GetData() {
+async function GetData({ params }: Props) {
   try {
     unstable_noStore();
-    const query = `*[_type == "blog"] | order(_createdAt desc)`;
+    const query = `*[_type == "blog" && slug.current =="${params.slug}"][0]`;
     const data = await client.fetch(query);
 
-    return <BlogAll data={data} />;
+    return <BlogPage data={data} />;
   } catch (error) {
     console.error("Error fetching photos:", error);
     return [];
   }
 }
 
-export default function Page() {
+type Props = {
+  params: { slug: string };
+};
+
+const Page = ({ params }: Props) => {
   return (
     <>
       <Suspense
@@ -27,8 +31,14 @@ export default function Page() {
           </div>
         }
       >
-        <GetData />
+        <GetData
+          params={{
+            slug: params.slug,
+          }}
+        />
       </Suspense>
     </>
   );
-}
+};
+
+export default Page;
