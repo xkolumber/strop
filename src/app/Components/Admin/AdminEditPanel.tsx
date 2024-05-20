@@ -70,6 +70,7 @@ const EditMainProduct = ({ data }: Props) => {
       otvory2: data.otvory2,
       predbezny_vypocet: data.predbezny_vypocet,
       podrobny_vypocet: data.podrobny_vypocet,
+      poziarna_odolnost: data.poziarna_odolnost,
       popis1: data.popis1,
       popis2: data.popis2,
       rezy1: data.rezy1,
@@ -390,7 +391,7 @@ const EditMainProduct = ({ data }: Props) => {
 
               <input
                 type="file"
-                onChange={(event) => handlePhotoChange(event, "titulna_foto")}
+                onChange={(event) => handlePhotoChange(event, "foto")}
               />
             </div>
 
