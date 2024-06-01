@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import ButtonElement from "../ButtonElement";
+import BackgroundVideo from "../BackgroundVideo";
 
 const HomePageInfo = () => {
   return (
@@ -36,6 +37,7 @@ const HomePageInfo = () => {
             <ButtonElement text="Zistiť viac" />
           </div>
         </div>
+
         <Image
           src={"/panel.jpg"}
           alt="panel"

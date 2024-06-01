@@ -83,12 +83,11 @@ const HomePagePanel = () => {
           </div>
           <div className="flex flex-col border-t border-black ">
             {panels.map((panel, index) => (
-              <>
+              <div key={index}>
                 {index != choosenIndex && (
                   <div
                     className="flex flex-row justify-between border-b border-black p-4 items-center cursor-pointer"
                     onClick={() => setChoosenIndex(index)}
-                    key={index}
                   >
                     {" "}
                     <>
@@ -97,7 +96,7 @@ const HomePagePanel = () => {
                     </>
                   </div>
                 )}
-              </>
+              </div>
             ))}
           </div>
           <Image

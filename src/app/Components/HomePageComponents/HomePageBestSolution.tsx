@@ -1,6 +1,8 @@
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 import ButtonElement from "../ButtonElement";
+import BackgroundVideo from "../BackgroundVideo";
+import { ClipLoader } from "react-spinners";
 
 const HomePageBestSolution = () => {
   return (
@@ -22,14 +24,20 @@ const HomePageBestSolution = () => {
           </div>
         </div>
       </div>
-      <Image
-        src={"/intro.jpg"}
-        alt="Intro"
-        sizes="100vw"
-        width={1000}
-        height={1000}
-        className="object-cover w-full h-full"
-      />
+      {/* <Image alt="sdf" src={"/placeholder.png"} width={1000} height={1000} /> */}
+
+      <Suspense
+        fallback={
+          <div className="main_section min-h-[600px]">
+            <ClipLoader size={20} color={"#00000"} loading={true} />
+          </div>
+        }
+      >
+        <BackgroundVideo
+          videoSource="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fvyroba%20madarsko%201.mp4?alt=media&token=bb83d06f-6496-420a-a968-9469f00fbabe"
+          placeholderImage="/placeholder.png"
+        />
+      </Suspense>
     </div>
   );
 };
