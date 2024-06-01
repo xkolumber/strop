@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { unstable_noStore } from "next/cache";
 import { client } from "@/app/sanity-setting/sanity";
 import HomePageThreeBlogs from "./HomePageThreeBlogs";
+import Link from "next/link";
 
 async function GetData() {
   try {
@@ -35,8 +36,10 @@ const HomePageBlogSection = () => {
         <GetData />
       </Suspense>
 
-      <div className="mt-8">
-        <ButtonElement text="Všetky blogy" />
+      <div className="mt-8 2xl:mt-16">
+        <Link href={"/blog"}>
+          <ButtonElement text="Všetky blogy" />
+        </Link>
       </div>
     </div>
   );

@@ -59,8 +59,9 @@ const HomePagePanel = () => {
         <Image
           src={"/panel.jpg"}
           alt="panel"
-          width={500}
-          height={500}
+          width={0}
+          height={0}
+          sizes="100vw"
           className="w-full md:w-1/2 hidden md:block"
         />
 

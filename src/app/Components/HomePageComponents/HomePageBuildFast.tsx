@@ -34,7 +34,7 @@ const HomePageBuildFast = () => {
           Stavajte rýchlejšie a efektívnejšie vďaka novým predpätým stropným
           panelom. Prinášame nové riešenia do sveta stavieb!
         </h2>
-        <div className="flex flex-col  md:flex-row">
+        <div className="flex flex-col  md:flex-row gap-4">
           <div className="md:w-[30%] flex flex-col justify-between">
             <p>
               Pomôžeme vám urýchliť proces stavby a ušetriť finančné
@@ -63,20 +63,22 @@ const HomePageBuildFast = () => {
           </div>
           <div className="flex flex-col md:flex-row md:w-[70%] gap-8">
             <Image
-              src={"/build_faster1.jpg"}
+              src={"/build_faster11.jpg"}
               alt="Intro"
-              width={100}
-              height={100}
+              width={0}
+              height={0}
+              sizes="100vw"
               quality={100}
-              className=" w-full h-[200px] object-cover md:h-fit rounded-[8px]"
+              className=" w-fit h-[200px] object-contain md:h-fit rounded-[8px]"
             />
             <Image
               src={"/build_faster2.jpg"}
               alt="Intro"
-              width={100}
-              height={100}
+              width={0}
+              height={0}
+              sizes="100vw"
               quality={100}
-              className="object-contai w-full h-[200px] md:h-fit rounded-[8px]"
+              className="object-contain w-fit h-[200px] md:h-fit rounded-[8px]"
             />
           </div>
         </div>
