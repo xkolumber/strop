@@ -13,7 +13,7 @@ interface Props {
 const OneBlogSection = ({ photo, title, slug, description }: Props) => {
   return (
     <Link
-      className="rounded-3xl border border-black cursor-pointer flex flex-col "
+      className="rounded-3xl border border-black cursor-pointer flex flex-col  "
       href={`/blog/${slug}`}
     >
       <div className="p-4 h-3/5">

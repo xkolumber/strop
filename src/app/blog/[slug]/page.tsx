@@ -26,7 +26,7 @@ const Page = ({ params }: Props) => {
     <>
       <Suspense
         fallback={
-          <div className="main_section additional_padding min-h-[600px]">
+          <div className="main_section additional_padding min-h-[1800px]">
             <ClipLoader size={20} color={"#00000"} loading={true} />
           </div>
         }

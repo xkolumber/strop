@@ -22,7 +22,7 @@ export default function Page() {
     <>
       <Suspense
         fallback={
-          <div className="main_section additional_padding min-h-[800px]">
+          <div className="main_section additional_padding min-h-[1800px]">
             <ClipLoader size={20} color={"#00000"} loading={true} />
           </div>
         }
