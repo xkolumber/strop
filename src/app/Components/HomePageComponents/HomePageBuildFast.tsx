@@ -61,14 +61,14 @@ const HomePageBuildFast = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col md:flex-row md:w-[70%] gap-8">
+          <div className="flex flex-col md:flex-row md:w-[70%] gap-8 md:pt-16">
             <Image
               src={"/build_faster11.jpg"}
               alt="Intro"
               width={1000}
               height={1000}
               quality={100}
-              className=" md:w-1/2 md:h-[200px] object-contain rounded-[8px]"
+              className=" md:h-[500px] object-contain rounded-[8px]"
             />
             <Image
               src={"/build_faster2.jpg"}
@@ -76,7 +76,7 @@ const HomePageBuildFast = () => {
               width={1000}
               height={1000}
               quality={100}
-              className="object-contain md:w-1/2 md:h-[200px]  rounded-[8px]"
+              className="object-contain md:w-1/2 h-fit  rounded-[8px]"
             />
           </div>
         </div>

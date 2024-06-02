@@ -19,7 +19,16 @@ const AboutUsModernSociety = () => {
         <ButtonElement text="Zistiť viac" />
       </Link>
 
-      <div className="flex flex-row items-end gap-4 md:gap-8">
+      <Image
+        src={"/bratislava1.jpg"}
+        alt="Photo blog"
+        width={1000}
+        height={1000}
+        quality={100}
+        className="w-full md:hidden h-[338px] rounded-[8px] object-cover"
+      />
+
+      <div className="hidden md:flex flex-row items-end gap-4 md:gap-8">
         <Image
           src={"/bratislava1.jpg"}
           alt="Photo blog"

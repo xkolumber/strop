@@ -43,12 +43,13 @@ const AboutUsFirstElement = () => {
         </div>
       </div>
       <Image
-        src={"/intro.jpg"}
+        src={"/about_us_new.png"}
         alt="Intro"
         sizes="100vw"
-        width={1000}
-        height={1000}
-        className="object-cover w-full h-full"
+        width={1500}
+        height={1500}
+        quality={100}
+        className="object-cover w-full h-full rounded-[8px]"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4 ">
         {about_us_data.map((object, index) => (
