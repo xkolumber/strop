@@ -55,17 +55,16 @@ const HomePagePanel = () => {
 
   return (
     <div className="main_section ">
-      <div className="flex flex-col md:flex-row md:gap-6 ">
+      <div className="flex flex-col md:flex-row md:gap-6  ">
         <Image
           src={"/panel.jpg"}
           alt="panel"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full md:w-1/2 hidden md:block"
+          width={1000}
+          height={1000}
+          className="w-full md:w-1/2 hidden md:block max-h-[600px] object-cover rounded-[8px]"
         />
 
-        <div className="justify-between flex flex-col">
+        <div className="justify-between flex flex-col md:w-1/2">
           <div className="flex flex-col">
             <p>[Produkty]</p>
             <h2>{panels[choosenIndex].nazov}</h2>
@@ -92,7 +91,7 @@ const HomePagePanel = () => {
                   >
                     {" "}
                     <>
-                      <div className="p">{panel.nazov}</div>
+                      <p className="p font-normal">{panel.nazov}</p>
                       <IconPlus />
                     </>
                   </div>

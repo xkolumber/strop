@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import ButtonElement from "../ButtonElement";
 import BackgroundVideo from "../BackgroundVideo";
 import { ClipLoader } from "react-spinners";
+import Link from "next/link";
 
 const HomePageBestSolution = () => {
   return (
@@ -19,12 +20,15 @@ const HomePageBestSolution = () => {
             prístup ku každému klientovi.
           </p>
           <div className="flex flex-row gap-4 mt-4">
-            <ButtonElement text="Produkty" />
-            <ButtonElement text="Kontaktujte nás" />
+            <Link className="" href={"/stropne-panely"}>
+              <ButtonElement text="Produkty" />
+            </Link>
+            <Link className="" href={"/kontakt"}>
+              <ButtonElement text="Kontaktujte nás" />
+            </Link>
           </div>
         </div>
       </div>
-      {/* <Image alt="sdf" src={"/placeholder.png"} width={1000} height={1000} /> */}
 
       <Suspense
         fallback={
@@ -33,10 +37,7 @@ const HomePageBestSolution = () => {
           </div>
         }
       >
-        <BackgroundVideo
-          videoSource="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fvyroba%20madarsko%201.mp4?alt=media&token=bb83d06f-6496-420a-a968-9469f00fbabe"
-          placeholderImage="/placeholder.png"
-        />
+        <BackgroundVideo videoSource="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fvyroba%20madarsko%201.mp4?alt=media&token=bb83d06f-6496-420a-a968-9469f00fbabe" />
       </Suspense>
     </div>
   );

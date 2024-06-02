@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonElement from "../ButtonElement";
 import Image from "next/image";
+import Link from "next/link";
 
 const AboutUsTeamProfesional = () => {
   return (
@@ -34,7 +35,7 @@ const AboutUsTeamProfesional = () => {
             dôveryhodnosť a hodnotu každého nášho produktu. Sme hrdí na to, že
             naše produkty a realizácie presahujú očakávania.
           </p>
-          <p className="mt-4">
+          <p className="mt-4 mb-4">
             {" "}
             Ak máte záujem o vlastné riešenie dopravy, nahláste vopred druh
             vozidla a evidenčné číslo ťahača a návesu. Uveďte takisto čas
@@ -44,16 +45,16 @@ const AboutUsTeamProfesional = () => {
             Garantujeme efektívny prístup a komplexný servis vo váš prospech.
             Naším cieľom je vaša spokojnosť.
           </p>
-          <div className="mt-8">
+          <Link href={"/kontakt"}>
             <ButtonElement text="Kontaktovať" />
-          </div>
+          </Link>
         </div>
         <Image
-          src={"/panel.jpg"}
+          src={"/team.png"}
           alt="panel"
-          width={500}
-          height={500}
-          className="w-full md:w-1/2 h-[300px] object-cover"
+          width={1000}
+          height={1000}
+          className="w-full md:w-1/2 h-full rounded-[8px] object-cover"
         />
       </div>
     </div>

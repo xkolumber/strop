@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import ButtonElement from "../ButtonElement";
+import Link from "next/link";
 
 const HomePageTechnical = () => {
   return (
@@ -24,9 +25,11 @@ const HomePageTechnical = () => {
             vyplniť e-mail a my vám zašleme dokumenty s potrebnými technickými
             špecifikáciami a detailami.
           </p>{" "}
-          <div className="mt-4">
-            <ButtonElement text="Zistiť viac" />
-          </div>
+          <Link href={"/stropne-panely"}>
+            <div className="mt-4">
+              <ButtonElement text="Zistiť viac" />
+            </div>
+          </Link>
           <Image
             src={"/panel.jpg"}
             alt="panel"

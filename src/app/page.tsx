@@ -13,7 +13,7 @@ export default function Home() {
       <HomePageBuildFast />
       <HomePagePanel />
       <HomePageBratislava />
-      <HomePageBlogSection />
+      <HomePageBlogSection colorGray={false} />
       <HomePageTechnical />
       <HomePageInfo />
     </main>

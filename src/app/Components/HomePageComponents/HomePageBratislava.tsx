@@ -55,7 +55,20 @@ const HomePageBratislava = () => {
         <h2>{choosenCity}</h2>
         <p>{choosenDescription}</p>
 
-        <div className="flex flex-wrap gap-8 mt-8 mb-8">
+        {/* <div className="flex flex-wrap gap-8 mt-8 mb-8"> */}
+        <div className="scroll-container mt-4 !mb-2 md:hidden">
+          {zakazky.map((object, index) => (
+            <div
+              className=""
+              key={index}
+              onClick={() => handleNewChoosenObject(object)}
+            >
+              <ButtonElement text={object.mesto} />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex-wrap gap-8 mt-8 mb-8 hidden md:flex">
           {zakazky.map((object, index) => (
             <div
               className=""
@@ -68,12 +81,12 @@ const HomePageBratislava = () => {
         </div>
       </div>
       <div className="flex flex-col md:w-1/2">
-        {zakazky ? (
+        {choosenPhoto != "" ? (
           <Image
             src={choosenPhoto}
             alt="panel"
-            width={500}
-            height={500}
+            width={1000}
+            height={1000}
             quality={100}
             priority={true}
             className="w-full  rounded-[8px] object-cover h-[250px] md:h-[350px] 2xl:h-[400px] 3xl:h-[520px]"

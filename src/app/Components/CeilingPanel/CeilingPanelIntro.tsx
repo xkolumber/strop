@@ -90,8 +90,6 @@ const CeilingPanelIntro = ({ data }: Props) => {
   const { reset } = useForm<FormData>();
 
   const handleSendEmail = async () => {
-    console.log("zaciatok");
-
     if (!checkData) {
       toast.error("Zaškrtnite súhlas.");
       return;
@@ -155,10 +153,10 @@ const CeilingPanelIntro = ({ data }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row gap-4 mb-16">
+        <div className="scroll-container">
           {data.map((button, index) => (
             <div
-              className=""
+              className="button-wrapper"
               onClick={() => handleClick(button.slug)}
               key={index}
             >
@@ -203,7 +201,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
           vás dôležité pri projektoch. Stačí vyplniť e-mail a my vám zašleme
           vybrané dokumenty.
         </p>
-        <div className="flex flex-row gap-4 mb-8 mt-8">
+        <div className="scroll-container">
           {data.map((button, index) => (
             <div
               className=""

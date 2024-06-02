@@ -1,10 +1,9 @@
 import Image from "next/image";
 interface Props {
   videoSource: string;
-  placeholderImage: string;
 }
 
-const BackgroundVideo = ({ videoSource, placeholderImage }: Props) => {
+const BackgroundVideo = ({ videoSource }: Props) => {
   return (
     <div>
       <video

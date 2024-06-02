@@ -5,10 +5,10 @@ import BackgroundVideo from "../BackgroundVideo";
 
 const HomePageInfo = () => {
   return (
-    <div className="main_section bg-secondary">
-      <div className="flex flex-col md:flex-row md:gap-6">
+    <div className="main_section bg-secondary  max-h-[900px]">
+      <div className="flex flex-col md:flex-row md:gap-6 ">
         <div
-          className="w-full md:w-1/2
+          className="w-full md:w-1/2 justify-center flex flex-col
     "
         >
           <p>[Logistika]</p>
@@ -39,11 +39,11 @@ const HomePageInfo = () => {
         </div>
 
         <Image
-          src={"/panel.jpg"}
+          src={"/info_transport.jpg"}
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2 h-[300px] object-cover rounded-[8px]"
+          className="w-full md:w-1/2 h-full object-cover rounded-[8px]"
         />
       </div>
     </div>

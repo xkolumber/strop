@@ -11,9 +11,9 @@ const page = () => {
     <div className="">
       <AboutUsFirstElement />
       <AboutUsTeamProfesional />
-      <AboutUsOurTeam />
+      {/* <AboutUsOurTeam /> */}
       <AboutUsModernSociety />
-      <HomePageBlogSection />
+      <HomePageBlogSection colorGray={true} />
       <HomePageInfo />
     </div>
   );

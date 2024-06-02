@@ -65,20 +65,18 @@ const HomePageBuildFast = () => {
             <Image
               src={"/build_faster11.jpg"}
               alt="Intro"
-              width={0}
-              height={0}
-              sizes="100vw"
+              width={1000}
+              height={1000}
               quality={100}
-              className=" w-fit h-[200px] object-contain md:h-fit rounded-[8px]"
+              className=" md:w-1/2 md:h-[200px] object-contain rounded-[8px]"
             />
             <Image
               src={"/build_faster2.jpg"}
               alt="Intro"
-              width={0}
-              height={0}
-              sizes="100vw"
+              width={1000}
+              height={1000}
               quality={100}
-              className="object-contain w-fit h-[200px] md:h-fit rounded-[8px]"
+              className="object-contain md:w-1/2 md:h-[200px]  rounded-[8px]"
             />
           </div>
         </div>

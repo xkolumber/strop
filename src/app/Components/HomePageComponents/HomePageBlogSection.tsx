@@ -22,9 +22,14 @@ async function GetData() {
     return [];
   }
 }
-const HomePageBlogSection = () => {
+
+interface Props {
+  colorGray: boolean;
+}
+
+const HomePageBlogSection = ({ colorGray }: Props) => {
   return (
-    <div className="main_section">
+    <div className={`main_section ${colorGray && "bg-primary"}`}>
       <p className="mb-4">[ Blog ]</p>
       <Suspense
         fallback={

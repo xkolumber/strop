@@ -13,7 +13,7 @@ const page = () => {
       <ProfesionalPanel />
       <ProfesionalCuts />
       {/* <ProfesionalDownload /> */}
-      <HomePageBlogSection />
+      <HomePageBlogSection colorGray={false} />
       <HomePageInfo />
     </div>
   );
