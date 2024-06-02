@@ -74,6 +74,8 @@ const HomePageBratislava = () => {
             alt="panel"
             width={500}
             height={500}
+            quality={100}
+            priority={true}
             className="w-full  rounded-[8px] object-cover h-[250px] md:h-[350px] 2xl:h-[400px] 3xl:h-[520px]"
           />
         ) : (

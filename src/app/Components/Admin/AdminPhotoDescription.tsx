@@ -203,7 +203,7 @@ const AdminPhotoDescription = ({ data }: Props) => {
 
   return (
     <div>
-      <div className="mt-16 main_section additional_padding products_admin">
+      <div className="main_section additional_padding products_admin">
         <StepBack />
         <h2 className="mb-4">Popisy ku stavbám</h2>
 
