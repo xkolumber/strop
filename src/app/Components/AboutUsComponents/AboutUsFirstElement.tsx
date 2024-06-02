@@ -49,6 +49,7 @@ const AboutUsFirstElement = () => {
         width={1500}
         height={1500}
         quality={100}
+        priority={true}
         className="object-cover w-full h-full rounded-[8px]"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4 ">
