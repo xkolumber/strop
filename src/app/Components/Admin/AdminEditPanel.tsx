@@ -7,10 +7,7 @@ import {
   PanelProductLoad,
 } from "@/app/firebase/interface";
 import {
-  addDoc,
   collection,
-  deleteDoc,
-  doc,
   getDocs,
   getFirestore,
   query,

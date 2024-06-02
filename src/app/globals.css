@@ -59,7 +59,7 @@ h6 {
 }
 p {
   color: black;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 300;
   line-height: 140%;
 }
@@ -602,6 +602,22 @@ textarea {
   /* margin-bottom: 2rem; */
   justify-content: space-between;
   border-bottom: 1px solid black;
+}
+
+.products_admin textarea {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid black;
+
+  font-size: 1.4rem;
+  width: 100%;
+  border-radius: 0px;
 }
 
 @media screen and (min-width: 768px) {

@@ -70,3 +70,9 @@ export interface Blog {
   content3: any;
   photo5: string;
 }
+
+export interface PhotoCityDescription {
+  foto: string;
+  mesto: string;
+  popis: string;
+}
