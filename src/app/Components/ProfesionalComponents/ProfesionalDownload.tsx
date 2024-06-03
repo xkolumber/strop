@@ -147,7 +147,7 @@ const ProfesionalDownload = ({ data }: Props) => {
         vás dôležité pri projektoch. Stačí vyplniť e-mail a my vám zašleme
         vybrané dokumenty.
       </p>
-      <div className="flex flex-row gap-4 mb-8 mt-8">
+      <div className="scroll-container">
         {data.map((button, index) => (
           <div
             className=""

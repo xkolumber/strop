@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ProfesionalIntro from "../Components/ProfesionalComponents/ProfesionalIntro";
 import ProfesionalPanel from "../Components/ProfesionalComponents/ProfesionalPanel";
 import ProfesionalCuts from "../Components/ProfesionalComponents/ProfesionalCuts";
@@ -9,6 +9,7 @@ import { unstable_noStore } from "next/cache";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { app } from "../firebase/config";
 import { PanelProduct } from "../firebase/interface";
+import { ClipLoader } from "react-spinners";
 
 async function GetData() {
   unstable_noStore();
@@ -35,7 +36,16 @@ const page = () => {
       <ProfesionalIntro />
       <ProfesionalPanel />
       <ProfesionalCuts />
-      <GetData />
+      <Suspense
+        fallback={
+          <div className="main_section min-h-[600px]">
+            <ClipLoader size={20} color={"#00000"} loading={true} />
+          </div>
+        }
+      >
+        <GetData />
+      </Suspense>
+
       <HomePageBlogSection colorGray={false} />
       <HomePageInfo />
     </div>
