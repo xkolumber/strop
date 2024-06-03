@@ -13,7 +13,7 @@ interface Props {
 const OneBlogSection = ({ photo, title, slug, description }: Props) => {
   return (
     <Link
-      className="rounded-3xl border border-black cursor-pointer flex flex-col  "
+      className="rounded-3xl border border-black cursor-pointer flex flex-col "
       href={`/blog/${slug}`}
     >
       <div className="p-4 h-3/5">
@@ -28,13 +28,11 @@ const OneBlogSection = ({ photo, title, slug, description }: Props) => {
         />
       </div>
 
-      <div className="p-4  flex flex-col justify-between h-2/5">
-        <div className="">
-          {" "}
-          <h5>{title}</h5>
-          <p className="mt-4 mb-4 line-clamp-2">{description}</p>
-          <p>2024</p>
-        </div>
+      <div className=" flex flex-col justify-between h-2/5 p-4">
+        {" "}
+        <h5>{title}</h5>
+        <p className=" line-clamp-3">{description}</p>
+        <p>2024</p>
       </div>
     </Link>
   );

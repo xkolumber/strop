@@ -12,7 +12,7 @@ const BackgroundVideo = ({ videoSource }: Props) => {
         playsInline
         autoPlay
         preload="metadata"
-        className="w-full h-full object-cover "
+        className="w-full h-full object-cover rounded-[8px] "
       >
         <source src={videoSource} type="video/mp4" />
         Your browser does not support the video tag.

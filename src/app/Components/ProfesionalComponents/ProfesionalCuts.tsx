@@ -41,11 +41,11 @@ const ProfesionalCuts = () => {
           </p>
         </div>
         <Image
-          src={"/panel.jpg"}
+          src={"/rezy_otvory.jpg"}
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 rounded-[8px]"
         />
       </div>
     </div>

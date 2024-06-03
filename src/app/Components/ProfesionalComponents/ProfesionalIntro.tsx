@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import ButtonElement from "../ButtonElement";
+import Link from "next/link";
 
 const ProfesionalIntro = () => {
   return (
@@ -14,9 +15,9 @@ const ProfesionalIntro = () => {
             našimi produktami, aby sme vám umožnili ľahký prístup k dôležitým
             informáciám.
           </p>
-          <div className="flex flex-row gap-4">
+          <Link className="flex flex-row gap-4" href={"/kontakt"}>
             <ButtonElement text="Kontaktujte nás" />
-          </div>
+          </Link>
         </div>
       </div>
       <Image

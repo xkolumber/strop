@@ -11,7 +11,7 @@ const ProfesionalPanel = () => {
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 rounded-[8px]"
         />
         <div
           className="md:w-1/2

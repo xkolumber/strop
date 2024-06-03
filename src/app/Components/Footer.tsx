@@ -3,6 +3,7 @@ import React from "react";
 import IconFooterFacebook from "./Icons/IconFooterFacebook";
 import IconFooterLinkedIn from "./Icons/IconFooterLinkedIn";
 import IconFooterInstagram from "./Icons/IconFooterInstagram";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -18,22 +19,59 @@ const Footer = () => {
               <p className="text-white">Všeobecné obchodné podmienky</p>
             </div>
             <div className="flex flex-col">
-              <p className="text-white">Domov</p>
-              <p className="text-white">Služby</p>
-              <p className="text-white">O nás</p>
+              <Link className="text-white" href={"/"}>
+                Domov
+              </Link>
+              <Link className="text-white" href={"/o-nas"}>
+                Služby
+              </Link>
+              <Link className="text-white" href={"/o-nas"}>
+                O nás
+              </Link>
             </div>
             <div className="flex flex-col">
-              <p className="text-white">Pre profesionálov</p>
-              <p className="text-white">Blog</p>
-              <p className="text-white">Kontakt</p>
+              <Link className="text-white" href={"/pre-profesionalov"}>
+                Pre profesionálov
+              </Link>
+              <Link className="text-white" href={"/blog"}>
+                Blog
+              </Link>
+              <Link className="text-white" href={"/kontakt"}>
+                Kontakt
+              </Link>
             </div>
             <div className="flex flex-col">
-              <p className="text-white">ferrobeton@strop.sk</p>
-              <p className="text-white">0905 033 030, 0948 207 776</p>
+              <a
+                className="text-white"
+                href="mailto:ferrobeton@strop.sk?subject=Otázka"
+              >
+                ferrobeton@strop.sk
+              </a>
+
+              <div
+                className="flex flex-row gap-4
+              "
+              >
+                <a className="text-white" href="tel:+421905033030">
+                  0905 033 030,
+                </a>
+
+                <a className="text-white" href="tel:+421948207776">
+                  {" "}
+                  0948 207 776
+                </a>
+              </div>
+
               <div className="flex flex-row gap-4 mt-2">
-                <IconFooterFacebook />
-                <IconFooterLinkedIn />
-                <IconFooterInstagram />
+                <Link href={"https://www.facebook.com/STROPSK"}>
+                  <IconFooterFacebook />
+                </Link>
+                <Link href={"https://www.x.com"}>
+                  <IconFooterLinkedIn />
+                </Link>
+                <Link href={"https://www.instagram.com/strop.sk/"}>
+                  <IconFooterInstagram />
+                </Link>
               </div>
             </div>
           </div>

@@ -51,7 +51,7 @@ const CeilingPanelCut = () => {
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2 object-cover"
+          className="w-full md:w-1/2 object-cover rounded-[8px]"
         />
       </div>
     </div>

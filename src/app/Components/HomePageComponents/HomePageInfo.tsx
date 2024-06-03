@@ -5,7 +5,7 @@ import BackgroundVideo from "../BackgroundVideo";
 
 const HomePageInfo = () => {
   return (
-    <div className="main_section bg-secondary  max-h-[900px]">
+    <div className="main_section bg-secondary  md:max-h-[900px]">
       <div className="flex flex-col md:flex-row md:gap-6 ">
         <div
           className="w-full md:w-1/2 justify-center flex flex-col
@@ -43,7 +43,7 @@ const HomePageInfo = () => {
           alt="panel"
           width={500}
           height={500}
-          className="w-full md:w-1/2 h-full object-cover rounded-[8px]"
+          className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px]"
         />
       </div>
     </div>
