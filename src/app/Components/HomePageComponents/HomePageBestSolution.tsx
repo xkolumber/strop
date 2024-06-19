@@ -37,7 +37,7 @@ const HomePageBestSolution = () => {
           </div>
         }
       >
-        <BackgroundVideo videoSource="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fvyroba%20madarsko%201.mp4?alt=media&token=bb83d06f-6496-420a-a968-9469f00fbabe" />
+        <BackgroundVideo videoSource="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2FFINAL%204K%20STROP%20SK.mp4?alt=media&token=f2ec841b-ab8c-412c-8c58-8084e3ac5edb" />
       </Suspense>
     </div>
   );
