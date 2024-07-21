@@ -1,21 +1,15 @@
 "use client";
-import { auth } from "@/app/firebase/config";
 import { PhotoCityDescription } from "@/app/firebase/interface";
 import {
-  addDoc,
-  collection,
-  deleteDoc,
-  getDocs,
-  getFirestore,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+  AdminActualizeStavbyPopisy,
+  AdminAddNewStavbyPopisy,
+  AdminDeleteCertainStavbyPopisy,
+} from "@/app/lib/actions";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import React, { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
-import { ClipLoader } from "react-spinners";
 import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
 import StepBack from "../StepBack";
 
 export interface IsLoadingMap {
@@ -36,11 +30,13 @@ const AdminPhotoDescription = ({ data }: Props) => {
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
   const [filePhoto, setFilePhoto] = useState<File | null>(null);
   const [updatedData, setUpdatedData] = useState<PhotoCityDescription[]>(data);
-  const [originalData] = useState<PhotoCityDescription[]>(
-    JSON.parse(JSON.stringify(data))
-  );
 
-  const handleAddNewPdfObject = async () => {
+  useEffect(() => {
+    setUpdatedData(data);
+  }, [data]);
+
+  const handleAddNewPdfObject = async (e: any) => {
+    e.preventDefault();
     try {
       setIsLoadingMap((prevState) => ({
         ...prevState,
@@ -58,17 +54,17 @@ const AdminPhotoDescription = ({ data }: Props) => {
         url_foto = await getDownloadURL(storageRef);
       }
 
-      const db = getFirestore(auth.app);
-
-      await addDoc(collection(db, "stavby_popisy"), {
-        foto: url_foto,
-        mesto: newCity,
-        popis: newDescription,
-      });
-
-      console.log("Product added successfully with ID: ");
-      toast.success("PDF súbor bol úspešne pridaný");
-      window.location.reload();
+      const response = await AdminAddNewStavbyPopisy(
+        url_foto,
+        newCity,
+        newDescription
+      );
+      if (response === "success") {
+        toast.success("Projekt bol pridaný");
+        setNewPhotoDescription(false);
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
       // toast.success("Produkt bol úspešne pridaný");
       console.error("Error adding product:", error);
@@ -122,19 +118,13 @@ const AdminPhotoDescription = ({ data }: Props) => {
     };
   }, [newPhotoDescription]);
 
-  const handleActualizeObject = async (mesto: string, index: number) => {
+  const handleActualizeObject = async (id: string, index: number) => {
     setIsLoadingMap((prevState) => ({
       ...prevState,
       [`actualize-${index}`]: true,
     }));
+
     try {
-      console.log("mesto", mesto);
-      const db = getFirestore(auth.app);
-
-      const querySnapshot = await getDocs(
-        query(collection(db, "stavby_popisy"), where("mesto", "==", mesto))
-      );
-
       let url_pdf = "";
       if (filePhoto !== null) {
         const storage = getStorage();
@@ -143,23 +133,18 @@ const AdminPhotoDescription = ({ data }: Props) => {
         url_pdf = await getDownloadURL(storageRef);
       }
 
-      const productDoc = querySnapshot.docs[0];
-
-      const new_object = {
-        mesto: updatedData[index].mesto,
-        foto: url_pdf === "" ? updatedData[index].foto : url_pdf,
-        popis: updatedData[index].popis,
-      };
-
-      await updateDoc(productDoc.ref, new_object);
-
-      console.log("Supported products updated successfully.");
-      window.location.reload();
+      const response = await AdminActualizeStavbyPopisy(
+        id,
+        updatedData[index].mesto,
+        url_pdf === "" ? updatedData[index].foto : url_pdf,
+        updatedData[index].popis
+      );
+      if (response === "success") {
+        toast.success("Projekt bol aktualizovaný");
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
-      setIsLoadingMap((prevState) => ({
-        ...prevState,
-        [`actualize-${index}`]: false,
-      }));
       console.error("Error updating product:", error);
     } finally {
       setIsLoadingMap((prevState) => ({
@@ -169,29 +154,20 @@ const AdminPhotoDescription = ({ data }: Props) => {
     }
   };
 
-  const handleDeleteObject = async (mesto: string, index: number) => {
+  const handleDeleteObject = async (id: string, index: number) => {
     setIsLoadingMap((prevState) => ({
       ...prevState,
       [`delete-${index}`]: true,
     }));
     try {
-      const db = getFirestore(auth.app);
-
-      const querySnapshot = await getDocs(
-        query(collection(db, "stavby_popisy"), where("mesto", "==", mesto))
-      );
-
-      const productDoc = querySnapshot.docs[0];
-
-      await deleteDoc(productDoc.ref);
-
-      console.log("Supported products deleted successfully.");
-      window.location.reload();
+      const response = await AdminDeleteCertainStavbyPopisy(id);
+      console.log(response);
+      if (response === "success") {
+        toast.success("Projekt bol odstránený");
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
-      setIsLoadingMap((prevState) => ({
-        ...prevState,
-        [`delete-${index}`]: false,
-      }));
       console.error("Error deleting promo code(s):", error);
     } finally {
       setIsLoadingMap((prevState) => ({
@@ -204,6 +180,7 @@ const AdminPhotoDescription = ({ data }: Props) => {
   return (
     <div>
       <div className="main_section additional_padding products_admin">
+        <Toaster />
         <StepBack />
         <h2 className="mb-4">Popisy ku stavbám</h2>
 
@@ -247,9 +224,7 @@ const AdminPhotoDescription = ({ data }: Props) => {
             <input type="file" onChange={(event) => handleLoadPhoto(event)} />
             <button
               className="btn btn--primary"
-              onClick={() =>
-                handleActualizeObject(originalData[index].mesto, index)
-              }
+              onClick={() => handleActualizeObject(object.id, index)}
               disabled={isLoadingMap[`actualize-${index}`]}
             >
               {isLoadingMap[`actualize-${index}`] ? (
@@ -265,9 +240,7 @@ const AdminPhotoDescription = ({ data }: Props) => {
             </button>
             <button
               className="btn btn--secondary"
-              onClick={() =>
-                handleDeleteObject(originalData[index].mesto, index)
-              }
+              onClick={() => handleDeleteObject(object.id, index)}
               disabled={isLoadingMap[`delete-${index}`]}
             >
               {isLoadingMap[`delete-${index}`] ? (
@@ -294,8 +267,11 @@ const AdminPhotoDescription = ({ data }: Props) => {
       {newPhotoDescription && (
         <>
           <div className="behind_card_background"></div>
-          <div className="popup_message " ref={popupRef}>
-            <form className="flex flex-col justify-center items-center products_admin">
+          <div className="popup_message !bg-orange-500 " ref={popupRef}>
+            <form
+              className="flex flex-col justify-center items-center products_admin"
+              onSubmit={handleAddNewPdfObject}
+            >
               <h4 className="text-center text-white mb-8">Nová stavba</h4>
 
               <input
@@ -327,8 +303,8 @@ const AdminPhotoDescription = ({ data }: Props) => {
                 required
               />
               <button
-                className="btn btn--primary"
-                onClick={handleAddNewPdfObject}
+                className="btn btn--secondary"
+                type="submit"
                 disabled={isLoadingMap["new_pdf_object"]}
               >
                 {isLoadingMap["new_pdf_object"] ? (

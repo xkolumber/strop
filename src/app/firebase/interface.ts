@@ -75,4 +75,5 @@ export interface PhotoCityDescription {
   foto: string;
   mesto: string;
   popis: string;
+  id: string;
 }

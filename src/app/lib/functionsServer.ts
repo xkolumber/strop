@@ -46,6 +46,7 @@ export async function GetStavbyPopis() {
         foto: doc.data().foto,
         mesto: doc.data().mesto,
         popis: doc.data().popis,
+        id: doc.id,
       })
     );
 
@@ -89,5 +90,27 @@ export async function GetCertainPanel(slug: string) {
     return productData;
   } catch (error) {
     return;
+  }
+}
+
+export async function GetStavbyPopisy() {
+  unstable_noStore();
+  const db = getFirestore(app);
+
+  try {
+    const panelyCollectionRef = collection(db, "stavby_popisy");
+    const querySnapshot = await getDocs(panelyCollectionRef);
+
+    const panelyProducts: PhotoCityDescription[] = querySnapshot.docs.map(
+      (doc) => ({
+        foto: doc.data().foto,
+        mesto: doc.data().mesto,
+        popis: doc.data().popis,
+        id: doc.id,
+      })
+    );
+    return panelyProducts;
+  } catch (error) {
+    return [];
   }
 }

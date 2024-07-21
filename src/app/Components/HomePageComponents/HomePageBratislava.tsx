@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { ClipLoader } from "react-spinners";
-import { GetStavbyPopis } from "@/app/lib/functions";
+
+import { GetStavbyPopis } from "@/app/lib/functionsServer";
 import HomePageBratislavaClient from "./HomePageBratislavaClient";
 import HomePageBratislavaSkeleton from "./HomePageBratislavaSkeleton";
 

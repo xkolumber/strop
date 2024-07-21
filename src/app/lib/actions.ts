@@ -3,9 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { DownloadPdf } from "../firebase/interface";
 
-import { getFirestore as GetFirestoreAdmin } from "firebase-admin/firestore";
-import { createSlug } from "./functions";
 import { firestore } from "../firebase/configServer";
+import { createSlug } from "./functions";
 
 export async function doRevalidate(pathname: string) {
   revalidatePath(pathname);
@@ -159,4 +158,58 @@ export async function AdminAddDeletePDf(
   });
   revalidatePath(`/admin/produkty/[${slug}]/page`, "page");
   return "success";
+}
+
+export async function AdminAddNewStavbyPopisy(
+  url_foto: string,
+  newCity: string,
+  newDescription: string
+) {
+  const stavbyCollectionRef = firestore.collection("stavby_popisy");
+
+  try {
+    await stavbyCollectionRef.add({
+      foto: url_foto,
+      mesto: newCity,
+      popis: newDescription,
+    });
+    revalidatePath("/admin/pridanie-foto-popis");
+    return "success";
+  } catch (error) {
+    return "false";
+  }
+}
+
+export async function AdminActualizeStavbyPopisy(
+  id: string,
+  mesto: string,
+  foto: string,
+  popis: string
+) {
+  const stavbyCollectionRef = firestore.collection("stavby_popisy");
+  try {
+    await stavbyCollectionRef.doc(id).update({
+      mesto: mesto,
+      foto: foto,
+      popis: popis,
+    });
+    revalidatePath("/admin/pridanie-foto-popis");
+    return "success";
+  } catch (error) {
+    console.error("Error updating document:", error);
+    return "false";
+  }
+}
+
+export async function AdminDeleteCertainStavbyPopisy(id: string) {
+  const stavbyCollectionRef = firestore.collection("stavby_popisy");
+
+  try {
+    await stavbyCollectionRef.doc(id).delete();
+    revalidatePath("/admin/pridanie-foto-popis");
+    return "success";
+  } catch (error) {
+    console.error("Error updating document:", error);
+    return "false";
+  }
 }
