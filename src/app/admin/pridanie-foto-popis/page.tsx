@@ -21,7 +21,7 @@ import { app } from "@/app/firebase/config";
 async function GetToken() {
   const cookieStore = cookies();
 
-  const authTokenCookie = cookieStore.get("FirebaseIdToken");
+  const authTokenCookie = cookieStore.get("FirebaseIdTokenStrop");
 
   if (authTokenCookie === undefined) {
     return <NotAuthorized />;

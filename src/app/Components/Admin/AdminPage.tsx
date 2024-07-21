@@ -33,15 +33,6 @@ const AdminPage = ({ data }: Props) => {
           Odhlásiť sa
         </p>
       </div>
-      <div className="flex flex-col gap-4">
-        {" "}
-        <Link href={"/admin/novy-panel"} className="text-black mb-8">
-          Pridať nový panel
-        </Link>
-        <Link href={"/admin/pridanie-foto-popis"} className="text-black mb-8">
-          Fotky s popisom
-        </Link>
-      </div>
 
       <div className="flex flex-row gap-4">
         {data.map((product, index) => (
@@ -53,6 +44,21 @@ const AdminPage = ({ data }: Props) => {
             <ButtonElement text={`${product.nazov}`} />
           </Link>
         ))}
+      </div>
+      <Link
+        href={"/admin/novy-panel"}
+        className="text-black mb-8 underline font-normal"
+      >
+        Pridať nový panel
+      </Link>
+      <div className="flex flex-col gap-4">
+        {" "}
+        <Link
+          href={"/admin/pridanie-foto-popis"}
+          className="text-black mb-8 font-normal mt-4"
+        >
+          Popisy ku stavbám
+        </Link>
       </div>
     </div>
   );

@@ -16,18 +16,18 @@ import { auth } from "../firebase/config";
 import Cookies from "js-cookie";
 
 export function getAuthToken(): string | undefined {
-  return Cookies.get("FirebaseIdToken");
+  return Cookies.get("FirebaseIdTokenStrop");
 }
 
 export function setAuthToken(token: string): void {
   const expirationDate = new Date();
-  Cookies.set("FirebaseIdToken", token, {
+  Cookies.set("FirebaseIdTokenStrop", token, {
     secure: true,
   });
 }
 
 export function removeAuthToken(): void {
-  return Cookies.remove("FirebaseIdToken");
+  return Cookies.remove("FirebaseIdTokenStrop");
 }
 
 const AuthContext = createContext<any>({});

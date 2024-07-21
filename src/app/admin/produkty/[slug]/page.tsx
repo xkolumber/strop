@@ -21,7 +21,7 @@ import { unstable_noStore } from "next/cache";
 async function GetData({ params }: Props) {
   const cookieStore = cookies();
 
-  const authTokenCookie = cookieStore.get("FirebaseIdToken");
+  const authTokenCookie = cookieStore.get("FirebaseIdTokenStrop");
 
   if (authTokenCookie === undefined) {
     return <NotAuthorized />;

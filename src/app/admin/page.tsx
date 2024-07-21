@@ -1,71 +1,39 @@
-import React, { Suspense } from "react";
-import { cookies } from "next/headers";
+import { Suspense } from "react";
 import jwt from "jsonwebtoken";
-
-import { ClipLoader } from "react-spinners";
+import { getToken } from "../lib/functions";
+import AdminNotAuthorized from "../Components/Admin/AdminNotAuthorized";
 import AdminPage from "../Components/Admin/AdminPage";
-import NotAuthorized from "../Components/Admin/NotAuthorized";
-import { unstable_noStore } from "next/cache";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { app } from "../firebase/config";
-import { PanelProduct, PanelProductSlugTitle } from "../firebase/interface";
+import AdminFinalNotAuthorized from "../Components/Admin/AdminFinalNotAuthorized";
+import AdminPageSkeleton from "../Components/Admin/AdminPageSkeleton";
+import { GetPanely } from "../lib/functionsServer";
 
-async function GetToken() {
-  const cookieStore = cookies();
+async function Validate() {
+  const authToken = await getToken();
 
-  const authTokenCookie = cookieStore.get("FirebaseIdToken");
-
-  if (authTokenCookie === undefined) {
-    return <NotAuthorized />;
+  if (!authToken) {
+    return <AdminNotAuthorized />;
   }
-  const authToken = authTokenCookie ? authTokenCookie.value : null;
 
-  if (authToken) {
-    const decodedToken: any = jwt.decode(authToken);
-    if (!decodedToken || typeof decodedToken === "string") {
-      console.log("tu som");
-      return <NotAuthorized />;
-    }
-    const browser_uid = decodedToken.user_id;
+  const decodedToken: any = jwt.decode(authToken!);
+  if (!decodedToken || typeof decodedToken === "string") {
+    return <AdminNotAuthorized />;
+  }
+  const browser_uid = decodedToken.user_id;
 
-    if (browser_uid === process.env.ADMIN_UID) {
-      unstable_noStore();
-      const db = getFirestore(app);
-
-      try {
-        const panelyCollectionRef = collection(db, "panely");
-        const querySnapshot = await getDocs(panelyCollectionRef);
-
-        const panelyProducts: PanelProductSlugTitle[] = querySnapshot.docs.map(
-          (doc) => ({
-            slug: doc.data().slug,
-            nazov: doc.data().nazov,
-          })
-        );
-
-        return <AdminPage data={panelyProducts} />;
-      } catch (error) {
-        console.error("Error fetching photos:", error);
-        return [];
-      }
-    } else {
-      return <NotAuthorized />;
-    }
+  if (browser_uid === process.env.ADMIN_UID) {
+    const panely = await GetPanely();
+    return <AdminPage data={panely} />;
+  } else {
+    return <AdminFinalNotAuthorized />;
   }
 }
 
-export default function Page() {
+const page = () => {
   return (
-    <>
-      <Suspense
-        fallback={
-          <div className="main_section additional_padding min-h-[600px]">
-            <ClipLoader size={20} color={"#00000"} loading={true} />
-          </div>
-        }
-      >
-        <GetToken />
-      </Suspense>
-    </>
+    <Suspense fallback={<AdminPageSkeleton />}>
+      <Validate />
+    </Suspense>
   );
-}
+};
+
+export default page;

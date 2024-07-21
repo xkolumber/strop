@@ -1,13 +1,16 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import IconFooterFacebook from "./Icons/IconFooterFacebook";
 import IconFooterLinkedIn from "./Icons/IconFooterLinkedIn";
 import IconFooterInstagram from "./Icons/IconFooterInstagram";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+  const pathname = usePathname();
   return (
-    <footer className=" bg-black  w-full">
+    <footer className={`bg-black  w-full ${pathname === "/admin" && "hidden"}`}>
       <div className="main_section">
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className=" flex flex-col md:flex-row gap-4 md:gap-24 xl:gap-52 md:mt-0">
