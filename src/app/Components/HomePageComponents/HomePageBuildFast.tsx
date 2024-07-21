@@ -4,6 +4,9 @@ import ButtonElementBlack from "../ButtonElements/ButtonElementBlack";
 import IconBuilding from "../Icons/IconBuilding";
 import IconStar from "../Icons/IconStar";
 import IconUser from "../Icons/IconUser";
+import IconLike from "../Icons/IconLike";
+import IconTime from "../Icons/IconTime";
+import IconWeight from "../Icons/IconWeight";
 
 const HomePageBuildFast = () => {
   const data = [
@@ -25,6 +28,21 @@ const HomePageBuildFast = () => {
     },
   ];
 
+  const info = [
+    {
+      icon: <IconLike />,
+      text: "Šetríme Váš čas",
+    },
+    {
+      icon: <IconTime />,
+      text: "Nízka pracnosť",
+    },
+    {
+      icon: <IconWeight />,
+      text: "Vysoká unosnosť",
+    },
+  ];
+
   return (
     <div className="bg-secondary">
       <div className="main_section ">
@@ -33,8 +51,8 @@ const HomePageBuildFast = () => {
           Stavajte rýchlejšie a efektívnejšie vďaka novým predpätým stropným
           panelom. Prinášame nové riešenia do sveta stavieb!
         </h2>
-        <div className="flex flex-col  md:flex-row gap-4  mt-8">
-          <div className="md:w-[30%] flex flex-col justify-between">
+        <div className="flex flex-col  xl:flex-row gap-4 xl:gap-12  mt-8">
+          <div className="xl:w-[30%] flex flex-col justify-between">
             <p>
               Pomôžeme vám urýchliť proces stavby a ušetriť finančné
               prostriedky. Inšpirujte sa novými možnosťami stavebného priemyslu,
@@ -48,7 +66,7 @@ const HomePageBuildFast = () => {
               sú tu pre vás od projekcie až po technickú kontrolu správnosti
               zabudovania našich produktov.
             </p>
-            <h2 className="mt-16">Cenová ponuka</h2>
+            <h2 className="mt-8 md:mt-16">Cenová ponuka</h2>
             <Link href={"/kontakt"} className="mt-4">
               <ButtonElementBlack text="Mám záujem" />
             </Link>
@@ -62,29 +80,41 @@ const HomePageBuildFast = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col md:flex-row md:w-[70%] gap-8 ">
-            <Image
-              src={"/build_fast.jpg"}
-              alt="Intro"
-              width={1000}
-              height={400}
-              quality={100}
-              priority={true}
-              className="xl:!w-1/2 max-h-[400px] object-cover rounded-[8px]"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
-            />
-            <Image
-              src={"/build_fast2.jpg"}
-              alt="Intro"
-              width={1000}
-              height={400}
-              quality={100}
-              priority={true}
-              className=" object-cover  max-h-[400px] xl:w-1/2   rounded-[8px]"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
-            />
+          <div className="flex flex-col  md:flex-row xl:w-[70%] gap-8 justify-center items-center">
+            <div className="flex flex-col">
+              <div className="flex flex-col md:flex-row gap-8">
+                <Image
+                  src={"/build_fast.jpg"}
+                  alt="Intro"
+                  width={1000}
+                  height={400}
+                  quality={100}
+                  priority={true}
+                  className="xl:!w-1/2 xl:h-[400px] 2xl:h-[550px] object-cover rounded-[8px]"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
+                />
+                <Image
+                  src={"/build_fast2.jpg"}
+                  alt="Intro"
+                  width={1000}
+                  height={400}
+                  quality={100}
+                  priority={true}
+                  className=" object-cover  xl:h-[400px] 2xl:h-[550px]   xl:w-1/2   rounded-[8px]"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+                />
+              </div>
+              <div className="flex-col md:flex-row justify-center items-center gap-8 mt-8 xl:mt-24 flex">
+                {info.map((object, index) => (
+                  <div className="flex flex-row items-center gap-2" key={index}>
+                    <div className="w-24 h-24">{object.icon}</div>
+                    <p>{object.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
