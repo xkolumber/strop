@@ -29,22 +29,24 @@ interface Props {
 
 const HomePageBlogSection = ({ colorGray }: Props) => {
   return (
-    <div className={`main_section ${colorGray && "bg-primary"}`}>
-      <p className="mb-4">[ Blog ]</p>
-      <Suspense
-        fallback={
-          <div className="min-h-[600px]">
-            <ClipLoader size={20} color={"#00000"} loading={true} />
-          </div>
-        }
-      >
-        <GetData />
-      </Suspense>
+    <div className={`${colorGray && "bg-primary"}`}>
+      <div className={`main_section `}>
+        <p className="mb-4">[ Blog ]</p>
+        <Suspense
+          fallback={
+            <div className="min-h-[600px]">
+              <ClipLoader size={20} color={"#00000"} loading={true} />
+            </div>
+          }
+        >
+          <GetData />
+        </Suspense>
 
-      <div className="mt-8 2xl:mt-16">
-        <Link href={"/blog"}>
-          <ButtonElement text="Všetky blogy" />
-        </Link>
+        <div className="mt-8 2xl:mt-16">
+          <Link href={"/blog"}>
+            <ButtonElement text="Všetky blogy" />
+          </Link>
+        </div>
       </div>
     </div>
   );

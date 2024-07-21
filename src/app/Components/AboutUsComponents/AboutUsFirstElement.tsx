@@ -1,67 +1,34 @@
-import React from "react";
 import Image from "next/image";
 import ButtonElement from "../ButtonElements/ButtonElement";
-import IconStar from "../Icons/IconStar";
-import IconUser from "../Icons/IconUser";
-import IconBuilding from "../Icons/IconBuilding";
-import IconHouse from "../Icons/IconHouse";
-
-const about_us_data = [
-  {
-    icon: <IconStar />,
-    title: "19 rokov na Slovenskom trhu",
-  },
-  {
-    icon: <IconUser />,
-    title: "9 772 spokojných zákazníkov",
-  },
-  {
-    icon: <IconBuilding />,
-    title: "254 miest na Slovensku",
-  },
-  {
-    icon: <IconHouse />,
-    title: "27 838m² ročne",
-  },
-];
 
 const AboutUsFirstElement = () => {
   return (
-    <div className="main_section additional_padding">
+    <div className="main_section  ">
       <div className="flex flex-col md:flex-row justify-between mb-8">
-        <h2 className="md:w-[60%]">O nás</h2>
+        <div className="flex flex-col w-full md:w-1/2 ">
+          <h2 className="">O nás</h2>
 
-        <div className="flex flex-col md:w-[40%]">
-          <p className="">
-            Od roku 2004 sme neustále inovovali a rástli. Preto dnes prinášame
-            moderné riešenia pre slovenský stavebný priemysel. Sme stabilným
-            partnerom spoločností po celom Slovensku.
-          </p>
-          <div className="flex flex-row gap-4 mt-4">
-            <ButtonElement text="Kontaktujte nás" />
+          <div className="flex flex-col ">
+            <p className="">Od roku 2004 sme neustále inovovali a rástli.</p>
+            <p>
+              Preto dnes prinášame moderné riešenia pre slovenský stavebný
+              priemysel.
+            </p>
+            <p>Sme stabilným partnerom spoločností po celom Slovensku.</p>
+            <div className="flex flex-row gap-4 mt-4 mb-4">
+              <ButtonElement text="Kontaktujte nás" />
+            </div>
           </div>
         </div>
-      </div>
-      <Image
-        src={"/about_us_new.png"}
-        alt="Intro"
-        sizes="100vw"
-        width={1500}
-        height={1500}
-        quality={100}
-        priority={true}
-        className="object-cover w-full h-full rounded-[8px]"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4 ">
-        {about_us_data.map((object, index) => (
-          <div
-            className="flex flex-row gap-4  p-4 items-center border-b border-black"
-            key={index}
-          >
-            {object.icon}
-            <p>{object.title}</p>
-          </div>
-        ))}
+        <Image
+          src={"/strop_panel.jpg"}
+          alt="Intro"
+          width={500}
+          height={500}
+          quality={100}
+          priority={true}
+          className="object-cover w-full md:w-1/2 h-full rounded-[8px]"
+        />
       </div>
     </div>
   );

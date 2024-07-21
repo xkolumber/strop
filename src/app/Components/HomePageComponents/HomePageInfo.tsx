@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import ButtonElement from "../ButtonElements/ButtonElement";
+import { usePathname } from "next/navigation";
 
 const HomePageInfo = () => {
+  const pathname = usePathname();
   return (
     <div className="bg-secondary">
       <div className="main_section   md:max-h-[900px]">
@@ -37,15 +40,27 @@ const HomePageInfo = () => {
             </div>
           </div>
 
-          <Image
-            src={"/doprava.jpg"}
-            alt="panel"
-            width={500}
-            height={500}
-            className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px]"
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
-          />
+          {pathname === "/o-nas" ? (
+            <Image
+              src={"/car.jpg"}
+              alt="panel"
+              width={500}
+              height={500}
+              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px]"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPUlEQVR4nGM4++DJp///OxeurmpKYCjMip/d3ByWnOydE81gw8DgxcCgwsDAq6LFUFJQEBkQVFFeNrGtGQBs5RQPZO5OaAAAAABJRU5ErkJggg=="
+            />
+          ) : (
+            <Image
+              src={"/doprava.jpg"}
+              alt="panel"
+              width={500}
+              height={500}
+              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px]"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
+            />
+          )}
         </div>
       </div>
     </div>

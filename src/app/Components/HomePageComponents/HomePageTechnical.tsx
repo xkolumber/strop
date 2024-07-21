@@ -1,7 +1,6 @@
-import React from "react";
 import Image from "next/image";
-import ButtonElement from "../ButtonElements/ButtonElement";
 import Link from "next/link";
+import ButtonElement from "../ButtonElements/ButtonElement";
 
 const HomePageTechnical = () => {
   return (

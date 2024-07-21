@@ -2,10 +2,37 @@ import Link from "next/link";
 import React from "react";
 import ButtonElement from "../ButtonElements/ButtonElement";
 import Image from "next/image";
+import IconStar from "../Icons/IconStar";
+import IconUser from "../Icons/IconUser";
+import IconBuilding from "../Icons/IconBuilding";
+import IconHouse from "../Icons/IconHouse";
+import getBase64 from "@/app/lib/functions";
+
+const about_us_data = [
+  {
+    icon: <IconStar />,
+    title: "19 rokov na Slovenskom trhu",
+  },
+  {
+    icon: <IconUser />,
+    title: "9 772 spokojných zákazníkov",
+  },
+  {
+    icon: <IconBuilding />,
+    title: "254 miest na Slovensku",
+  },
+  {
+    icon: <IconHouse />,
+    title: "27 838m² ročne",
+  },
+];
 
 const AboutUsModernSociety = () => {
+  // const url = await getBase64("http://localhost:3000/o_nas4.jpg");
+  // console.log(url);
   return (
-    <div className="main_section ">
+    <div className="main_section additional_padding ">
+      <p className="mb-2">[ Naša spoločnosť ]</p>
       <h2>
         Moderná spoločnosť s dlhoročnou tradíciou a individuálnym prístupom k
         zákazníkom od roku 2004
@@ -15,64 +42,102 @@ const AboutUsModernSociety = () => {
         pracujeme, je pre nás príležitosťou priniesť inováciu a štýl do ďalšej
         stavby, aby sme vytvorili miesta, ktoré inšpirujú a oživujú.
       </p>
-      <Link href={"/stropne-panely"}>
-        <ButtonElement text="Zistiť viac" />
-      </Link>
+      <div className="mt-4 mb-4">
+        <Link href={"/stropne-panely"} className="">
+          <ButtonElement text="Zistiť viac" />
+        </Link>
+      </div>
 
       <Image
         src={"/bratislava1.jpg"}
         alt="Photo blog"
-        width={1000}
-        height={1000}
+        width={300}
+        height={300}
         quality={100}
         className="w-full md:hidden h-[338px] rounded-[8px] object-cover"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNw0hM6u295iJepIhsDg6O16fef35bP7o80YwAAdZUJpqVnlCUAAAAASUVORK5CYII="
       />
 
-      <div className="hidden md:flex flex-row items-end gap-4 md:gap-8">
+      <div className="hidden md:flex flex-row items-end gap-4 md:gap-8 md:!-mt-16 xl:!-mt-32">
         <Image
-          src={"/bratislava1.jpg"}
+          src={"/o_nas.jpg"}
           alt="Photo blog"
-          width={1000}
-          height={1000}
+          width={300}
+          height={300}
           quality={100}
-          className="w-full md:w-[33%] h-[338px] rounded-[8px] object-cover"
+          className="w-full md:w-[33%] h-[238px] xl:h-[338px]  rounded-[8px] object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGOIc9PraZ9/4tz3xRPaGEQZGHIya7/++X9/+yYAng4Nag2sURAAAAAASUVORK5CYII="
         />
 
         <Image
-          src={"/bratislava1.jpg"}
+          src={"/build_faster11.jpg"}
           alt="Photo blog"
-          width={1000}
-          height={1000}
+          width={300}
+          height={600}
           quality={100}
-          className="w-full  md:w-[33%]  h-[558px] rounded-[8px] object-cover"
+          className="w-full  md:w-[33%]  h-[358px] xl:h-[558px] rounded-[8px] object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ALvR6LzI1O/x+vz+/wCuucKNkZW9vsDs8fsAY1hcaQAAjHBqvdz0AG1FSEQAAHZXWTxUYnXwHFgHCHPsAAAAAElFTkSuQmCC"
         />
 
         <div className="flex flex-col md:w-[33%]  gap-4 md:gap-8">
           <Image
-            src={"/bratislava1.jpg"}
+            src={"/o_nas2.jpg"}
             alt="Photo blog"
-            width={1000}
-            height={1000}
+            width={300}
+            height={300}
             quality={100}
-            className="w-full  h-[338px] rounded-[8px] object-cover"
+            className="w-full  h-[180px] xl:h-[338px] rounded-[8px] object-cover"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJUlEQVR4nAEaAOX/AJZuSJK+0WCfvfb9/QANAACCnKGyrqbp29C0wg6ApWTVhQAAAABJRU5ErkJggg=="
           />
+          <div className="flex flex-row gap-4">
+            <Image
+              src={"/o_nas3.jpg"}
+              alt="Photo blog"
+              width={200}
+              height={200}
+              quality={100}
+              className="w-full  h-[88px] xl:h-[166px] md:w-1/2  rounded-[8px] object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJUlEQVR4nAEaAOX/AJ+ZmP/37sLCty86GwCGjV/i3MqtrJ4ABwDGvA1sfmGyygAAAABJRU5ErkJggg=="
+            />
+            <Image
+              src={"/o_nas4.jpg"}
+              alt="Photo blog"
+              width={200}
+              height={200}
+              quality={100}
+              className="w-full  h-[88px] md:w-1/4  rounded-[8px] object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNgMHSS9s0wy5/CIKDKcPzYwXPnL7/78X/3kXMAc8cMolcwW84AAAAASUVORK5CYII="
+            />
+          </div>
+
           <Image
             src={"/bratislava1.jpg"}
             alt="Photo blog"
-            width={1000}
-            height={1000}
+            width={200}
+            height={200}
             quality={100}
-            className="w-full  h-[166px] md:w-1/2  rounded-[8px] object-cover"
-          />
-          <Image
-            src={"/bratislava1.jpg"}
-            alt="Photo blog"
-            width={1000}
-            height={1000}
-            quality={100}
-            className="w-full  h-[88px]  md:w-1/3  rounded-[8px] object-cover"
+            className="w-full  h-[88px]  md:w-1/4  rounded-[8px] object-cover"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNw0hM6u295iJepIhsDg6O16fef35bP7o80YwAAdZUJpqVnlCUAAAAASUVORK5CYII="
           />
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4 ">
+        {about_us_data.map((object, index) => (
+          <div
+            className="flex flex-row gap-4  p-4 items-center border-b border-black"
+            key={index}
+          >
+            {object.icon}
+            <p>{object.title}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -9,10 +9,13 @@ import HomePageInfo from "../Components/HomePageComponents/HomePageInfo";
 const page = () => {
   return (
     <div className="">
+      <AboutUsModernSociety />
+
       <AboutUsFirstElement />
       <AboutUsTeamProfesional />
+
       {/* <AboutUsOurTeam /> */}
-      <AboutUsModernSociety />
+
       <HomePageBlogSection colorGray={true} />
       <HomePageInfo />
     </div>
