@@ -1,7 +1,7 @@
 "use client";
 import { PanelProduct, PanelProductSlugTitle } from "@/app/firebase/interface";
 import React from "react";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import Link from "next/link";
 import { useAuth } from "@/app/auth/Provider";
 import { useRouter } from "next/navigation";

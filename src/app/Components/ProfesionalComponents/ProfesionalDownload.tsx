@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
-import ButtonElementNavbar from "../ButtonElementNavbar";
-import ButtonElementPanel from "../ButtonElementPanel";
+import ButtonElementNavbar from "../ButtonElements/ButtonElementNavbar";
+import ButtonElementPanel from "../ButtonElements/ButtonElementPanel";
 import IconCheck from "../Icons/IconCheck";
 import IconDownload from "../Icons/IconDownload";
 

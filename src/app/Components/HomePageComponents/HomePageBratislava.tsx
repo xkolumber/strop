@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import { PhotoCityDescription } from "@/app/firebase/interface";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { app } from "@/app/firebase/config";

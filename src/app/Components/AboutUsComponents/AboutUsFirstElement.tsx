@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import IconStar from "../Icons/IconStar";
 import IconUser from "../Icons/IconUser";
 import IconBuilding from "../Icons/IconBuilding";

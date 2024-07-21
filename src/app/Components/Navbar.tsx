@@ -9,8 +9,8 @@ import IconHamburger from "./Icons/IconHamburger";
 import { useEffect, useRef, useState } from "react";
 
 import IconCloseButton from "./Icons/IconCloseButton";
-import ButtonElement from "./ButtonElement";
-import ButtonElementNavbar from "./ButtonElementNavbar";
+import ButtonElement from "./ButtonElements/ButtonElement";
+import ButtonElementNavbar from "./ButtonElements/ButtonElementNavbar";
 
 const Navbar = () => {
   const [openWindow, setOpenWindow] = useState(false);
@@ -51,84 +51,82 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar `}>
-      <Link href="/">
-        <Image
-          src={"/logo.svg"}
-          alt="logo"
-          width={0}
-          height={0}
-          className="w-[50px] h-[30px]  navbar_left object-contain"
-        />
-      </Link>
-      <div className="hidden xl:flex flex-row gap-12 items-center">
-        <Link href={"/"}>Domov</Link>
-        <Link href={"/o-nas"}>O nás</Link>
-        <Link href={"/stropne-panely"}>Stropné panely</Link>
-        <Link href={"/pre-profesionalov"}>Pre profesionálov</Link>
-        <Link href={"/blog"}>Blog</Link>
-        <Link className="" href={"/kontakt"}>
-          Kontakt
+      <div className="main_section flex flex-row justify-between !pt-0 !pb-0 items-center">
+        <Link href="/">
+          <Image
+            src={"/logo.svg"}
+            alt="logo"
+            width={330}
+            height={50}
+            className="w-[50px] h-[30px]   object-contain"
+          />
         </Link>
-      </div>
-
-      <div className="navbar_second_group2 navbar_right  ">
-        <Link className="hidden xl:flex" href={"/kontakt"}>
-          <ButtonElementNavbar text="Kontaktujte nás" />
-        </Link>
-        <div
-          className={`xl:hidden cursor-pointer ${closeClicked && "hidden"} `}
-          onClick={() => clickedButtonClose()}
-        >
-          <IconHamburger />
+        <div className="hidden xl:flex flex-row gap-12 items-center">
+          <Link href={"/"}>Domov</Link>
+          <Link href={"/o-nas"}>O nás</Link>
+          <Link href={"/stropne-panely"}>Stropné panely</Link>
+          <Link href={"/blog"}>Blog</Link>
+          <Link className="" href={"/kontakt"}>
+            Kontakt
+          </Link>
         </div>
-      </div>
 
-      {closeClicked && <div className="behind_card_background"></div>}
-      <div
-        className={`collapsible--expanded ${
-          closeClicked ? "collapsible--collapsed" : ""
-        }  `}
-      >
-        <span className="nav__item">
+        <div className="navbar_second_group2   ">
+          <Link className="hidden xl:flex" href={"/kontakt"}>
+            <ButtonElementNavbar text="Kontaktujte nás" />
+          </Link>
           <div
-            className={`icon icon--white nav__close-button `}
+            className={`xl:hidden cursor-pointer ${closeClicked && "hidden"} `}
             onClick={() => clickedButtonClose()}
           >
-            <IconCloseButton />
+            <IconHamburger />
           </div>
-        </span>
+        </div>
 
-        <Link
-          href={"/o-nas"}
-          className="nav__item"
-          onClick={() => clickedButtonClose()}
+        {closeClicked && <div className="behind_card_background"></div>}
+        <div
+          className={`collapsible--expanded ${
+            closeClicked ? "collapsible--collapsed" : ""
+          }  `}
         >
-          O nás
-        </Link>
-        <Link
-          href={"/stropne-panely"}
-          className="nav__item"
-          onClick={() => clickedButtonClose()}
-        >
-          Stropné panely
-        </Link>
-        <Link
-          href={"/blog"}
-          className="nav__item"
-          onClick={() => clickedButtonClose()}
-        >
-          Blog
-        </Link>
-        <Link href={"/pre-profesionalov"} className="nav__item">
-          Pre profesionálov
-        </Link>
-        <Link
-          href={"/kontakt"}
-          className="nav__item"
-          onClick={() => clickedButtonClose()}
-        >
-          Kontakt
-        </Link>
+          <span className="nav__item">
+            <div
+              className={`icon icon--white nav__close-button `}
+              onClick={() => clickedButtonClose()}
+            >
+              <IconCloseButton />
+            </div>
+          </span>
+
+          <Link
+            href={"/o-nas"}
+            className="nav__item"
+            onClick={() => clickedButtonClose()}
+          >
+            O nás
+          </Link>
+          <Link
+            href={"/stropne-panely"}
+            className="nav__item"
+            onClick={() => clickedButtonClose()}
+          >
+            Stropné panely
+          </Link>
+          <Link
+            href={"/blog"}
+            className="nav__item"
+            onClick={() => clickedButtonClose()}
+          >
+            Blog
+          </Link>
+          <Link
+            href={"/kontakt"}
+            className="nav__item"
+            onClick={() => clickedButtonClose()}
+          >
+            Kontakt
+          </Link>
+        </div>
       </div>
     </nav>
   );

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import OneBlogSection from "../OneBlogSection";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import { ClipLoader } from "react-spinners";
 import { unstable_noStore } from "next/cache";
 import { client } from "@/app/sanity-setting/sanity";

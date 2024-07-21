@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import Link from "next/link";
 
 const ProfesionalIntro = () => {

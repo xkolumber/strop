@@ -5,7 +5,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import ButtonElement from "./ButtonElement";
+import ButtonElement from "./ButtonElements/ButtonElement";
 
 interface FormData {
   name: string;

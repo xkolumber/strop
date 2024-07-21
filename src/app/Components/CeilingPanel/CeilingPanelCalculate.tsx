@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 
 const CeilingPanelCalculate = () => {
   return (

@@ -1,10 +1,9 @@
-import React from "react";
 import Image from "next/image";
-import ButtonElement from "../ButtonElement";
+import Link from "next/link";
+import ButtonElementBlack from "../ButtonElements/ButtonElementBlack";
+import IconBuilding from "../Icons/IconBuilding";
 import IconStar from "../Icons/IconStar";
 import IconUser from "../Icons/IconUser";
-import IconBuilding from "../Icons/IconBuilding";
-import Link from "next/link";
 
 const HomePageBuildFast = () => {
   const data = [
@@ -34,7 +33,7 @@ const HomePageBuildFast = () => {
           Stavajte rýchlejšie a efektívnejšie vďaka novým predpätým stropným
           panelom. Prinášame nové riešenia do sveta stavieb!
         </h2>
-        <div className="flex flex-col  md:flex-row gap-4">
+        <div className="flex flex-col  md:flex-row gap-4  mt-8">
           <div className="md:w-[30%] flex flex-col justify-between">
             <p>
               Pomôžeme vám urýchliť proces stavby a ušetriť finančné
@@ -42,16 +41,18 @@ const HomePageBuildFast = () => {
               porovnajte si všetky výhody predpätých stropných dutinových
               panelov. Požiadajte o nezáväznú cenovú ponuku ešte dnes.
             </p>
-            <p>
+            <p className="mt-4 xl:mt-8">
               Vizualizácie a cenové kalkulácie vykonávame individuálne pre každú
               stavbu na základe projektovej dokumentácie. Cenovú ponuku vám
               zašleme najneskôr do 48 hodín od dodania podkladov. Naši odborníci
               sú tu pre vás od projekcie až po technickú kontrolu správnosti
               zabudovania našich produktov.
             </p>
-            <Link className="mt-4" href={"/kontakt"}>
-              <ButtonElement text="Cenová ponuka" />
+            <h2 className="mt-16">Cenová ponuka</h2>
+            <Link href={"/kontakt"} className="mt-4">
+              <ButtonElementBlack text="Mám záujem" />
             </Link>
+
             <div className="flex flex-col gap-4 mt-8 mb-8">
               {data.map((one_data, index) => (
                 <div className="flex flex-row gap-4 items-center" key={index}>
@@ -61,22 +62,28 @@ const HomePageBuildFast = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row md:w-[70%] gap-8 md:pt-16">
+          <div className="flex flex-col md:flex-row md:w-[70%] gap-8 ">
             <Image
-              src={"/build_faster11.jpg"}
+              src={"/build_fast.jpg"}
               alt="Intro"
               width={1000}
-              height={1000}
+              height={400}
               quality={100}
-              className=" md:h-[200px] xl:h-[500px] xl:w-1/2 object-cover rounded-[8px]"
+              priority={true}
+              className="xl:!w-1/2 max-h-[400px] object-cover rounded-[8px]"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
             />
             <Image
-              src={"/build_faster2.jpg"}
+              src={"/build_fast2.jpg"}
               alt="Intro"
               width={1000}
-              height={1000}
+              height={400}
               quality={100}
-              className="md:h-[200px] object-cover xl:w-1/2 h-fit  rounded-[8px]"
+              priority={true}
+              className=" object-cover  max-h-[400px] xl:w-1/2   rounded-[8px]"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
             />
           </div>
         </div>

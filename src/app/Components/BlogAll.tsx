@@ -1,7 +1,7 @@
 import React from "react";
 import { Blog } from "../firebase/interface";
 import OneBlogSection from "./OneBlogSection";
-import ButtonElement from "./ButtonElement";
+import ButtonElement from "./ButtonElements/ButtonElement";
 import Link from "next/link";
 
 interface Props {

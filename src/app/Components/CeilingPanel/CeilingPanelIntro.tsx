@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createSlug } from "../HomePageComponents/HomePagePanel";
-import ButtonElementPanel from "../ButtonElementPanel";
+import ButtonElementPanel from "../ButtonElements/ButtonElementPanel";
 import { DownloadPdf, PanelProduct } from "@/app/firebase/interface";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import ButtonElementNavbar from "../ButtonElementNavbar";
+import ButtonElementNavbar from "../ButtonElements/ButtonElementNavbar";
 import IconDownload from "../Icons/IconDownload";
 import IconCheck from "../Icons/IconCheck";
 import { ClipLoader } from "react-spinners";

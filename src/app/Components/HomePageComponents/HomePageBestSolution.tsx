@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { Suspense } from "react";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import BackgroundVideo from "../BackgroundVideo";
 import { ClipLoader } from "react-spinners";
 import Link from "next/link";
@@ -9,7 +9,7 @@ const HomePageBestSolution = () => {
   return (
     <div className="main_section additional_padding">
       <div className="flex flex-col md:flex-row justify-between mb-8">
-        <h2 className="md:w-[60%]">Najlepšie riešenie pre Vašu stavbu</h2>
+        <h2 className="md:max-w-[50%]">Najlepšie riešenie pre Vašu stavbu</h2>
 
         <div className="flex flex-col md:w-[40%]">
           <p className="">

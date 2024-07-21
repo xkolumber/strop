@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import IconArrow from "./Icons/IconArrow";
+import IconArrow from "../Icons/IconArrow";
 
 interface Props {
   text: string;

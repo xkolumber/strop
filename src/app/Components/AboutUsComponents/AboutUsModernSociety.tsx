@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import ButtonElement from "../ButtonElement";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import Image from "next/image";
 
 const AboutUsModernSociety = () => {
