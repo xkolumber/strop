@@ -1,8 +1,15 @@
 "use server";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 import { getPlaiceholder } from "plaiceholder";
 import { app } from "../firebase/config";
 import {
+  PanelProduct,
   PanelProductSlugTitle,
   PhotoCityDescription,
 } from "../firebase/interface";
@@ -66,5 +73,21 @@ export async function GetPanely() {
     return panelyProducts;
   } catch (error) {
     return [];
+  }
+}
+
+export async function GetCertainPanel(slug: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore(app);
+    const q = query(collection(db, "panely"), where("slug", "==", slug));
+    const querySnapshot = await getDocs(q);
+
+    const doc = querySnapshot.docs[0];
+    const productData = doc.data() as PanelProduct;
+    return productData;
+  } catch (error) {
+    return;
   }
 }

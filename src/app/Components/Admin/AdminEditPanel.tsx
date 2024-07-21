@@ -1,19 +1,16 @@
 "use client";
 import { useAuth } from "@/app/auth/Provider";
-import { auth } from "@/app/firebase/config";
 import {
   DownloadPdf,
   PanelProduct,
   PanelProductLoad,
 } from "@/app/firebase/interface";
 import {
-  collection,
-  getDocs,
-  getFirestore,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+  AdminActualizePanel,
+  AdminActualizePdf,
+  AdminAddDeletePDf,
+  AdminAddPdf,
+} from "@/app/lib/actions";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +19,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
 interface Props {
-  data: PanelProduct;
+  data: PanelProduct | null;
 }
 
 export interface IsLoadingMap {
@@ -60,20 +57,22 @@ const EditMainProduct = ({ data }: Props) => {
   });
 
   useEffect(() => {
-    setActualizeData((prevData) => ({
-      ...prevData,
-      nazov: data.nazov,
-      otvory1: data.otvory1,
-      otvory2: data.otvory2,
-      predbezny_vypocet: data.predbezny_vypocet,
-      podrobny_vypocet: data.podrobny_vypocet,
-      poziarna_odolnost: data.poziarna_odolnost,
-      popis1: data.popis1,
-      popis2: data.popis2,
-      rezy1: data.rezy1,
-      rezy2: data.rezy2,
-      slug: data.slug,
-    }));
+    if (data) {
+      setActualizeData((prevData) => ({
+        ...prevData,
+        nazov: data.nazov,
+        otvory1: data.otvory1,
+        otvory2: data.otvory2,
+        predbezny_vypocet: data.predbezny_vypocet,
+        podrobny_vypocet: data.podrobny_vypocet,
+        poziarna_odolnost: data.poziarna_odolnost,
+        popis1: data.popis1,
+        popis2: data.popis2,
+        rezy1: data.rezy1,
+        rezy2: data.rezy2,
+        slug: data.slug,
+      }));
+    }
   }, []);
 
   const handlePhotoChange = (
@@ -106,6 +105,7 @@ const EditMainProduct = ({ data }: Props) => {
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setActualizeData((prevData) => {
@@ -114,11 +114,12 @@ const EditMainProduct = ({ data }: Props) => {
     });
   };
 
-  const handleActualizePanel = async () => {
+  const handleActualizePanel = async (e: any) => {
+    e.preventDefault();
     try {
       setIsLoadingMap((prevState) => ({ ...prevState, ["actualize"]: true }));
 
-      let url_foto = data.foto;
+      let url_foto = data?.foto ? data.foto : "";
       if (actualizeData.foto !== null) {
         const storage = getStorage();
         const storageRef = ref(
@@ -130,34 +131,25 @@ const EditMainProduct = ({ data }: Props) => {
         url_foto = await getDownloadURL(storageRef);
       }
 
-      const db = getFirestore(auth.app);
-      const productQuery = query(
-        collection(db, "panely"),
-        where("slug", "==", actualizeData.slug)
+      const response = await AdminActualizePanel(
+        url_foto,
+        actualizeData.nazov,
+        actualizeData.otvory1,
+        actualizeData.otvory2,
+        actualizeData.predbezny_vypocet,
+        actualizeData.podrobny_vypocet,
+        actualizeData.poziarna_odolnost,
+        actualizeData.popis1,
+        actualizeData.popis2,
+        actualizeData.rezy1,
+        actualizeData.rezy2,
+        actualizeData.slug
       );
-
-      const productQuerySnapshot = await getDocs(productQuery);
-
-      const productDocRef = productQuerySnapshot.docs[0].ref;
-
-      await updateDoc(productDocRef, {
-        foto: url_foto,
-        nazov: actualizeData.nazov,
-        otvory1: actualizeData.otvory1,
-        otvory2: actualizeData.otvory2,
-        predbezny_vypocet: actualizeData.predbezny_vypocet,
-        podrobny_vypocet: actualizeData.podrobny_vypocet,
-        poziarna_odolnost: actualizeData.poziarna_odolnost,
-        popis1: actualizeData.popis1,
-        popis2: actualizeData.popis2,
-        rezy1: actualizeData.rezy1,
-        rezy2: actualizeData.rezy2,
-        slug: createSlug(actualizeData.nazov),
-      });
-
-      console.log("Product actualized");
-      toast.success("Produkt bol úspešne aktualizovaný");
-      window.location.reload();
+      if (response === "success") {
+        toast.success("Panel bol aktualizovaný");
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
       toast.error("Chyba");
       console.error("Error adding product:", error);
@@ -165,20 +157,6 @@ const EditMainProduct = ({ data }: Props) => {
       setIsLoadingMap((prevState) => ({ ...prevState, ["actualize"]: false }));
     }
   };
-
-  function createSlug(title: string): string {
-    const slug = title
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "")
-      .replace(/--+/g, "-");
-
-    return slug;
-  }
 
   const handleDeletePdf = async (
     slug: string,
@@ -190,23 +168,13 @@ const EditMainProduct = ({ data }: Props) => {
       [`delete-${index}`]: true,
     }));
     try {
-      const db = getFirestore(auth.app);
-
-      const querySnapshot = await getDocs(
-        query(collection(db, "panely"), where("slug", "==", slug))
-      );
-
-      const productDoc = querySnapshot.docs[0];
-      const productData = productDoc.data();
-
-      const updatedDownloadFile = productData.download_file.filter(
-        (file: DownloadPdf) => file.nazov !== nazov
-      );
-
-      await updateDoc(productDoc.ref, { download_file: updatedDownloadFile });
-
-      console.log("Supported products deleted successfully.");
-      window.location.reload();
+      const response = await AdminAddDeletePDf(nazov, index, data!.slug);
+      if (response === "success") {
+        toast.success("PDF element bol odstránený");
+        setNewPdf(false);
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
       setIsLoadingMap((prevState) => ({
         ...prevState,
@@ -227,12 +195,6 @@ const EditMainProduct = ({ data }: Props) => {
       [`actualize-${index}`]: true,
     }));
     try {
-      const db = getFirestore(auth.app);
-
-      const querySnapshot = await getDocs(
-        query(collection(db, "panely"), where("slug", "==", slug))
-      );
-
       let url_pdf = "";
       if (filePdf !== null) {
         const storage = getStorage();
@@ -241,31 +203,19 @@ const EditMainProduct = ({ data }: Props) => {
         url_pdf = await getDownloadURL(storageRef);
       }
 
-      const productDoc = querySnapshot.docs[0];
-      const productData = productDoc.data();
-
-      const updatedDownloadFile = productData.download_file.map(
-        (file: DownloadPdf, i: number) => {
-          if (i === index) {
-            return {
-              nazov: downloadFiles[index].nazov,
-              pdf_link:
-                url_pdf === "" ? downloadFiles[index].pdf_link : url_pdf,
-            };
-          }
-          return file;
-        }
+      const response = await AdminActualizePdf(
+        downloadFiles,
+        url_pdf,
+        slug,
+        index
       );
-
-      await updateDoc(productDoc.ref, { download_file: updatedDownloadFile });
-
-      console.log("Supported products updated successfully.");
-      window.location.reload();
+      if (response === "success") {
+        toast.success("PDF element bol aktualizovaný");
+        setFilePdf(null);
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
-      setIsLoadingMap((prevState) => ({
-        ...prevState,
-        [`actualize-${index}`]: false,
-      }));
       console.error("Error updating product:", error);
     } finally {
       setIsLoadingMap((prevState) => ({
@@ -297,10 +247,10 @@ const EditMainProduct = ({ data }: Props) => {
   }, [newPdf]);
 
   useEffect(() => {
-    if (data.download_file) {
+    if (data?.download_file) {
       setDownloadFiles(data.download_file);
     }
-  }, [data.download_file]);
+  }, [data?.download_file]);
 
   const handleChangePdfTitle = (index: number, newValue: string) => {
     const updatedFiles = [...downloadFiles];
@@ -308,7 +258,8 @@ const EditMainProduct = ({ data }: Props) => {
     setDownloadFiles(updatedFiles);
   };
 
-  const handleAddNewPdfObject = async () => {
+  const handleAddNewPdfObject = async (e: any) => {
+    e.preventDefault();
     try {
       setIsLoadingMap((prevState) => ({
         ...prevState,
@@ -326,34 +277,14 @@ const EditMainProduct = ({ data }: Props) => {
         url_pdf = await getDownloadURL(storageRef);
       }
 
-      const db = getFirestore(auth.app);
-
-      const querySnapshot = await getDocs(
-        query(collection(db, "panely"), where("slug", "==", data.slug))
-      );
-
-      const productDoc = querySnapshot.docs[0];
-      const productData = productDoc.data();
-
-      const new_object_pdf = {
-        nazov: newPdfTitle,
-        pdf_link: url_pdf,
-      };
-
-      const all_pdf_objects = [
-        ...(productData.download_file || []),
-        new_object_pdf,
-      ];
-
-      await updateDoc(productDoc.ref, {
-        download_file: all_pdf_objects,
-      });
-
-      console.log("Product added successfully with ID: ");
-      toast.success("PDF súbor bol úspešne pridaný");
-      window.location.reload();
+      const response = await AdminAddPdf(newPdfTitle, url_pdf, data!.slug);
+      if (response === "success") {
+        toast.success("PDF element bol pridaný");
+        setNewPdf(false);
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
-      // toast.success("Produkt bol úspešne pridaný");
       console.error("Error adding product:", error);
     } finally {
       setIsLoadingMap((prevState) => ({
@@ -365,256 +296,250 @@ const EditMainProduct = ({ data }: Props) => {
 
   return (
     <>
-      {user && (
-        <>
-          <Toaster />
-          <div className="main_section additional_padding products_admin">
-            <Link href={"/admin"}>
-              <p className="hover:underline ease-in">Späť</p>
-            </Link>
+      <Toaster />
+      <div className="main_section additional_padding products_admin">
+        <Link href={"/admin"}>
+          <p className="hover:underline ease-in">Späť</p>
+        </Link>
+        <form className="form" onSubmit={handleActualizePanel}>
+          <h4>Produkt {data?.nazov}</h4>
+          <div className="product_admin_row">
+            <p>Titulná fotka produktu:</p>
 
-            <h4>Produkt {data.nazov}</h4>
-            <div className="product_admin_row">
-              <p>Titulná fotka produktu:</p>
-
+            {data?.foto && (
               <Image
-                src={data.foto}
+                src={data?.foto}
                 alt="titulna fotka"
                 width={400}
                 height={400}
                 className="w-40 h-40 object-contain"
               />
+            )}
 
-              <input
-                type="file"
-                onChange={(event) => handlePhotoChange(event, "foto")}
+            <input
+              type="file"
+              onChange={(event) => handlePhotoChange(event, "foto")}
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Popis produktu1:</p>
+            <textarea
+              name="popis1"
+              value={actualizeData.popis1}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+          <div className="product_admin_row">
+            <p>Popis produktu2:</p>
+            <textarea
+              name="popis2"
+              value={actualizeData.popis2}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Rezy 1 :</p>
+            <textarea
+              name="rezy1"
+              value={actualizeData.rezy1}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Rezy 2 :</p>
+            <textarea
+              name="rezy2"
+              value={actualizeData.rezy2}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Otvor 1:</p>
+            <textarea
+              name="otvory1"
+              value={actualizeData.otvory1}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Otvor 2:</p>
+            <textarea
+              name="otvory2"
+              value={actualizeData.otvory2}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Predbežný výpočet:</p>
+            <textarea
+              name="predbezny_vypocet"
+              value={actualizeData.predbezny_vypocet}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Podrobný výpočet:</p>
+            <textarea
+              name="podrobny_vypocet"
+              value={actualizeData.podrobny_vypocet}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <div className="product_admin_row">
+            <p>Požiarna odolnosť :</p>
+            <textarea
+              name="poziarna_odolnost"
+              value={actualizeData.poziarna_odolnost}
+              onChange={handleChange}
+              className="!w-[75%] h-[10rem] text-black"
+            />
+          </div>
+
+          <button
+            className="btn btn--primary"
+            // onClick={handleActualizePanel}
+            type="submit"
+            disabled={isLoadingMap["actualize"]}
+          >
+            {isLoadingMap["actualize"] ? (
+              <ClipLoader
+                size={20}
+                color={"#00000"}
+                loading={true}
+                className="ml-16 mr-16"
               />
-            </div>
+            ) : (
+              "Aktualizovať produkt"
+            )}
+          </button>
+        </form>
 
-            <div className="product_admin_row">
-              <p>Popis produktu1:</p>
+        <div className="mt-16">
+          <h5>Pdf dokumenty</h5>
+
+          {data?.download_file.map((pdf, index) => (
+            <div className="product_admin_row" key={index}>
               <input
                 type="text"
-                name="popis1"
-                value={actualizeData.popis1}
-                onChange={handleChange}
-                className=""
+                name={`pdf-nazov-${index}`}
+                value={pdf.nazov}
+                onChange={(e) => handleChangePdfTitle(index, e.target.value)}
+                className="!w-1/3"
               />
+              <Link href={`${pdf.pdf_link}`} className="underline text-black">
+                Link pdf
+              </Link>
+              <input type="file" onChange={(event) => handleLoadPdf(event)} />
+              <button
+                className="btn btn--primary"
+                onClick={() => handleActualizePdf(data.slug, index)}
+                disabled={isLoadingMap[`actualize-${index}`]}
+              >
+                {isLoadingMap[`actualize-${index}`] ? (
+                  <ClipLoader
+                    size={20}
+                    color={"#00000"}
+                    loading={true}
+                    className="ml-10 mr-10"
+                  />
+                ) : (
+                  "Aktualizovať"
+                )}
+              </button>
+              <button
+                className="btn btn--secondary"
+                onClick={() => handleDeletePdf(data.slug, pdf.nazov, index)}
+                disabled={isLoadingMap[`delete-${index}`]}
+              >
+                {isLoadingMap[`delete-${index}`] ? (
+                  <ClipLoader
+                    size={20}
+                    color={"#00000"}
+                    loading={true}
+                    className="ml-8 mr-8"
+                  />
+                ) : (
+                  "Odstrániť"
+                )}
+              </button>
             </div>
-            <div className="product_admin_row">
-              <p>Popis produktu2:</p>
-              <input
-                type="text"
-                name="popis2"
-                value={actualizeData.popis2}
-                onChange={handleChange}
-              />
-            </div>
+          ))}
 
-            <div className="product_admin_row">
-              <p>Rezy 1 :</p>
-              <input
-                type="text"
-                name="rezy1"
-                value={actualizeData.rezy1}
-                onChange={handleChange}
-              />
-            </div>
+          <h6
+            className="underline mt-16 cursor-pointer"
+            onClick={() => setNewPdf(true)}
+          >
+            Pridať nový PDF dokument
+          </h6>
 
-            <div className="product_admin_row">
-              <p>Rezy 2 :</p>
-              <input
-                type="text"
-                name="rezy2"
-                value={actualizeData.rezy2}
-                onChange={handleChange}
-              />
-            </div>
+          {newPdf && (
+            <>
+              <div className="behind_card_background"></div>
+              <div className="popup_message " ref={popupRef}>
+                <form
+                  className="flex flex-col justify-center items-center products_admin"
+                  onSubmit={handleAddNewPdfObject}
+                >
+                  <h4 className="text-center text-white mb-8">
+                    Nový pdf dokument
+                  </h4>
 
-            <div className="product_admin_row">
-              <p>Otvor 1:</p>
-              <input
-                type="text"
-                name="otvory1"
-                value={actualizeData.otvory1}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="product_admin_row">
-              <p>Otvor 2:</p>
-              <input
-                type="text"
-                name="otvory2"
-                value={actualizeData.otvory2}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="product_admin_row">
-              <p>Predbežný výpočet:</p>
-              <input
-                type="text"
-                name="predbezny_vypocet"
-                value={actualizeData.predbezny_vypocet}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="product_admin_row">
-              <p>Podrobný výpočet:</p>
-              <input
-                type="text"
-                name="podrobny_vypocet"
-                value={actualizeData.podrobny_vypocet}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="product_admin_row">
-              <p>Požiarna odolnosť :</p>
-              <input
-                type="text"
-                name="poziarna_odolnost"
-                value={actualizeData.poziarna_odolnost}
-                onChange={handleChange}
-              />
-            </div>
-
-            <button
-              className="btn btn--primary"
-              onClick={handleActualizePanel}
-              disabled={isLoadingMap["actualize"]}
-            >
-              {isLoadingMap["actualize"] ? (
-                <ClipLoader
-                  size={20}
-                  color={"#00000"}
-                  loading={true}
-                  className="ml-16 mr-16"
-                />
-              ) : (
-                "Aktualizovať produkt"
-              )}
-            </button>
-
-            <div className="mt-16">
-              <h5>Pdf dokumenty</h5>
-
-              {data.download_file.map((pdf, index) => (
-                <div className="product_admin_row" key={index}>
                   <input
                     type="text"
-                    name={`pdf-nazov-${index}`}
-                    value={pdf.nazov}
-                    onChange={(e) =>
-                      handleChangePdfTitle(index, e.target.value)
-                    }
-                    className="!w-[200px]"
+                    id="nazov_dokument"
+                    value={newPdfTitle}
+                    onChange={(e) => setNewPdfTitle(e.target.value)}
+                    placeholder="*Názov dokumentu"
+                    required
+                    className="!w-full"
                   />
-                  <Link
-                    href={`${pdf.pdf_link}`}
-                    className="underline text-black"
-                  >
-                    Link pdf
-                  </Link>
+
                   <input
                     type="file"
-                    onChange={(event) => handleLoadPdf(event)}
+                    onChange={(event) =>
+                      setNewFilePdf(event.target.files?.[0] || null)
+                    }
+                    className="!w-full mt-4"
+                    required
                   />
                   <button
                     className="btn btn--primary"
-                    onClick={() => handleActualizePdf(data.slug, index)}
-                    disabled={isLoadingMap[`actualize-${index}`]}
+                    type="submit"
+                    disabled={isLoadingMap["new_pdf_object"]}
                   >
-                    {isLoadingMap[`actualize-${index}`] ? (
+                    {isLoadingMap["new_pdf_object"] ? (
                       <ClipLoader
                         size={20}
                         color={"#00000"}
                         loading={true}
-                        className="ml-10 mr-10"
+                        className="ml-4 mr-4"
                       />
                     ) : (
-                      "Aktualizovať"
+                      "Pridať"
                     )}
                   </button>
-                  <button
-                    className="btn btn--secondary"
-                    onClick={() => handleDeletePdf(data.slug, pdf.nazov, index)}
-                    disabled={isLoadingMap[`delete-${index}`]}
-                  >
-                    {isLoadingMap[`delete-${index}`] ? (
-                      <ClipLoader
-                        size={20}
-                        color={"#00000"}
-                        loading={true}
-                        className="ml-8 mr-8"
-                      />
-                    ) : (
-                      "Odstrániť"
-                    )}
-                  </button>
-                </div>
-              ))}
-
-              <h6
-                className="underline mt-16 cursor-pointer"
-                onClick={() => setNewPdf(true)}
-              >
-                Pridať nový PDF dokument
-              </h6>
-
-              {newPdf && (
-                <>
-                  <div className="behind_card_background"></div>
-                  <div className="popup_message " ref={popupRef}>
-                    <form className="flex flex-col justify-center items-center products_admin">
-                      <h4 className="text-center text-white mb-8">
-                        Nový pdf dokument
-                      </h4>
-
-                      <input
-                        type="text"
-                        id="nazov_dokument"
-                        value={newPdfTitle}
-                        onChange={(e) => setNewPdfTitle(e.target.value)}
-                        placeholder="*Názov dokumentu"
-                        required
-                        className="!w-full"
-                      />
-
-                      <input
-                        type="file"
-                        onChange={(event) =>
-                          setNewFilePdf(event.target.files?.[0] || null)
-                        }
-                        className="!w-full mt-4"
-                        required
-                      />
-                      <button
-                        className="btn btn--primary"
-                        onClick={handleAddNewPdfObject}
-                        disabled={isLoadingMap["new_pdf_object"]}
-                      >
-                        {isLoadingMap["new_pdf_object"] ? (
-                          <ClipLoader
-                            size={20}
-                            color={"#00000"}
-                            loading={true}
-                            className="ml-4 mr-4"
-                          />
-                        ) : (
-                          "Pridať"
-                        )}
-                      </button>
-                    </form>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </>
-      )}
+                </form>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
     </>
   );
 };
