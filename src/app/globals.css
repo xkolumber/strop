@@ -459,6 +459,10 @@ a {
   height: 5rem;
   font-size: 1.8rem;
 }
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border-bottom: 3px solid black;
+}
 
 .send_email input[type="email"] {
   padding: 10px;

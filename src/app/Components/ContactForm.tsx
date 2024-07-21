@@ -60,7 +60,7 @@ const ContactForm = () => {
   return (
     <>
       <Toaster />
-      <div className="flex md:flex-row justify-center gap-12 main_section additional_padding">
+      <div className="flex flex-col md:flex-row justify-center gap-12 main_section additional_padding">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="contact_form w-full md:w-1/2  flex flex-col"
@@ -138,7 +138,7 @@ const ContactForm = () => {
               required
             />
           </div>
-          <div className="mt-8">
+          <div className="mt-8 mb-8">
             <ButtonElement text="Odoslať" />
           </div>
           {/* <button
@@ -159,7 +159,7 @@ const ContactForm = () => {
           width={1000}
           height={1000}
           quality={100}
-          className="w-full md:w-1/2 h-full rounded-[8px] object-cover"
+          className="w-full md:w-1/2 h-full rounded-[8px] object-cover hidden md:flex"
         />
       </div>
     </>

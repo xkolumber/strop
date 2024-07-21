@@ -6,7 +6,6 @@ import IconStar from "../Icons/IconStar";
 import IconUser from "../Icons/IconUser";
 import IconBuilding from "../Icons/IconBuilding";
 import IconHouse from "../Icons/IconHouse";
-import getBase64 from "@/app/lib/functions";
 
 const about_us_data = [
   {
