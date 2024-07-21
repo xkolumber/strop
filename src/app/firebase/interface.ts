@@ -8,6 +8,7 @@ export function urlFor(source: any) {
 }
 
 export interface PanelProduct {
+  id: string;
   foto: string;
   nazov: string;
   otvory1: string;

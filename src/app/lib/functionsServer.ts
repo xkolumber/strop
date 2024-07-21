@@ -87,7 +87,10 @@ export async function GetCertainPanel(slug: string) {
 
     const doc = querySnapshot.docs[0];
     const productData = doc.data() as PanelProduct;
-    return productData;
+    return {
+      ...productData,
+      id: doc.id,
+    };
   } catch (error) {
     return;
   }

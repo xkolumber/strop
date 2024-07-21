@@ -213,3 +213,53 @@ export async function AdminDeleteCertainStavbyPopisy(id: string) {
     return "false";
   }
 }
+
+export async function AdminAddNewPanel(
+  foto: string,
+  nazov: string,
+  otvory1: string,
+  otvory2: string,
+  predbezny_vypocet: string,
+  podrobny_vypocet: string,
+  poziarna_odolnost: string,
+  popis1: string,
+  popis2: string,
+  rezy1: string,
+  rezy2: string
+) {
+  const stavbyCollectionRef = firestore.collection("panely");
+
+  try {
+    await stavbyCollectionRef.add({
+      foto: foto,
+      nazov: nazov,
+      otvory1: otvory1,
+      otvory2: otvory2,
+      predbezny_vypocet: predbezny_vypocet,
+      podrobny_vypocet: podrobny_vypocet,
+      poziarna_odolnost: poziarna_odolnost,
+      popis1: popis1,
+      popis2: popis2,
+      rezy1: rezy1,
+      rezy2: rezy2,
+      slug: createSlug(nazov),
+      download_file: [],
+    });
+    revalidatePath("/admin/pridanie-foto-popis");
+    return "success";
+  } catch (error) {
+    return "false";
+  }
+}
+
+export async function AdminDeletePanel(id: string) {
+  const stavbyCollectionRef = firestore.collection("panely");
+
+  try {
+    await stavbyCollectionRef.doc(id).delete();
+    return "success";
+  } catch (error) {
+    console.error("Error updating document:", error);
+    return "false";
+  }
+}

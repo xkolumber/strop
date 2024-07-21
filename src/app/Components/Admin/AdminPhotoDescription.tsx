@@ -267,7 +267,7 @@ const AdminPhotoDescription = ({ data }: Props) => {
       {newPhotoDescription && (
         <>
           <div className="behind_card_background"></div>
-          <div className="popup_message !bg-orange-500 " ref={popupRef}>
+          <div className="popup_message " ref={popupRef}>
             <form
               className="flex flex-col justify-center items-center products_admin"
               onSubmit={handleAddNewPdfObject}
@@ -299,11 +299,11 @@ const AdminPhotoDescription = ({ data }: Props) => {
                 onChange={(event) =>
                   setNewFilePdf(event.target.files?.[0] || null)
                 }
-                className="!w-full mt-4"
+                className="!w-full mt-4 text-white"
                 required
               />
               <button
-                className="btn btn--secondary"
+                className="btn btn--primary"
                 type="submit"
                 disabled={isLoadingMap["new_pdf_object"]}
               >

@@ -1,16 +1,17 @@
 "use client";
 import { useAuth } from "@/app/auth/Provider";
-import { auth } from "@/app/firebase/config";
 import { PanelProductLoad } from "@/app/firebase/interface";
 
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { AdminAddNewPanel } from "@/app/lib/actions";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
 const AdminNewPanel = () => {
+  const router = useRouter();
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
@@ -56,10 +57,11 @@ const AdminNewPanel = () => {
     }
   };
 
-  const handleSaveProduct = async () => {
+  const handleSaveProduct = async (e: any) => {
+    e.preventDefault();
     try {
       setIsLoading(true);
-      let url_foto = null;
+      let url_foto = "";
       if (actualizeData.foto !== null) {
         const storage = getStorage();
         const storageRef = ref(
@@ -71,26 +73,26 @@ const AdminNewPanel = () => {
         url_foto = await getDownloadURL(storageRef);
       }
 
-      const db = getFirestore(auth.app);
-      await addDoc(collection(db, "panely"), {
-        foto: url_foto,
-        nazov: actualizeData.nazov,
-        otvory1: actualizeData.otvory1,
-        otvory2: actualizeData.otvory2,
-        predbezny_vypocet: actualizeData.predbezny_vypocet,
-        podrobny_vypocet: actualizeData.podrobny_vypocet,
-        poziarna_odolnost: actualizeData.poziarna_odolnost,
-        popis1: actualizeData.popis1,
-        popis2: actualizeData.popis2,
-        rezy1: actualizeData.rezy1,
-        rezy2: actualizeData.rezy2,
-        slug: createSlug(actualizeData.nazov),
-        download_file: [],
-      });
+      const response = await AdminAddNewPanel(
+        url_foto,
+        actualizeData.nazov,
+        actualizeData.otvory1,
+        actualizeData.otvory2,
+        actualizeData.predbezny_vypocet,
+        actualizeData.podrobny_vypocet,
+        actualizeData.poziarna_odolnost,
+        actualizeData.popis1,
+        actualizeData.popis2,
+        actualizeData.rezy1,
+        actualizeData.rezy2
+      );
+      if (response === "success") {
+        toast.success("Produkt bol úspešne pridaný");
 
-      console.log("Product added successfully with ID: ");
-      toast.success("Produkt bol úspešne pridaný");
-      window.location.reload();
+        router.push("/admin");
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
     } catch (error) {
       toast.success("Produkt bol úspešne pridaný");
       console.error("Error adding product:", error);
@@ -99,42 +101,16 @@ const AdminNewPanel = () => {
     }
   };
 
-  function createSlug(title: string): string {
-    const slug = title
-      .toString()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w-]+/g, "")
-      .replace(/--+/g, "-");
-
-    return slug;
-  }
-
-  const handleCheckboxChangeSizes = (size: string) => {
-    setSelectedSizes((prevSelected) => {
-      const updatedSelected = prevSelected.includes(size)
-        ? prevSelected.filter((nazov) => nazov !== size)
-        : [...prevSelected, size];
-
-      setActualizeData((prevData) => ({
-        ...prevData,
-        velkost: updatedSelected,
-      }));
-
-      return updatedSelected;
-    });
-  };
-
   return (
     <>
       {user && (
         <>
           <Toaster />
 
-          <div className=" products_admin main_section additional_padding">
+          <form
+            className=" products_admin main_section additional_padding"
+            onSubmit={handleSaveProduct}
+          >
             <Link href={"/admin"}>
               <p className="hover:underline ease-in">Späť</p>
             </Link>
@@ -142,7 +118,12 @@ const AdminNewPanel = () => {
 
             <div className="product_admin_row">
               <p>Názov produktu:</p>
-              <input type="text" name="nazov" onChange={handleChange} />
+              <input
+                type="text"
+                name="nazov"
+                onChange={handleChange}
+                required
+              />
             </div>
 
             <div className="product_admin_row">
@@ -151,6 +132,7 @@ const AdminNewPanel = () => {
               <input
                 type="file"
                 onChange={(event) => handlePhotoChange(event, "foto")}
+                required
               />
             </div>
 
@@ -161,6 +143,7 @@ const AdminNewPanel = () => {
                 name="popis1"
                 value={actualizeData.popis1}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -170,6 +153,7 @@ const AdminNewPanel = () => {
                 name="popis2"
                 value={actualizeData.popis2}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -179,6 +163,7 @@ const AdminNewPanel = () => {
                 name="rezy1"
                 value={actualizeData.rezy1}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -188,6 +173,7 @@ const AdminNewPanel = () => {
                 name="rezy2"
                 value={actualizeData.rezy2}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -197,6 +183,7 @@ const AdminNewPanel = () => {
                 name="otvory1"
                 value={actualizeData.otvory1}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -206,6 +193,7 @@ const AdminNewPanel = () => {
                 name="otvory2"
                 value={actualizeData.otvory2}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -215,6 +203,7 @@ const AdminNewPanel = () => {
                 name="predbezny_vypocet"
                 value={actualizeData.predbezny_vypocet}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -224,6 +213,7 @@ const AdminNewPanel = () => {
                 name="podrobny_vypocet"
                 value={actualizeData.podrobny_vypocet}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="product_admin_row">
@@ -233,12 +223,13 @@ const AdminNewPanel = () => {
                 name="poziarna_odolnost"
                 value={actualizeData.poziarna_odolnost}
                 onChange={handleChange}
+                required
               />
             </div>
 
             <button
               className="btn btn--primary"
-              onClick={handleSaveProduct}
+              type="submit"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -252,7 +243,7 @@ const AdminNewPanel = () => {
                 "Nahrať produkt"
               )}
             </button>
-          </div>
+          </form>
         </>
       )}
     </>

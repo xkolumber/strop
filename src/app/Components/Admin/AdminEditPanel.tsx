@@ -10,10 +10,12 @@ import {
   AdminActualizePdf,
   AdminAddDeletePDf,
   AdminAddPdf,
+  AdminDeletePanel,
 } from "@/app/lib/actions";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -30,7 +32,6 @@ const EditMainProduct = ({ data }: Props) => {
   const { user } = useAuth();
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
 
-  const [success, setSuccess] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
 
   const [filePdf, setFilePdf] = useState<File | null>(null);
@@ -39,6 +40,7 @@ const EditMainProduct = ({ data }: Props) => {
   const [newPdf, setNewPdf] = useState(false);
   const [newPdfTitle, setNewPdfTitle] = useState("");
   const [newFilePdf, setNewFilePdf] = useState<File | null>(null);
+  const router = useRouter();
 
   const [actualizeData, setActualizeData] = useState<PanelProductLoad>({
     foto: null,
@@ -294,6 +296,26 @@ const EditMainProduct = ({ data }: Props) => {
     }
   };
 
+  const handleDeletePanel = async (e: any) => {
+    e.preventDefault();
+    try {
+      setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: true }));
+
+      const response = await AdminDeletePanel(data!.id);
+      if (response === "success") {
+        toast.success("Panel bol odstránený");
+        router.push("/admin");
+      } else {
+        toast.error("Niekde nastala chyba");
+      }
+    } catch (error) {
+      toast.error("Chyba");
+      console.error("Error adding product:", error);
+    } finally {
+      setIsLoadingMap((prevState) => ({ ...prevState, ["delete"]: false }));
+    }
+  };
+
   return (
     <>
       <Toaster />
@@ -411,23 +433,42 @@ const EditMainProduct = ({ data }: Props) => {
             />
           </div>
 
-          <button
-            className="btn btn--primary"
-            // onClick={handleActualizePanel}
-            type="submit"
-            disabled={isLoadingMap["actualize"]}
-          >
-            {isLoadingMap["actualize"] ? (
-              <ClipLoader
-                size={20}
-                color={"#00000"}
-                loading={true}
-                className="ml-16 mr-16"
-              />
-            ) : (
-              "Aktualizovať produkt"
-            )}
-          </button>
+          <div className="flex flex-row justify-between">
+            <button
+              className="btn btn--primary"
+              // onClick={handleActualizePanel}
+              type="submit"
+              disabled={isLoadingMap["actualize"]}
+            >
+              {isLoadingMap["actualize"] ? (
+                <ClipLoader
+                  size={20}
+                  color={"#00000"}
+                  loading={true}
+                  className="ml-16 mr-16"
+                />
+              ) : (
+                "Aktualizovať panel"
+              )}
+            </button>
+            <button
+              className="btn btn--primary !bg-red-600"
+              onClick={handleDeletePanel}
+              type="submit"
+              disabled={isLoadingMap["delete"]}
+            >
+              {isLoadingMap["delete"] ? (
+                <ClipLoader
+                  size={20}
+                  color={"#00000"}
+                  loading={true}
+                  className="ml-16 mr-16"
+                />
+              ) : (
+                "Ofstrániť produkt"
+              )}
+            </button>
+          </div>
         </form>
 
         <div className="mt-16">
@@ -515,7 +556,7 @@ const EditMainProduct = ({ data }: Props) => {
                     onChange={(event) =>
                       setNewFilePdf(event.target.files?.[0] || null)
                     }
-                    className="!w-full mt-4"
+                    className="!w-full mt-4 text-white"
                     required
                   />
                   <button
