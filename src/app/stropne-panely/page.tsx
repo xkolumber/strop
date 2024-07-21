@@ -16,9 +16,19 @@ async function GetData() {
 
     const panelyProducts: PanelProduct[] = querySnapshot.docs.map((doc) => ({
       ...(doc.data() as PanelProduct),
+      id: doc.id,
     }));
 
-    return <CeilingPanelWholeSection data={panelyProducts} />;
+    const sortedPanelyProducts = panelyProducts.sort((a, b) => {
+      const extractNumber = (nazov: string) => {
+        const match = nazov.match(/^FF(\d+)$/);
+        return match ? parseInt(match[1], 10) : 0;
+      };
+
+      return extractNumber(a.nazov) - extractNumber(b.nazov);
+    });
+
+    return <CeilingPanelWholeSection data={sortedPanelyProducts} />;
   } catch (error) {
     console.error("Error fetching photos:", error);
     return [];

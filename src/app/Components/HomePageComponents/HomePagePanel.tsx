@@ -4,37 +4,38 @@ import React, { useState } from "react";
 import ButtonElement from "../ButtonElements/ButtonElement";
 import IconPlus from "../Icons/IconPlus";
 import Link from "next/link";
+import { PanelProductHomePage } from "@/app/firebase/interface";
 
-const panels = [
-  {
-    nazov: "Stropný panel 200",
-    popis1:
-      "Vďaka nízkej váhe a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-    popis2:
-      "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-  },
-  {
-    nazov: "Stropný panel 265",
-    popis1:
-      "Vďaka nízkej váhe 265 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-    popis2:
-      "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-  },
-  {
-    nazov: "Stropný panel 320",
-    popis1:
-      "Vďaka nízkej váhe 320 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-    popis2:
-      "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-  },
-  {
-    nazov: "Stropný panel 400",
-    popis1:
-      "Vďaka nízkej váhe 400 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-    popis2:
-      "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-  },
-];
+// const panels = [
+//   {
+//     nazov: "Stropný panel 200",
+//     popis1:
+//       "Vďaka nízkej váhe a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
+//     popis2:
+//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
+//   },
+//   {
+//     nazov: "Stropný panel 265",
+//     popis1:
+//       "Vďaka nízkej váhe 265 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
+//     popis2:
+//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
+//   },
+//   {
+//     nazov: "Stropný panel 320",
+//     popis1:
+//       "Vďaka nízkej váhe 320 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
+//     popis2:
+//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
+//   },
+//   {
+//     nazov: "Stropný panel 400",
+//     popis1:
+//       "Vďaka nízkej váhe 400 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
+//     popis2:
+//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
+//   },
+// ];
 
 export function createSlug(title: string): string {
   const slug = title
@@ -50,7 +51,10 @@ export function createSlug(title: string): string {
   return slug;
 }
 
-const HomePagePanel = () => {
+interface Props {
+  panels: PanelProductHomePage[];
+}
+const HomePagePanel = ({ panels }: Props) => {
   const [choosenIndex, setChoosenIndex] = useState(0);
 
   return (
@@ -67,7 +71,7 @@ const HomePagePanel = () => {
         <div className="justify-between flex flex-col md:w-1/2">
           <div className="flex flex-col">
             <p>[Produkty]</p>
-            <h2>{panels[choosenIndex].nazov}</h2>
+            <h2>Stropný panel {panels[choosenIndex].nazov}</h2>
             <p>{panels[choosenIndex].popis1}</p>
             <p className="mt-4">{panels[choosenIndex].popis2}</p>
             <Link
@@ -91,7 +95,9 @@ const HomePagePanel = () => {
                   >
                     {" "}
                     <>
-                      <p className="p font-normal">{panel.nazov}</p>
+                      <p className="p font-normal">
+                        Stropný panel {panel.nazov}
+                      </p>
                       <IconPlus />
                     </>
                   </div>

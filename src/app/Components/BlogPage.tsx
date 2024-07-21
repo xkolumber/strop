@@ -21,6 +21,8 @@ const BlogPage = ({ data }: Props) => {
         className="w-full rounded-3xl max-h-[800px]"
         priority={true}
         quality={100}
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
       />
       <div className="flex flex-col w-full items-center mt-4 md:mt-12">
         <div className="md:max-w-[70%]">

@@ -10,6 +10,7 @@ import { getPlaiceholder } from "plaiceholder";
 import { app } from "../firebase/config";
 import {
   PanelProduct,
+  PanelProductHomePage,
   PanelProductSlugTitle,
   PhotoCityDescription,
 } from "../firebase/interface";
@@ -114,6 +115,32 @@ export async function GetStavbyPopisy() {
     );
     return panelyProducts;
   } catch (error) {
+    return [];
+  }
+}
+
+export async function GetHomePagePanels() {
+  unstable_noStore();
+  const db = getFirestore(app);
+
+  try {
+    const panelyCollectionRef = collection(db, "panely");
+    const querySnapshot = await getDocs(panelyCollectionRef);
+
+    const panelyProducts: PanelProductHomePage[] = querySnapshot.docs.map(
+      (doc) => ({
+        foto: doc.data().foto,
+        nazov: doc.data().nazov,
+        popis1: doc.data().popis1,
+        popis2: doc.data().popis2,
+        slug: doc.data().slug,
+        id: doc.id,
+      })
+    );
+
+    return panelyProducts;
+  } catch (error) {
+    console.error("Error fetching photos:", error);
     return [];
   }
 }

@@ -25,7 +25,7 @@ const HomePageTechnical = () => {
               vyplniť e-mail a my vám zašleme dokumenty s potrebnými technickými
               špecifikáciami a detailami.
             </p>{" "}
-            <Link href={"/stropne-panely"}>
+            <Link href={"/stropne-panely#na_stiahnutie"}>
               <div className="mt-4">
                 <ButtonElement text="Zistiť viac" />
               </div>

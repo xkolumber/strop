@@ -24,6 +24,15 @@ export interface PanelProduct {
   download_file: DownloadPdf[];
 }
 
+export interface PanelProductHomePage {
+  id: string;
+  foto: string;
+  nazov: string;
+  popis1: string;
+  popis2: string;
+  slug: string;
+}
+
 export interface PanelProductSlugTitle {
   slug: string;
   nazov: string;

@@ -12,6 +12,7 @@ import ButtonElementNavbar from "../ButtonElements/ButtonElementNavbar";
 import IconDownload from "../Icons/IconDownload";
 import IconCheck from "../Icons/IconCheck";
 import { ClipLoader } from "react-spinners";
+import Link from "next/link";
 
 interface Props {
   data: PanelProduct[];
@@ -39,7 +40,19 @@ const CeilingPanelIntro = ({ data }: Props) => {
       const panel = data.find((panel) => panel.slug === search);
       if (panel) {
         setChoosenPanel(panel);
+      } else {
+        const panel = data.find((panel) => panel.slug === "ff200");
+        const url = new URL(window.location.href);
+        url.searchParams.set("typ", "ff200");
+        window.history.replaceState({}, "", url.toString());
+        setChoosenPanel(panel);
       }
+    } else {
+      const panel = data.find((panel) => panel.slug === "ff200");
+      setChoosenPanel(panel);
+      const url = new URL(window.location.href);
+      url.searchParams.set("typ", "ff200");
+      window.history.replaceState({}, "", url.toString());
     }
   }, [router]);
 
@@ -167,31 +180,15 @@ const CeilingPanelIntro = ({ data }: Props) => {
             </div>
           ))}
         </div>
-        <Image
-          src={"/intro.jpg"}
-          alt="Intro"
-          width={1000}
-          height={1000}
-          className="object-cover w-full h-full"
-        />
+        <div className="min-h-[600px]"></div>
+
         <h2 className="mt-16">Popis panelov</h2>
-        <p>
-          Panely FF200 sú navrhnuté najmä pre stropné a strešné konštrukcie. Ich
-          všestrannosť spočíva v tom, že môžu byť uložené ako nosník, ale dajú
-          sa použiť aj pre konzolové uloženie. Technológia prepínacích lán
-          umožňuje dosihnuť nadvýšenie panelov (max. l/300), ktoré sa stanovuje
-          v závislosti od viacerých faktorov.
-        </p>
-        <p className="mt-8">
-          Pre optimálne výsledky je vhodné voliť vyššie prierezy, ktoré sú viac
-          vystužené. Vzhľadom k nadvýšeniu dielcov je potrebné zvoliť hrúbku
-          skladby podlahy minimálne 75 milimetrov, čím sa zabezpečí nielen
-          stabilita, ale aj dlhodoba spoľahlivosť konštrukcie.
-        </p>
+        <p>{choosenPanel?.popis1}</p>
+        <p className="mt-8">{choosenPanel?.popis2}</p>
       </div>
 
       <div className="bg-primary">
-        <div className="main_section ">
+        <div className="main_section " id="na_stiahnutie">
           <Toaster />
           <p>[Na stiahnutie]</p>
           <h2>Na stiahnutie</h2>
@@ -332,6 +329,56 @@ const CeilingPanelIntro = ({ data }: Props) => {
               </div>
             </>
           )}
+        </div>
+      </div>
+
+      <div className="bg-secondary">
+        <div className="main_section ">
+          <div className="flex flex-col md:flex-row md:gap-6">
+            <div
+              className="w-full md:w-1/2
+"
+            >
+              <p>[Možnosti úprav]</p>
+              <h2>Rezy</h2>
+              <p>{choosenPanel?.rezy1}</p>
+              <p className="mt-4"> {choosenPanel?.rezy2}</p>
+              <h2 className="mt-4">Otvory</h2>
+              <p>{choosenPanel?.otvory1}</p>
+              <p className="mt-4">{choosenPanel?.otvory2}</p>
+              <div className="mt-16">
+                <Link href={"/kontakt"}>
+                  <ButtonElement text="Zistiť viac" />
+                </Link>
+              </div>
+            </div>
+            <Image
+              src={"/panel.jpg"}
+              alt="panel"
+              width={500}
+              height={500}
+              className="w-full md:w-1/2 object-cover rounded-[8px]"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="main_section ">
+        <h2>Predbežný výpočet konštrukčnej hrúbky a výstuže</h2>
+        <p>{choosenPanel?.predbezny_vypocet}</p>
+
+        <h2 className="mt-16">
+          Podrobný výpočet konštrukčnej hrúbky a výstuže
+        </h2>
+        <p>{choosenPanel?.podrobny_vypocet}</p>
+
+        <h2 className="mt-16">Požiarna odolnosť FF200</h2>
+        <p>{choosenPanel?.poziarna_odolnost}</p>
+
+        <div className="mt-16">
+          <Link href={"/kontakt"}>
+            <ButtonElement text="Kontaktujte nás" />
+          </Link>
         </div>
       </div>
     </>

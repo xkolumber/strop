@@ -6,6 +6,7 @@ import { unstable_noStore } from "next/cache";
 import { client } from "@/app/sanity-setting/sanity";
 import HomePageThreeBlogs from "./HomePageThreeBlogs";
 import Link from "next/link";
+import getBase64 from "@/app/lib/functionsServer";
 
 async function GetData() {
   try {

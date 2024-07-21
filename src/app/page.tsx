@@ -1,17 +1,18 @@
 import HomePageBestSolution from "./Components/HomePageComponents/HomePageBestSolution";
-import HomePageBuildFast from "./Components/HomePageComponents/HomePageBuildFast";
-import HomePagePanel from "./Components/HomePageComponents/HomePagePanel";
-import HomePageBratislava from "./Components/HomePageComponents/HomePageBratislava";
 import HomePageBlogSection from "./Components/HomePageComponents/HomePageBlogSection";
-import HomePageTechnical from "./Components/HomePageComponents/HomePageTechnical";
+import HomePageBratislava from "./Components/HomePageComponents/HomePageBratislava";
+import HomePageBuildFast from "./Components/HomePageComponents/HomePageBuildFast";
 import HomePageInfo from "./Components/HomePageComponents/HomePageInfo";
+import HomePagePanelServer from "./Components/HomePageComponents/HomePagePanelServer";
+import HomePageTechnical from "./Components/HomePageComponents/HomePageTechnical";
 
 export default function Home() {
   return (
     <main className="">
       <HomePageBestSolution />
       <HomePageBuildFast />
-      <HomePagePanel />
+
+      <HomePagePanelServer />
       <HomePageBratislava />
       <HomePageBlogSection colorGray={false} />
       <HomePageTechnical />

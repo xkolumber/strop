@@ -22,7 +22,7 @@ const BackgroundVideo = ({ videoSource }: Props) => {
 
       <Skeleton
         className="absolute top-0 left-0 w-full h-full"
-        height={600}
+        height={700}
         borderRadius={8}
         baseColor="#c4c4c4"
       />

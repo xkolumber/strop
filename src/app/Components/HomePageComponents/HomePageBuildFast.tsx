@@ -81,30 +81,34 @@ const HomePageBuildFast = () => {
             </div>
           </div>
           <div className="flex flex-col  md:flex-row xl:w-[70%] gap-8 justify-center items-center">
-            <div className="flex flex-col">
-              <div className="flex flex-col md:flex-row gap-8">
-                <Image
-                  src={"/build_fast.jpg"}
-                  alt="Intro"
-                  width={1000}
-                  height={400}
-                  quality={100}
-                  priority={true}
-                  className="xl:!w-1/2 xl:h-[400px] 2xl:h-[550px] object-cover rounded-[8px]"
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
-                />
-                <Image
-                  src={"/build_fast2.jpg"}
-                  alt="Intro"
-                  width={1000}
-                  height={400}
-                  quality={100}
-                  priority={true}
-                  className=" object-cover  xl:h-[400px] 2xl:h-[550px]   xl:w-1/2   rounded-[8px]"
-                  placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
-                />
+            <div className="flex flex-col w-full">
+              <div className="flex flex-col md:flex-row gap-8 w-full ">
+                <div className="relative w-full h-[400px] xl:h-[400px] 2xl:h-[550px]">
+                  <Image
+                    src="/build_fast.jpg"
+                    alt="Intro"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                    priority={true}
+                    className="rounded-[8px]"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
+                  />
+                </div>
+                <div className="relative w-full h-[400px] xl:h-[400px] 2xl:h-[550px]">
+                  <Image
+                    src="/build_fast2.jpg"
+                    alt="Intro"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                    priority={true}
+                    className="rounded-[8px]"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+                  />
+                </div>
               </div>
               <div className="flex-col md:flex-row justify-center items-center gap-8 mt-8 xl:mt-24 flex">
                 {info.map((object, index) => (
