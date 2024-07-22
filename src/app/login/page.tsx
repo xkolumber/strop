@@ -3,10 +3,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "../auth/Provider";
 import toast, { Toaster } from "react-hot-toast";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
   const router = useRouter();
   const { user, login, logout, signup } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -24,13 +26,16 @@ const Login = () => {
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
+    setIsLoading(true);
     try {
       await login(data.email, data.password);
-      window.location.href = "/admin";
-      // router.push("/admin");
+
+      router.push("/admin");
     } catch (err) {
       toast.error("Nesprávne email alebo heslo");
       // console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -79,7 +84,11 @@ const Login = () => {
             />
           </div>
           <button className="btn btn--primary w-full min-w-full" type="submit">
-            Login
+            {isLoading ? (
+              <ClipLoader size={20} color={"#32a8a0"} loading={true} />
+            ) : (
+              "Prihlásiť sa"
+            )}
           </button>
         </form>
       </div>
