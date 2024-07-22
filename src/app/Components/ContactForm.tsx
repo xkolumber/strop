@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import ButtonElement from "./ButtonElements/ButtonElement";
+import { ClipLoader } from "react-spinners";
 
 interface FormData {
   name: string;
@@ -35,9 +36,11 @@ const ContactForm = () => {
         },
         body: JSON.stringify({
           name: data.name,
-
           email: data.email,
           tel_number: data.tel_number,
+          interest: data.interest,
+          place: data.place,
+          date: data.date,
           message: data.message,
         }),
       });
@@ -138,20 +141,12 @@ const ContactForm = () => {
               required
             />
           </div>
-          <div className="mt-8 mb-8">
-            <ButtonElement text="Odoslať" />
-          </div>
-          {/* <button
-            className="btn btn--product margin_bottom_5 min-w-[10rem] "
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <ClipLoader size={20} color={"#32a8a0"} loading={isLoading} />
-            ) : (
-              "Odoslať"
-            )}
-          </button> */}
+
+          <button className="mt-8 mb-8" type="submit" disabled={isLoading}>
+            <ButtonElement
+              text={`${isLoading ? "Zasielanie..." : "Odoslať"} `}
+            />
+          </button>
         </form>
         <Image
           src={"/bratislava1.jpg"}

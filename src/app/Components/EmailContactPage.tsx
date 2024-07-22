@@ -1,14 +1,20 @@
 interface Props {
   name: string;
   email: string;
-  tel_number: string;
   message: string;
+  tel_number: string;
+  interest: string;
+  place: string;
+  date: string;
 }
 
 export const EmailContactPage = ({
   name,
   email,
   tel_number,
+  interest,
+  place,
+  date,
   message,
 }: Props) => {
   return `
@@ -88,6 +94,9 @@ export const EmailContactPage = ({
                   <p class="questions_q">Meno a priezvisko: ${name}</p>
                   <p class="questions_q">Email: ${email}</p>
                   <p class="questions_q">Telefónny kontakt: ${tel_number}</p>
+                  <p class="questions_q">Má záujem o: ${interest}</p>
+                  <p class="questions_q">Miesto stavby o: ${place}</p>
+                  <p class="questions_q">Požadovaný termín dodania: ${date}</p>
                   <p class="questions_q">Správa: ${message}</p>
   
                 </div>

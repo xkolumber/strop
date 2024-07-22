@@ -5,11 +5,15 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(req: NextRequest) {
-  const { name, email, tel_number, message } = await req.json();
+  const { name, email, tel_number, interest, place, date, message } =
+    await req.json();
   const emailHtml = EmailContactPage({
     name,
     email,
     tel_number,
+    interest,
+    place,
+    date,
     message,
   });
   try {
