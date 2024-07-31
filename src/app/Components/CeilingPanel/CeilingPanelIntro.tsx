@@ -169,7 +169,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
           </div>
         </div>
 
-        <div className="relative w-full md:h-[150px] xl:h-[400px] hidden md:flex cursor-pointer videoo">
+        <div className="relative w-full md:h-[200px] lg:h-[250px] xl:h-[370px] hidden md:flex cursor-pointer videoo">
           <video
             muted
             playsInline

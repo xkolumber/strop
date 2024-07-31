@@ -688,3 +688,207 @@ video:active {
   border: none !important;
   outline: none !important;
 }
+
+/*Cookies */
+.cookies_container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-primary);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem;
+  gap: 2rem;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.cookies_container button {
+  /* margin-top: 0px !important; */
+  width: 100%;
+  width: 150px;
+}
+.cookies_button_container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+  justify-content: center;
+}
+.cookie_settings_all {
+  padding: 5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-primary);
+  box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 20px 6px;
+  width: 95%;
+  height: 90%;
+  border-radius: 30px;
+  z-index: 2500;
+}
+.cookie_settings_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  background-color: var(--fourthiary-color);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 1rem;
+  gap: 2rem;
+  color: black;
+  overflow-y: auto;
+  max-height: 85%;
+}
+.cookie_settings_modal h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: black;
+  font-family: initial;
+}
+.toggle_check {
+  min-height: 2rem;
+}
+.cookie_all {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+.cookie_left {
+  width: 70%;
+}
+.cookie_setting_text {
+  border-bottom: 1px solid black;
+  padding-bottom: 2rem;
+  color: black;
+}
+.switch_label {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: black;
+  cursor: pointer;
+}
+.switch_label::after {
+  content: "";
+  background-image: url("/arrow.svg");
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  object-fit: contain;
+}
+.description_cookies_text {
+  font-weight: 300;
+  color: black;
+}
+.cookie_settings_modal::-webkit-scrollbar {
+  width: 8px;
+  margin-right: 20px;
+}
+
+.cookie_settings_modal::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+.cookie_settings_modal::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.cookie_settings_modal::-webkit-scrollbar-track {
+  background-color: var(--fourthiary-color);
+}
+
+@media screen and (min-width: 768px) {
+  .cookie_settings_all {
+    width: 80vw;
+    height: 50vh;
+  }
+  .cookies_container {
+    flex-direction: row;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+  }
+
+  .cookies_button_container {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    width: fit-content;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .cookie_settings_all {
+    width: 60%;
+    height: 70%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .cookies_container {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  .cookie_settings_modal h2 {
+    font-size: 5rem;
+  }
+  .switch_label {
+    font-size: 2.5rem;
+  }
+}
+
+.toogle_cookies {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--fourthiary-color);
+  flex-direction: column;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.toggle_switcher_cookies {
+  -webkit-appearance: none;
+  width: 4rem;
+  height: 2rem;
+  background: gray;
+  border-radius: 15px;
+  outline: none;
+  opacity: 1;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  min-height: 2rem;
+  border-bottom: none !important;
+}
+.toggle_switcher_cookies:focus {
+  border: none !important;
+}
+
+.toggle_switcher_cookies::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+.white_bg {
+  background-color: black;
+}

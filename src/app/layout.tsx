@@ -4,6 +4,7 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import "./globals.css";
 import { AuthContextProvider } from "./auth/Provider";
+import CookieComponent from "./Components/CookieComponent";
 
 export const metadata: Metadata = {
   title: "Strop",
@@ -53,6 +54,7 @@ export default function RootLayout({
 
           {children}
           <Footer />
+          <CookieComponent />
         </AuthContextProvider>
       </body>
     </html>
