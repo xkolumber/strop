@@ -151,11 +151,6 @@ const CeilingPanelIntro = ({ data }: Props) => {
     }
   };
 
-  // const handleClickPanel = (panel: number) => {
-  //   console.log(`Panel ${panel} clicked`);
-  //   // Add your specific action here
-  // };
-
   return (
     <>
       <div className="main_section additional_padding">
@@ -164,23 +159,23 @@ const CeilingPanelIntro = ({ data }: Props) => {
 
           <div className="flex flex-col md:w-[40%]">
             <p className="">
-              Naše stropné panely FF200, FF265, FF320, FF400 sú určené
+              Naše stropné panely FF200, FF265, FF320, FF400, FF500 sú určené
               predovšetkým pre stropné a strešné konštrukcie. Vďaka ich kvalite
               sú zaručene spoľahlivou investíciou do vašej stavby.
             </p>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-4 mt-4">
               <ButtonElement text="Kontaktujte nás" />
             </div>
           </div>
         </div>
 
-        <div className="relative w-full md:h-[350px] xl:h-[400px] hidden md:flex cursor-pointer">
+        <div className="relative w-full md:h-[150px] xl:h-[400px] hidden md:flex cursor-pointer videoo">
           <video
             muted
             playsInline
             autoPlay
             preload="metadata"
-            className="w-full h-full object-contain rounded-[8px] absolute top-0 z-10  "
+            className="w-full  object-contain absolute z-10 "
           >
             <source
               src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fanimacia%20(online-video-cutter.com)%20(1).mp4?alt=media&token=7ee0851c-eadd-4b89-ba7b-d57330856df8"
@@ -189,7 +184,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
             Your browser does not support the video tag.
           </video>
           <div
-            className="absolute top-0 left-0 w-[20%] h-full z-20"
+            className={`absolute top-0 left-0 w-[20%] h-full  z-20 `}
             onClick={() => handleClick("ff200")}
           ></div>
 

@@ -13,16 +13,16 @@ interface Props {
 const OneBlogSection = ({ photo, title, slug, description }: Props) => {
   return (
     <Link
-      className="rounded-3xl border border-black cursor-pointer flex flex-col "
+      className="rounded-3xl border border-black cursor-pointer flex flex-col overflow-hidden "
       href={`/blog/${slug}`}
     >
-      <div className="p-4 h-3/5">
+      <div className=" h-3/5">
         <Image
           src={urlFor(photo).url()}
           alt="Blog section"
           width={500}
           height={500}
-          className="w-full rounded-3xl hover:scale-[1.02] transition-transform duration-100 ease-in object-cover h-full "
+          className="w-full  rounded-t-3xl  hover:scale-[1.02] transition-transform duration-100 ease-in object-cover h-full "
           priority={true}
           quality={100}
           placeholder="blur"
@@ -30,7 +30,7 @@ const OneBlogSection = ({ photo, title, slug, description }: Props) => {
         />
       </div>
 
-      <div className=" flex flex-col justify-between h-2/5 p-4">
+      <div className=" flex flex-col justify-between h-2/5 p-4 2xl:p-6">
         {" "}
         <h5>{title}</h5>
         <p className=" line-clamp-3">{description}</p>

@@ -57,7 +57,7 @@ const Navbar = () => {
             className="w-[50px] h-[30px]   object-contain"
           />
         </Link>
-        <div className="hidden xl:flex flex-row gap-12 items-center">
+        <div className="hidden lg:flex flex-row gap-12 items-center">
           <Link
             href={"/"}
             className={`${pathname === "/" && "text-secondary"}`}
@@ -78,7 +78,7 @@ const Navbar = () => {
           </Link>
           <Link
             href={"/blog"}
-            className={`${pathname === "/blog" && "text-secondary"}`}
+            className={`${pathname.includes("/blog") && "text-secondary"}`}
           >
             Blog
           </Link>
@@ -91,11 +91,11 @@ const Navbar = () => {
         </div>
 
         <div className="navbar_second_group2   ">
-          <Link className="hidden xl:flex" href={"/kontakt"}>
+          <Link className="hidden lg:flex" href={"/kontakt"}>
             <ButtonElementNavbar text="Kontaktujte nás" />
           </Link>
           <div
-            className={`xl:hidden cursor-pointer ${closeClicked && "hidden"} `}
+            className={`lg:hidden cursor-pointer ${closeClicked && "hidden"} `}
             onClick={() => clickedButtonClose()}
           >
             <IconHamburger />

@@ -9,7 +9,9 @@ const AboutUsFirstElement = () => {
           <h2 className="">O nás</h2>
 
           <div className="flex flex-col ">
-            <p className="">Od roku 2004 sme neustále inovovali a rástli.</p>
+            <p className="pt-4">
+              Od roku 2004 sme neustále inovovali a rástli.
+            </p>
             <p>
               Preto dnes prinášame moderné riešenia pre slovenský stavebný
               priemysel.
@@ -27,7 +29,7 @@ const AboutUsFirstElement = () => {
           height={500}
           quality={100}
           priority={true}
-          className="object-cover w-full md:w-1/2 h-full rounded-[8px]"
+          className="object-cover w-full md:w-1/2 h-full rounded-[8px]  mt-6 md:mt-0"
         />
       </div>
     </div>

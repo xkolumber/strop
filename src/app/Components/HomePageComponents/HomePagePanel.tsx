@@ -72,7 +72,7 @@ const HomePagePanel = ({ panels }: Props) => {
           <div className="flex flex-col">
             <p>[Produkty]</p>
             <h2>Stropný panel {panels[choosenIndex].nazov}</h2>
-            <p>{panels[choosenIndex].popis1}</p>
+            <p className="mt-4">{panels[choosenIndex].popis1}</p>
             <p className="mt-4">{panels[choosenIndex].popis2}</p>
             <Link
               className=""

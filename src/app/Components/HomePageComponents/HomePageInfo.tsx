@@ -8,14 +8,14 @@ const HomePageInfo = () => {
   return (
     <div className="bg-secondary">
       <div className="main_section   md:max-h-[900px]">
-        <div className="flex flex-col md:flex-row md:gap-6 ">
+        <div className="flex flex-col md:flex-row md:gap-6 xl:gap-8 3xl:gap-12 ">
           <div
             className="w-full md:w-1/2 justify-center flex flex-col
     "
           >
             <p>[Logistika]</p>
             <h2>Informácie o doprave</h2>
-            <p>
+            <p className="mt-4">
               Náklady na prepravu sú súčasťou cenovej ponuky, ktorú vám zašleme
               na základe dopytu. Dlhodobo spolupracujeme s overenými
               logistickými spoločnosťami, ktorým dôverujeme. Zabezpečujeme
@@ -46,7 +46,7 @@ const HomePageInfo = () => {
               alt="panel"
               width={500}
               height={500}
-              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px]"
+              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPUlEQVR4nGM4++DJp///OxeurmpKYCjMip/d3ByWnOydE81gw8DgxcCgwsDAq6LFUFJQEBkQVFFeNrGtGQBs5RQPZO5OaAAAAABJRU5ErkJggg=="
             />
@@ -56,7 +56,7 @@ const HomePageInfo = () => {
               alt="panel"
               width={500}
               height={500}
-              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px]"
+              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
             />

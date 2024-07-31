@@ -20,7 +20,7 @@ const HomePageTechnical = () => {
           >
             <p>[Pre profesionálov]</p>
             <h2>Technické špecifikácie panelov na stiahnutie v PDF</h2>
-            <p>
+            <p className="mt-4">
               Získajte úplné informácie a podrobnosti o našich produktoch. Stačí
               vyplniť e-mail a my vám zašleme dokumenty s potrebnými technickými
               špecifikáciami a detailami.

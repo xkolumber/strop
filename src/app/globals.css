@@ -61,7 +61,7 @@ h6 {
 p,
 a {
   color: black;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 300;
   line-height: 140%;
 }
@@ -87,7 +87,7 @@ a {
   }
   p,
   a {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -460,7 +460,8 @@ a {
   font-size: 1.8rem;
 }
 input[type="text"]:focus,
-input[type="email"]:focus {
+input[type="email"]:focus,
+textarea:focus {
   border-bottom: 3px solid black;
 }
 
@@ -643,7 +644,7 @@ textarea {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   overflow-x: auto;
   white-space: nowrap;
   position: relative;
@@ -675,4 +676,15 @@ textarea {
     rgba(255, 255, 255, 0)
   ); */
   pointer-events: none;
+}
+
+video {
+  border: none !important;
+  outline: none !important;
+}
+
+video:focus,
+video:active {
+  border: none !important;
+  outline: none !important;
 }

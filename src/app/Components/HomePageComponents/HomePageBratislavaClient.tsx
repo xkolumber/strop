@@ -1,12 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import ButtonElement from "../ButtonElements/ButtonElement";
 import { PhotoCityDescription } from "@/app/firebase/interface";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { app } from "@/app/firebase/config";
+import Image from "next/image";
+import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import ButtonElement from "../ButtonElements/ButtonElement";
+import ButtonElementProject from "../ButtonElements/ButtonElementProject";
 
 interface Props {
   zakazky: PhotoCityDescription[] | [];
@@ -24,21 +23,25 @@ const HomePageBratislavaClient = ({ zakazky }: Props) => {
     setChoosenDescription(object.popis);
     setChoosenPhoto(object.foto);
   };
+
   return (
     <div className="bg-primary">
       <div className="main_section flex flex-col md:flex-row  gap-6">
         <div className="flex flex-col md:w-1/2">
           <p>[ Naše projekty ]</p>
           <h2>{choosenCity}</h2>
-          <p>{choosenDescription}</p>
+          <p className="pt-4">{choosenDescription}</p>
           <div className="scroll-container mt-4 !mb-2 md:hidden">
             {zakazky.map((object, index) => (
               <div
-                className=""
+                className={`${object.mesto === choosenCity && ""}`}
                 key={index}
                 onClick={() => handleNewChoosenObject(object)}
               >
-                <ButtonElement text={object.mesto} />
+                <ButtonElementProject
+                  text={object.mesto}
+                  choosenCity={choosenCity}
+                />
               </div>
             ))}
           </div>
@@ -50,7 +53,11 @@ const HomePageBratislavaClient = ({ zakazky }: Props) => {
                 key={index}
                 onClick={() => handleNewChoosenObject(object)}
               >
-                <ButtonElement text={object.mesto} />
+                {/* <ButtonElement text={object.mesto} /> */}
+                <ButtonElementProject
+                  text={object.mesto}
+                  choosenCity={choosenCity}
+                />
               </div>
             ))}
           </div>

@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { Suspense } from "react";
-import { ClipLoader } from "react-spinners";
 import BackgroundVideo from "../BackgroundVideo";
 import ButtonElement from "../ButtonElements/ButtonElement";
 
@@ -11,7 +9,7 @@ const HomePageBestSolution = () => {
         <h2 className="xl:max-w-[50%]">Najlepšie riešenie pre Vašu stavbu</h2>
 
         <div className="flex flex-col xl:w-[40%]">
-          <p className="pt-2">
+          <p className="pt-4 pb-2">
             Špecializujeme sa na dodávanie predpätých stropných systémov pre
             stavby na celom území Slovenska, Česka a Rakúska. Sme hrdí na naše
             referencie. STROP SK je dynamická spoločnosť, ktorá sa rýchlo

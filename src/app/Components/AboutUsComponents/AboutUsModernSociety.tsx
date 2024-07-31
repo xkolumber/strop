@@ -36,7 +36,7 @@ const AboutUsModernSociety = () => {
         Moderná spoločnosť s dlhoročnou tradíciou a individuálnym prístupom k
         zákazníkom od roku 2004
       </h2>
-      <p className="max-w-[600px]">
+      <p className="max-w-[600px] pt-4">
         Sme architekti snov a budovatelia vízií. Každý projekt, na ktorom
         pracujeme, je pre nás príležitosťou priniesť inováciu a štýl do ďalšej
         stavby, aby sme vytvorili miesta, ktoré inšpirujú a oživujú.
@@ -53,7 +53,7 @@ const AboutUsModernSociety = () => {
         width={300}
         height={300}
         quality={100}
-        className="w-full md:hidden h-[338px] rounded-[8px] object-cover"
+        className="w-full md:hidden h-[338px] rounded-[8px] object-cover mt-6 md:mt-0"
         placeholder="blur"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNw0hM6u295iJepIhsDg6O16fef35bP7o80YwAAdZUJpqVnlCUAAAAASUVORK5CYII="
       />

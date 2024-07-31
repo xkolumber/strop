@@ -10,7 +10,7 @@ const ButtonElement = ({ text }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
-      className="flex flex-row border border-black rounded-lg items-center cursor-pointer w-fit"
+      className="flex flex-row border border-black rounded-lg items-center cursor-pointer w-fit hover:bg-secondary duration-300"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

@@ -148,13 +148,14 @@ const ContactForm = () => {
             />
           </button>
         </form>
+
         <Image
-          src={"/bratislava1.jpg"}
+          src={"/kontakt.jpg"}
           alt="Photo blog"
           width={1000}
           height={1000}
           quality={100}
-          className="w-full md:w-1/2 h-full rounded-[8px] object-cover hidden md:flex"
+          className="w-full md:w-1/2 h-initial rounded-[8px] object-cover hidden md:flex"
         />
       </div>
     </>

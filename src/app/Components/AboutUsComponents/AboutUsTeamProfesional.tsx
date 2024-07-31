@@ -7,14 +7,14 @@ const AboutUsTeamProfesional = () => {
   return (
     <div className="bg-primary">
       <div className="main_section ">
-        <div className="flex flex-col xl:flex-row md:gap-6">
+        <div className="flex flex-col xl:flex-row  xl:gap-8 3xl:gap-12">
           <div
             className="w-full xl:w-1/2
 "
           >
             <p>[Profesionáli]</p>
             <h2>Tím profesionálov</h2>
-            <p>
+            <p className="pt-4">
               Od roku 2004 sa náš tím STROP SK, s.r.o. vyvíjal a rástol.
               Neustále sme prinášali inovatívne riešenia pre slovenský stavebný
               priemysel. Naša cesta začala s víziou priniesť modernú technológiu
@@ -58,7 +58,7 @@ const AboutUsTeamProfesional = () => {
             width={500}
             height={500}
             priority={true}
-            className="w-full xl:w-1/2 h-full rounded-[8px] object-cover"
+            className="w-full xl:w-1/2 h-full rounded-[8px] object-cover  mt-6 md:mt-0"
           />
         </div>
       </div>

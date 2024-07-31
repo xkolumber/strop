@@ -51,7 +51,7 @@ const HomePageBuildFast = () => {
           Stavajte rýchlejšie a efektívnejšie vďaka novým predpätým stropným
           panelom. Prinášame nové riešenia do sveta stavieb!
         </h2>
-        <div className="flex flex-col  xl:flex-row gap-4 xl:gap-12  mt-8">
+        <div className="flex flex-col  xl:flex-row gap-4 xl:gap-12  mt-4 md:mt-8">
           <div className="xl:w-[30%] flex flex-col justify-between">
             <p>
               Pomôžeme vám urýchliť proces stavby a ušetriť finančné

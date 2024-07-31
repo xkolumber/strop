@@ -13,7 +13,7 @@ const Footer = () => {
     <footer className={`bg-black  w-full ${pathname === "/admin" && "hidden"}`}>
       <div className="main_section">
         <div className="flex flex-col md:flex-row justify-between items-start">
-          <div className=" flex flex-col md:flex-row gap-4 md:gap-24 xl:gap-52 md:mt-0">
+          <div className=" flex flex-col md:flex-row gap-6 md:gap-24 xl:gap-52 md:mt-0">
             <div className="flex flex-col ">
               <p className="text-white">
                 OC Avion, Ivánska cesta 16, 821 04 Bratislava
