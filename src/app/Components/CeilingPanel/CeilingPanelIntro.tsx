@@ -13,6 +13,8 @@ import IconDownload from "../Icons/IconDownload";
 import IconCheck from "../Icons/IconCheck";
 import { ClipLoader } from "react-spinners";
 import Link from "next/link";
+import BackgroundVideo from "../BackgroundVideo";
+import Skeleton from "react-loading-skeleton";
 
 interface Props {
   data: PanelProduct[];
@@ -149,6 +151,11 @@ const CeilingPanelIntro = ({ data }: Props) => {
     }
   };
 
+  // const handleClickPanel = (panel: number) => {
+  //   console.log(`Panel ${panel} clicked`);
+  //   // Add your specific action here
+  // };
+
   return (
     <>
       <div className="main_section additional_padding">
@@ -166,7 +173,55 @@ const CeilingPanelIntro = ({ data }: Props) => {
             </div>
           </div>
         </div>
-        <div className="scroll-container">
+
+        <div className="relative w-full md:h-[350px] xl:h-[400px] hidden md:flex cursor-pointer">
+          <video
+            muted
+            playsInline
+            autoPlay
+            preload="metadata"
+            className="w-full h-full object-contain rounded-[8px] absolute top-0 z-10  "
+          >
+            <source
+              src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fanimacia%20(online-video-cutter.com)%20(1).mp4?alt=media&token=7ee0851c-eadd-4b89-ba7b-d57330856df8"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+          <div
+            className="absolute top-0 left-0 w-[20%] h-full z-20"
+            onClick={() => handleClick("ff200")}
+          ></div>
+
+          <div
+            className="absolute top-0 left-[20%] w-[20%] h-full z-20"
+            onClick={() => handleClick("ff265")}
+          ></div>
+
+          <div
+            className="absolute top-0 left-[40%] w-[20%] h-full z-20"
+            onClick={() => handleClick("ff320")}
+          ></div>
+
+          <div
+            className="absolute top-0 left-[60%] w-[20%] h-full z-20"
+            onClick={() => handleClick("ff400")}
+          ></div>
+
+          <div
+            className="absolute top-0 left-[80%] w-[20%] h-full z-20"
+            onClick={() => handleClick("ff500")}
+          ></div>
+
+          <Skeleton
+            className="absolute top-0 left-0 w-full h-full"
+            height={400}
+            borderRadius={8}
+            baseColor="#c4c4c4"
+          />
+        </div>
+
+        <div className="scroll-container md:hidden">
           {data.map((button, index) => (
             <div
               className="button-wrapper"
@@ -180,7 +235,6 @@ const CeilingPanelIntro = ({ data }: Props) => {
             </div>
           ))}
         </div>
-        <div className="min-h-[600px]"></div>
 
         <h2 className="mt-16">Popis panelov</h2>
         <p>{choosenPanel?.popis1}</p>

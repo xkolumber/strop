@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import IconHamburger from "./Icons/IconHamburger";
 import { useEffect, useRef, useState } from "react";
 
@@ -18,6 +18,7 @@ const Navbar = () => {
   const router = useRouter();
   const popupRef = useRef<HTMLDivElement>(null);
   const [closeClicked, setCloseClicked] = useState(false);
+  const pathname = usePathname();
 
   const clickedButtonClose = () => {
     setCloseClicked(!closeClicked);
@@ -44,11 +45,6 @@ const Navbar = () => {
     };
   }, [openWindow]);
 
-  const handleLoginMobile = () => {
-    setOpenWindow(true);
-    clickedButtonClose();
-  };
-
   return (
     <nav className={`navbar `}>
       <div className="main_section flex flex-row justify-between !pt-0 !pb-0 items-center">
@@ -62,11 +58,34 @@ const Navbar = () => {
           />
         </Link>
         <div className="hidden xl:flex flex-row gap-12 items-center">
-          <Link href={"/"}>Domov</Link>
-          <Link href={"/o-nas"}>O nás</Link>
-          <Link href={"/stropne-panely"}>Stropné panely</Link>
-          <Link href={"/blog"}>Blog</Link>
-          <Link className="" href={"/kontakt"}>
+          <Link
+            href={"/"}
+            className={`${pathname === "/" && "text-secondary"}`}
+          >
+            Domov
+          </Link>
+          <Link
+            href={"/o-nas"}
+            className={`${pathname === "/o-nas" && "text-secondary"}`}
+          >
+            O nás
+          </Link>
+          <Link
+            href={"/stropne-panely"}
+            className={`${pathname === "/stropne-panely" && "text-secondary"}`}
+          >
+            Stropné panely
+          </Link>
+          <Link
+            href={"/blog"}
+            className={`${pathname === "/blog" && "text-secondary"}`}
+          >
+            Blog
+          </Link>
+          <Link
+            href={"/kontakt"}
+            className={`${pathname === "/kontakt" && "text-secondary"}`}
+          >
             Kontakt
           </Link>
         </div>
