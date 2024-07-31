@@ -127,7 +127,7 @@ a {
 
   p,
   a {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -570,9 +570,6 @@ textarea {
     width: 450px;
     padding: 5rem;
   }
-  .btn {
-    font-size: 1rem;
-  }
 }
 
 .square {
@@ -709,9 +706,19 @@ video:active {
 }
 
 .cookies_container button {
-  /* margin-top: 0px !important; */
   width: 100%;
   width: 150px;
+}
+
+@media screen and (min-width: 1556px) {
+  .cookies_container button {
+    width: 100%;
+    width: 250px;
+  }
+  .btn {
+    font-size: 1.6rem;
+    padding: 2.5rem 2.9rem;
+  }
 }
 .cookies_button_container {
   display: flex;
