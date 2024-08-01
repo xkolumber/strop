@@ -6,7 +6,7 @@ const HomePageTechnical = () => {
   return (
     <div className="bg-primary">
       <div className="main_section  nd:max-h-[600px]">
-        <div className="flex flex-col md:flex-row md:gap-6 xl:gap-12">
+        <div className="flex flex-col md:flex-row md:gap-6 xl:gap-8 2xl:gap-12">
           <Image
             src={"/panel.jpg"}
             alt="panel"

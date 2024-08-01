@@ -26,8 +26,6 @@ const ContactForm = () => {
   const onSubmit = async (data: FieldValues) => {
     setIsLoading(true);
 
-    console.log(data);
-
     try {
       const response = await fetch("/api/send-form", {
         method: "POST",
@@ -155,7 +153,10 @@ const ContactForm = () => {
           width={1000}
           height={1000}
           quality={100}
+          priority={true}
           className="w-full md:w-1/2 h-initial rounded-[8px] object-cover hidden md:flex"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANH//0GU20KU2kCc7QCfwOEACS0sVWy13v8Ap66tbHd6wMXKhpOfALKwlKCjg6qqj39/ZevpHFZ6OZ4bAAAAAElFTkSuQmCC"
         />
       </div>
     </>

@@ -6,37 +6,6 @@ import IconPlus from "../Icons/IconPlus";
 import Link from "next/link";
 import { PanelProductHomePage } from "@/app/firebase/interface";
 
-// const panels = [
-//   {
-//     nazov: "Stropný panel 200",
-//     popis1:
-//       "Vďaka nízkej váhe a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-//     popis2:
-//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-//   },
-//   {
-//     nazov: "Stropný panel 265",
-//     popis1:
-//       "Vďaka nízkej váhe 265 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-//     popis2:
-//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-//   },
-//   {
-//     nazov: "Stropný panel 320",
-//     popis1:
-//       "Vďaka nízkej váhe 320 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-//     popis2:
-//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-//   },
-//   {
-//     nazov: "Stropný panel 400",
-//     popis1:
-//       "Vďaka nízkej váhe 400 a špeciálnemu spôsobu výroby sú dutinové panely vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich panelov je aj variabilita možností uloženia. Priestupy a otvory podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe, vrátane otvorov pre schodiská a priestupy väčších rozmerov. Detaily a technické riešenia sú pripravuje naše oddelenie projekcie, takže  náš zákazník vopred vie, ako bude jeho riešenie vyzerať. ",
-//     popis2:
-//       "Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych pevnostných kategóriách: základný model (200/1) zosilnený model (200/2) a najpevnejší panel (200/3).",
-//   },
-// ];
-
 export function createSlug(title: string): string {
   const slug = title
     .toString()
@@ -59,28 +28,30 @@ const HomePagePanel = ({ panels }: Props) => {
 
   return (
     <div className="main_section ">
-      <div className="flex flex-col md:flex-row md:gap-6  ">
+      <div className="flex flex-col md:flex-row md:gap-6 xl:gap-8 2xl:gap-12 ">
         <Image
           src={"/panel.jpg"}
           alt="panel"
           width={1000}
           height={1000}
-          className="w-full md:w-1/2 hidden md:block max-h-[600px] object-cover rounded-[8px]"
+          className="w-full md:w-1/2 hidden md:block h-auto  object-cover rounded-[8px]"
         />
 
-        <div className="justify-between flex flex-col md:w-1/2">
+        <div className="justify-between flex flex-col md:w-1/2 ">
           <div className="flex flex-col">
             <p>[Produkty]</p>
             <h2>Stropný panel {panels[choosenIndex].nazov}</h2>
             <p className="mt-4">{panels[choosenIndex].popis1}</p>
-            <p className="mt-4">{panels[choosenIndex].popis2}</p>
+            <p className="mt-4 line-clamp-5 2xl:line-clamp-[8]">
+              {panels[choosenIndex].popis2}
+            </p>
             <Link
               className=""
               href={`stropne-panely?typ=${createSlug(
                 panels[choosenIndex].nazov
               )}`}
             >
-              <div className="mt-4 mb-4">
+              <div className="mt-4 mb-8">
                 <ButtonElement text="Zistiť viac" />
               </div>
             </Link>
@@ -95,7 +66,7 @@ const HomePagePanel = ({ panels }: Props) => {
                   >
                     {" "}
                     <>
-                      <p className="p font-normal">
+                      <p className="p font-normal hover:text-secondary duration-100">
                         Stropný panel {panel.nazov}
                       </p>
                       <IconPlus />

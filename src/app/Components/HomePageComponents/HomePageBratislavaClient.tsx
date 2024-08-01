@@ -26,12 +26,12 @@ const HomePageBratislavaClient = ({ zakazky }: Props) => {
 
   return (
     <div className="bg-primary">
-      <div className="main_section flex flex-col md:flex-row  gap-6">
+      <div className="main_section flex flex-col md:flex-row  md:gap-6 xl:gap-8 2xl:gap-12">
         <div className="flex flex-col md:w-1/2">
           <p>[ Naše projekty ]</p>
           <h2>{choosenCity}</h2>
           <p className="pt-4">{choosenDescription}</p>
-          <div className="scroll-container mt-4 !mb-2 md:hidden">
+          <div className="scroll-container mt-4 !mb-4 md:hidden">
             {zakazky.map((object, index) => (
               <div
                 className={`${object.mesto === choosenCity && ""}`}

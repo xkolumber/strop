@@ -75,9 +75,6 @@ const Footer = () => {
                 <Link href={"https://www.facebook.com/STROPSK"}>
                   <IconFooterFacebook />
                 </Link>
-                <Link href={"https://www.x.com"}>
-                  <IconFooterLinkedIn />
-                </Link>
                 <Link href={"https://www.instagram.com/strop.sk/"}>
                   <IconFooterInstagram />
                 </Link>

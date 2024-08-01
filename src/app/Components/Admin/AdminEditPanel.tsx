@@ -465,7 +465,7 @@ const EditMainProduct = ({ data }: Props) => {
                   className="ml-16 mr-16"
                 />
               ) : (
-                "Ofstrániť produkt"
+                "Odstrániť panel"
               )}
             </button>
           </div>
@@ -560,9 +560,11 @@ const EditMainProduct = ({ data }: Props) => {
                     required
                   />
                   <button
-                    className="btn btn--primary"
+                    className={`btn btn--primary ${(isLoadingMap["new_pdf_object"] || newFilePdf === null) && "disabledPrimaryBtn"}`}
                     type="submit"
-                    disabled={isLoadingMap["new_pdf_object"]}
+                    disabled={
+                      isLoadingMap["new_pdf_object"] || newFilePdf === null
+                    }
                   >
                     {isLoadingMap["new_pdf_object"] ? (
                       <ClipLoader

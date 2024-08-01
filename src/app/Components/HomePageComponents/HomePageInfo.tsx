@@ -7,10 +7,10 @@ const HomePageInfo = () => {
   const pathname = usePathname();
   return (
     <div className="bg-secondary">
-      <div className="main_section   md:max-h-[900px]">
-        <div className="flex flex-col md:flex-row md:gap-6 xl:gap-8 3xl:gap-12 ">
+      <div className="main_section   lg:max-h-[900px]">
+        <div className="flex flex-col lg:flex-row md:gap-6 xl:gap-8 2xl:gap-12 ">
           <div
-            className="w-full md:w-1/2 justify-center flex flex-col
+            className="w-full lg:w-1/2 justify-center flex flex-col
     "
           >
             <p>[Logistika]</p>
@@ -35,9 +35,6 @@ const HomePageInfo = () => {
               Garantujeme efektívny prístup a komplexný servis vo váš prospech.
               Naším cieľom je Vaša spokojnosť.
             </p>
-            <div className="mt-4 mb-4">
-              <ButtonElement text="Zistiť viac" />
-            </div>
           </div>
 
           {pathname === "/o-nas" ? (
@@ -46,7 +43,7 @@ const HomePageInfo = () => {
               alt="panel"
               width={500}
               height={500}
-              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0"
+              className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] lg:max-h-none"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPUlEQVR4nGM4++DJp///OxeurmpKYCjMip/d3ByWnOydE81gw8DgxcCgwsDAq6LFUFJQEBkQVFFeNrGtGQBs5RQPZO5OaAAAAABJRU5ErkJggg=="
             />
@@ -56,7 +53,7 @@ const HomePageInfo = () => {
               alt="panel"
               width={500}
               height={500}
-              className="w-full md:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0"
+              className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] lg:max-h-none"
               placeholder="blur"
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
             />

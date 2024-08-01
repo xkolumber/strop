@@ -15,6 +15,7 @@ import { ClipLoader } from "react-spinners";
 import Link from "next/link";
 import BackgroundVideo from "../BackgroundVideo";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface Props {
   data: PanelProduct[];
@@ -43,17 +44,17 @@ const CeilingPanelIntro = ({ data }: Props) => {
       if (panel) {
         setChoosenPanel(panel);
       } else {
-        const panel = data.find((panel) => panel.slug === "ff200");
+        const panel = data.find((panel) => panel.slug === "200");
         const url = new URL(window.location.href);
-        url.searchParams.set("typ", "ff200");
+        url.searchParams.set("typ", "200");
         window.history.replaceState({}, "", url.toString());
         setChoosenPanel(panel);
       }
     } else {
-      const panel = data.find((panel) => panel.slug === "ff200");
+      const panel = data.find((panel) => panel.slug === "200");
       setChoosenPanel(panel);
       const url = new URL(window.location.href);
-      url.searchParams.set("typ", "ff200");
+      url.searchParams.set("typ", "200");
       window.history.replaceState({}, "", url.toString());
     }
   }, [router]);
@@ -159,9 +160,9 @@ const CeilingPanelIntro = ({ data }: Props) => {
 
           <div className="flex flex-col md:w-[40%]">
             <p className="">
-              Naše stropné panely FF200, FF265, FF320, FF400, FF500 sú určené
-              predovšetkým pre stropné a strešné konštrukcie. Vďaka ich kvalite
-              sú zaručene spoľahlivou investíciou do vašej stavby.
+              Naše stropné panely 200, 265, 320, 400, 500 sú určené predovšetkým
+              pre stropné a strešné konštrukcie. Vďaka ich kvalite sú zaručene
+              spoľahlivou investíciou do vašej stavby.
             </p>
             <div className="flex flex-row gap-4 mt-4">
               <ButtonElement text="Kontaktujte nás" />
@@ -169,7 +170,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
           </div>
         </div>
 
-        <div className="relative w-full md:h-[200px] lg:h-[250px] xl:h-[370px] hidden md:flex cursor-pointer videoo">
+        <div className="relative w-full md:h-[220px] lg:h-[270px] xl:h-[320px] 2xl:h-[350px] 3xl:h-[420px] hidden md:flex cursor-pointer videoo">
           <video
             muted
             playsInline
@@ -185,27 +186,27 @@ const CeilingPanelIntro = ({ data }: Props) => {
           </video>
           <div
             className={`absolute top-0 left-0 w-[20%] h-full  z-20 `}
-            onClick={() => handleClick("ff200")}
+            onClick={() => handleClick("200")}
           ></div>
 
           <div
             className="absolute top-0 left-[20%] w-[20%] h-full z-20"
-            onClick={() => handleClick("ff265")}
+            onClick={() => handleClick("265")}
           ></div>
 
           <div
             className="absolute top-0 left-[40%] w-[20%] h-full z-20"
-            onClick={() => handleClick("ff320")}
+            onClick={() => handleClick("320")}
           ></div>
 
           <div
             className="absolute top-0 left-[60%] w-[20%] h-full z-20"
-            onClick={() => handleClick("ff400")}
+            onClick={() => handleClick("400")}
           ></div>
 
           <div
             className="absolute top-0 left-[80%] w-[20%] h-full z-20"
-            onClick={() => handleClick("ff500")}
+            onClick={() => handleClick("500")}
           ></div>
 
           <Skeleton
@@ -231,13 +232,36 @@ const CeilingPanelIntro = ({ data }: Props) => {
           ))}
         </div>
 
-        <h2 className="mt-16">Popis panelov</h2>
-        <p>{choosenPanel?.popis1}</p>
-        <p className="mt-8">{choosenPanel?.popis2}</p>
+        <h2 className=" flex flex-row gap-2">
+          Panely{" "}
+          <span className="text-secondary">
+            {choosenPanel ? (
+              choosenPanel?.nazov
+            ) : (
+              <Skeleton width={70} borderRadius={8} baseColor="#ededed" />
+            )}
+          </span>
+        </h2>
+        <p>
+          {" "}
+          {choosenPanel ? (
+            choosenPanel?.popis1
+          ) : (
+            <Skeleton count={3} borderRadius={8} baseColor="#ededed" />
+          )}
+        </p>
+        <p className="mt-8">
+          {" "}
+          {choosenPanel ? (
+            choosenPanel?.popis2
+          ) : (
+            <Skeleton count={6} borderRadius={8} baseColor="#ededed" />
+          )}
+        </p>
       </div>
 
       <div className="bg-primary">
-        <div className="main_section " id="na_stiahnutie">
+        <div className="main_section" id="na_stiahnutie">
           <Toaster />
           <p>[Na stiahnutie]</p>
           <h2>Na stiahnutie</h2>
@@ -247,7 +271,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
             pre vás dôležité pri projektoch. Stačí vyplniť e-mail a my vám
             zašleme vybrané dokumenty.
           </p>
-          <div className="scroll-container">
+          <div className="scroll-container mt-2">
             {data.map((button, index) => (
               <div
                 className=""
@@ -383,19 +407,19 @@ const CeilingPanelIntro = ({ data }: Props) => {
 
       <div className="bg-secondary">
         <div className="main_section ">
-          <div className="flex flex-col md:flex-row md:gap-6">
+          <div className="flex flex-col lg:flex-row md:gap-6 xl:gap-8 2xl:gap-12">
             <div
-              className="w-full md:w-1/2
+              className="w-full lg:w-1/2
 "
             >
               <p>[Možnosti úprav]</p>
               <h2>Rezy</h2>
-              <p>{choosenPanel?.rezy1}</p>
+              <p className="mt-4">{choosenPanel?.rezy1}</p>
               <p className="mt-4"> {choosenPanel?.rezy2}</p>
               <h2 className="mt-4">Otvory</h2>
-              <p>{choosenPanel?.otvory1}</p>
+              <p className="mt-4">{choosenPanel?.otvory1}</p>
               <p className="mt-4">{choosenPanel?.otvory2}</p>
-              <div className="mt-16">
+              <div className="mt-4 mb-8">
                 <Link href={"/kontakt"}>
                   <ButtonElement text="Zistiť viac" />
                 </Link>
@@ -406,7 +430,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
               alt="panel"
               width={500}
               height={500}
-              className="w-full md:w-1/2 object-cover rounded-[8px]"
+              className="w-full lg:w-1/2 md:max-h-[500px] lg:max-h-none  object-cover rounded-[8px]"
             />
           </div>
         </div>

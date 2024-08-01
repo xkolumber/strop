@@ -8,7 +8,7 @@ interface Props {
 
 const HomePageThreeBlogs = ({ data }: Props) => {
   return (
-    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-8 3xl:gap-12">
+    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-8 3xl:gap-12">
       {data.map((object, index) => (
         <OneBlogSection
           photo={object.photo}

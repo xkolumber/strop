@@ -32,15 +32,14 @@ const Login = () => {
 
       router.push("/admin");
     } catch (err) {
-      toast.error("Nesprávne email alebo heslo");
-      // console.log(err);
+      toast.error("Nesprávny email alebo heslo");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex  flex-col justify-center px-6 py-12 lg:px-8  pt-56 pb-56 min-h-[600px]">
+    <div className="flex  flex-col justify-center px-6 py-12 lg:px-8  pt-56 pb-56 min-h-screen">
       <h1 className="text-center my-3">Login</h1>
       <Toaster />
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm  justify-center items-center">

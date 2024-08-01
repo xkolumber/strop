@@ -45,17 +45,19 @@ const AdminPage = ({ data }: Props) => {
           </Link>
         ))}
       </div>
-      <Link
-        href={"/admin/novy-panel"}
-        className="text-black mb-8 underline font-normal"
-      >
-        Pridať nový panel
-      </Link>
+      <div className="mt-6">
+        <Link
+          href={"/admin/novy-panel"}
+          className="text-black mb-8 underline font-normal "
+        >
+          Pridať nový panel
+        </Link>
+      </div>
       <div className="flex flex-col gap-4">
         {" "}
         <Link
           href={"/admin/pridanie-foto-popis"}
-          className="text-black mb-8 font-normal mt-4"
+          className="text-black mb-8 font-normal mt-4 underline"
         >
           Popisy ku stavbám
         </Link>

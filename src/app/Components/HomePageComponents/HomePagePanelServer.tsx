@@ -24,8 +24,11 @@ async function GetData() {
         id: doc.id,
       })
     );
+    const final_data = panelyProducts.sort((a, b) => {
+      return Number(a.slug) - Number(b.slug);
+    });
 
-    return <HomePagePanel panels={panelyProducts} />;
+    return <HomePagePanel panels={final_data} />;
   } catch (error) {
     console.error("Error fetching photos:", error);
     return <HomePagePanel panels={[]} />;

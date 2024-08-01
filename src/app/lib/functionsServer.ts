@@ -72,7 +72,11 @@ export async function GetPanely() {
         nazov: doc.data().nazov,
       })
     );
-    return panelyProducts;
+    const final_data = panelyProducts.sort((a, b) => {
+      return Number(a.slug) - Number(b.slug);
+    });
+
+    return final_data;
   } catch (error) {
     return [];
   }
