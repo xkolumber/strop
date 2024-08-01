@@ -9,12 +9,14 @@ import {
 import { getPlaiceholder } from "plaiceholder";
 import { app } from "../firebase/config";
 import {
+  Email,
   PanelProduct,
   PanelProductHomePage,
   PanelProductSlugTitle,
   PhotoCityDescription,
 } from "../firebase/interface";
 import { unstable_noStore } from "next/cache";
+import { firestore } from "../firebase/configServer";
 
 export default async function getBase64(imageUrl: string) {
   try {
@@ -145,6 +147,24 @@ export async function GetHomePagePanels() {
     return panelyProducts;
   } catch (error) {
     console.error("Error fetching photos:", error);
+    return [];
+  }
+}
+
+export async function GetEmails() {
+  unstable_noStore();
+
+  try {
+    const emailsCollectionRef = firestore.collection("emaily");
+    const querySnapshot = await emailsCollectionRef.get();
+    const emails: Email[] = querySnapshot.docs.map((doc) => ({
+      email: doc.data().email,
+      linky: doc.data().linky,
+      datum: doc.data().datum,
+    }));
+
+    return emails;
+  } catch (error) {
     return [];
   }
 }

@@ -87,3 +87,9 @@ export interface PhotoCityDescription {
   popis: string;
   id: string;
 }
+
+export interface Email {
+  email: string;
+  linky: DownloadPdf[];
+  datum: string;
+}

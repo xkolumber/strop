@@ -263,3 +263,22 @@ export async function AdminDeletePanel(id: string) {
     return "false";
   }
 }
+
+export async function AdminAddNewEmail(
+  email: string,
+  links: DownloadPdf[],
+  datum: string
+) {
+  const emailsCollectionRef = firestore.collection("emaily");
+
+  try {
+    await emailsCollectionRef.add({
+      email: email,
+      linky: links,
+      datum: datum,
+    });
+    return "success";
+  } catch (error) {
+    return "false";
+  }
+}

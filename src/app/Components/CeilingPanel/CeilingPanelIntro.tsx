@@ -164,9 +164,9 @@ const CeilingPanelIntro = ({ data }: Props) => {
               pre stropné a strešné konštrukcie. Vďaka ich kvalite sú zaručene
               spoľahlivou investíciou do vašej stavby.
             </p>
-            <div className="flex flex-row gap-4 mt-4">
+            <Link className="flex flex-row gap-4 mt-4" href={"/kontakt"}>
               <ButtonElement text="Kontaktujte nás" />
-            </div>
+            </Link>
           </div>
         </div>
 

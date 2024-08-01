@@ -37,7 +37,7 @@ const EmailSentPdfToUser = () => {
           <Container className="rounded-3xl ">
             <Section>
               <Img
-                src="https://firebasestorage.googleapis.com/v0/b/game-ready-cf008.appspot.com/o/fotky_email%2Fgr_logo.png?alt=media&token=1367f208-bd61-4c47-8501-8bfcf395b530"
+                src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_stavieb%2Flogo_strop.png?alt=media&token=d209cde3-bee0-456e-bfb1-471268cdc411"
                 width="120"
                 height="36"
                 alt="Slack"
@@ -46,23 +46,19 @@ const EmailSentPdfToUser = () => {
             </Section>
 
             <Img
-              src="https://firebasestorage.googleapis.com/v0/b/game-ready-cf008.appspot.com/o/fotky_email%2Fgr_foto.jpg?alt=media&token=4cd465d7-86b5-4da7-a515-a5722b31d810"
+              src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_stavieb%2FRectangle%20160.jpg?alt=media&token=7cb30f82-1f0c-48f4-aa20-e7b0ee012d38"
               alt="Popis"
-              className="object-contain rounded-t-3xl max-w-[100%]"
+              className="object-cover rounded-t-3xl w-full max-h-[300px]"
             />
             <Container className="bg-white rounded-b-3xl p-[25px]">
-              {/* <Heading className="text-center my-0 leading-8">
-                  Ďakujem za Vašu objednávku.
-                </Heading> */}
-
               <Section className="text-center">
-                <Text style={paragraph} key={1}>
+                <Text style={paragraph} key={1} className="font-bold text-xl">
                   Ďakujeme, že máte záujem o naše PDF súbory.
                 </Text>
               </Section>
 
               <Text style={paragraph} key={5}>
-                Vaše pdf súbory sa nachádzajú v prílohe. V prípade akýchkoľvek
+                Vaše súbory sa nachádzajú v prílohe. V prípade akýchkoľvek
                 otázok, neváhajte sa na nás obratiť.
               </Text>
 
@@ -78,7 +74,7 @@ const EmailSentPdfToUser = () => {
           <Container className="text-center">
             <Row style={categories.container}>
               <Column align="center">
-                <Link href="https://www.facebook.com">
+                <Link href="https://www.facebook.com/STROPSK">
                   <Img
                     src="https://firebasestorage.googleapis.com/v0/b/website-4d9ed.appspot.com/o/logo%2Ffacebook_logo.png?alt=media&token=02dc67cf-c527-4355-8c72-7013319b6e65"
                     className="w-6 h-6 object-contain rounded-lg"
@@ -86,7 +82,7 @@ const EmailSentPdfToUser = () => {
                 </Link>
               </Column>
               <Column align="center">
-                <Link href="https://www.instagram.com">
+                <Link href="https://www.instagram.com/strop.sk/">
                   <Img
                     src="https://firebasestorage.googleapis.com/v0/b/website-4d9ed.appspot.com/o/logo%2Finstagram_logo.png?alt=media&token=51954141-8c2b-4f24-b286-ce45a898093a"
                     className="w-6 h-6 object-contain"
@@ -94,7 +90,7 @@ const EmailSentPdfToUser = () => {
                 </Link>
               </Column>
               <Column align="center">
-                <a href="tel:+421903243393">
+                <a href="tel:+421905033030">
                   <Img
                     src="https://firebasestorage.googleapis.com/v0/b/website-4d9ed.appspot.com/o/logo%2Ftelephone.png?alt=media&token=bf11ac8d-99ee-4536-a62b-a98d3c1dace8"
                     className="w-6 h-6 object-contain"
