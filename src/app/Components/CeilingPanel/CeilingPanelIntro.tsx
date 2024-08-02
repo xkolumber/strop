@@ -44,20 +44,27 @@ const CeilingPanelIntro = ({ data }: Props) => {
       if (panel) {
         setChoosenPanel(panel);
       } else {
-        const panel = data.find((panel) => panel.slug === "200");
+        const defaultPanel = data.find((panel) => panel.slug === "200");
         const url = new URL(window.location.href);
         url.searchParams.set("typ", "200");
         window.history.replaceState({}, "", url.toString());
-        setChoosenPanel(panel);
+        setChoosenPanel(defaultPanel);
       }
     } else {
-      const panel = data.find((panel) => panel.slug === "200");
-      setChoosenPanel(panel);
+      const defaultPanel = data.find((panel) => panel.slug === "200");
+      setChoosenPanel(defaultPanel);
       const url = new URL(window.location.href);
       url.searchParams.set("typ", "200");
       window.history.replaceState({}, "", url.toString());
     }
-  }, [router]);
+    const hash = window.location.hash;
+    if (hash && hash === "#na_stiahnutie") {
+      const element = document.getElementById("na_stiahnutie");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [router, data]);
 
   const handleClick = (typ: string) => {
     const url = new URL(window.location.href);
@@ -445,7 +452,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
         </h2>
         <p>{choosenPanel?.podrobny_vypocet}</p>
 
-        <h2 className="mt-16">Požiarna odolnosť FF200</h2>
+        <h2 className="mt-16">Požiarna odolnosť panelov</h2>
         <p>{choosenPanel?.poziarna_odolnost}</p>
 
         <div className="mt-16">

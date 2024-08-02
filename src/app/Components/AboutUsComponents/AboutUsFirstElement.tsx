@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ButtonElement from "../ButtonElements/ButtonElement";
+import Link from "next/link";
 
 const AboutUsFirstElement = () => {
   return (
@@ -17,9 +18,9 @@ const AboutUsFirstElement = () => {
               priemysel.
             </p>
             <p>Sme stabilným partnerom spoločností po celom Slovensku.</p>
-            <div className="flex flex-row gap-4 mt-4 mb-4">
+            <Link className="flex flex-row gap-4 mt-4 mb-4" href={"/kontakt"}>
               <ButtonElement text="Kontaktujte nás" />
-            </div>
+            </Link>
           </div>
         </div>
         <Image

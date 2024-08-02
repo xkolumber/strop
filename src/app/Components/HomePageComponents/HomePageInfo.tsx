@@ -37,27 +37,15 @@ const HomePageInfo = () => {
             </p>
           </div>
 
-          {pathname === "/o-nas" ? (
-            <Image
-              src={"/car.jpg"}
-              alt="panel"
-              width={500}
-              height={500}
-              className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] lg:max-h-none"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPUlEQVR4nGM4++DJp///OxeurmpKYCjMip/d3ByWnOydE81gw8DgxcCgwsDAq6LFUFJQEBkQVFFeNrGtGQBs5RQPZO5OaAAAAABJRU5ErkJggg=="
-            />
-          ) : (
-            <Image
-              src={"/doprava.jpg"}
-              alt="panel"
-              width={500}
-              height={500}
-              className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] lg:max-h-none"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
-            />
-          )}
+          <Image
+            src={"/doprava.jpg"}
+            alt="panel"
+            width={500}
+            height={500}
+            className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] lg:max-h-none"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
+          />
         </div>
       </div>
     </div>

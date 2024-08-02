@@ -19,15 +19,6 @@ async function GetData() {
       id: doc.id,
     }));
 
-    // const sortedPanelyProducts = panelyProducts.sort((a, b) => {
-    //   const extractNumber = (nazov: string) => {
-    //     const match = nazov.match(/^FF(\d+)$/);
-    //     return match ? parseInt(match[1], 10) : 0;
-    //   };
-
-    //   return extractNumber(a.nazov) - extractNumber(b.nazov);
-    // });
-
     const final_data = panelyProducts.sort((a, b) => {
       return Number(a.slug) - Number(b.slug);
     });

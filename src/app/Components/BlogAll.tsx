@@ -25,7 +25,7 @@ const BlogAll = ({ data }: Props) => {
           </Link>
         </div>
       </div>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mt-8 xl:mt-16">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-8 3xl:gap-12">
         {data.map((object, index) => (
           <OneBlogSection
             photo={object.photo}
