@@ -7,8 +7,7 @@ import HomePageBratislavaClient from "./HomePageBratislavaClient";
 import HomePageBratislavaSkeleton from "./HomePageBratislavaSkeleton";
 
 const HomePageBratislava = () => {
-  const isLoading = true;
-  const { data, error, status } = useQuery<PhotoCityDescription[]>({
+  const { data, error, status, isLoading } = useQuery<PhotoCityDescription[]>({
     queryKey: ["projects"],
     queryFn: async () => await GetStavbyPopis(),
     staleTime: 1000 * 60 * 10,
