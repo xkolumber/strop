@@ -1,5 +1,3 @@
-import React from "react";
-import ButtonElement from "../ButtonElements/ButtonElement";
 import Image from "next/image";
 
 const ProfesionalCuts = () => {

@@ -53,12 +53,14 @@ const AboutUsTeamProfesional = () => {
             </div>
           </div>
           <Image
-            src={"/team.png"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fteam.png?alt=media&token=ac997c07-9df7-4a3a-8879-8fc400601c5e"
+            }
             alt="panel"
-            width={500}
-            height={500}
+            width={800}
+            height={800}
             priority={true}
-            className="w-full xl:w-1/2 h-full rounded-[8px] object-cover  mt-6 md:mt-0"
+            className="w-full xl:w-1/2 h-auto rounded-[8px] object-cover  mt-6 md:mt-0"
           />
         </div>
       </div>

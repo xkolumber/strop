@@ -148,7 +148,9 @@ const ContactForm = () => {
         </form>
 
         <Image
-          src={"/kontakt.jpg"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fkontakt.jpg?alt=media&token=a1f83dc8-4ef7-4e3b-80ab-4cace9ed232f"
+          }
           alt="Photo blog"
           width={1000}
           height={1000}

@@ -39,7 +39,7 @@ const HomePageBuildFast = () => {
     },
     {
       icon: <IconWeight />,
-      text: "Vysoká unosnosť",
+      text: "Vysoká nosnosť",
     },
   ];
 
@@ -85,20 +85,7 @@ const HomePageBuildFast = () => {
               <div className="flex flex-col md:flex-row gap-8 w-full ">
                 <div className="relative w-full h-[400px] xl:h-[400px] 2xl:h-[550px]">
                   <Image
-                    src="/build_fast.jpg"
-                    alt="Intro"
-                    layout="fill"
-                    objectFit="cover"
-                    quality={100}
-                    priority={true}
-                    className="rounded-[8px]"
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
-                  />
-                </div>
-                <div className="relative w-full h-[400px] xl:h-[400px] 2xl:h-[550px]">
-                  <Image
-                    src="/build_fast2.jpg"
+                    src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fbuild_fast2.jpg?alt=media&token=5775840b-d6af-48c4-ba7f-14cf1dcb6a0f"
                     alt="Intro"
                     layout="fill"
                     objectFit="cover"
@@ -109,12 +96,25 @@ const HomePageBuildFast = () => {
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
                   />
                 </div>
+                <div className="relative w-full h-[400px] xl:h-[400px] 2xl:h-[550px]">
+                  <Image
+                    src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fbuild_fast.jpg?alt=media&token=862a3dc7-a669-4beb-a10c-41980654cd77"
+                    alt="Intro"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={100}
+                    priority={true}
+                    className="rounded-[8px]"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ANDx/+n//83c5NTw/QCnvMhVZGlpdXhhbG0AOUxZGSQpGis1AAUS6S8SqM/juOEAAAAASUVORK5CYII="
+                  />
+                </div>
               </div>
-              <div className="flex-col md:flex-row justify-center items-center gap-8 mt-8 xl:mt-24 flex">
+              <div className="flex-col md:flex-row justify-between items-center gap-8 mt-8 xl:mt-24 flex">
                 {info.map((object, index) => (
-                  <div className="flex flex-row items-center gap-2" key={index}>
+                  <div className="flex flex-row items-center gap-6" key={index}>
                     <div className="w-24 h-24">{object.icon}</div>
-                    <p>{object.text}</p>
+                    <p className="font-semibold">{object.text}</p>
                   </div>
                 ))}
               </div>

@@ -275,7 +275,7 @@ a {
 }
 @media screen and (min-width: 1536px) {
   .main_section {
-    max-width: 1340px;
+    max-width: 1440px;
   }
   .left_section_inside {
     padding-left: 12rem;
@@ -295,7 +295,7 @@ a {
   .main_section {
     padding-top: 8rem;
     padding-bottom: 8rem;
-    max-width: 1656px;
+    max-width: 1756px;
   }
   .left_section_inside {
     padding-left: 13.8rem;

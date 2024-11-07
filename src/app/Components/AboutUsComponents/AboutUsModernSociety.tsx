@@ -48,7 +48,9 @@ const AboutUsModernSociety = () => {
       </div>
 
       <Image
-        src={"/bratislava1.jpg"}
+        src={
+          "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fbratislava1.jpg?alt=media&token=abec8713-73bf-4f79-97a3-87da24c97f35"
+        }
         alt="Photo blog"
         width={300}
         height={300}
@@ -60,7 +62,9 @@ const AboutUsModernSociety = () => {
 
       <div className="hidden md:flex flex-row items-end gap-4 md:gap-8 md:!-mt-16 xl:!-mt-32">
         <Image
-          src={"/o_nas.jpg"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fo_nas.jpg?alt=media&token=9ac2c12f-a64b-4011-b1f8-7983b0add456"
+          }
           alt="Photo blog"
           width={300}
           height={300}
@@ -71,7 +75,9 @@ const AboutUsModernSociety = () => {
         />
 
         <Image
-          src={"/build_faster11.jpg"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fbuild_faster11.jpg?alt=media&token=cf06e38b-9643-4736-ba87-b40fdb6c27a7"
+          }
           alt="Photo blog"
           width={300}
           height={600}
@@ -83,7 +89,9 @@ const AboutUsModernSociety = () => {
 
         <div className="flex flex-col md:w-[33%]  gap-4 md:gap-8">
           <Image
-            src={"/o_nas2.jpg"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fo_nas2.jpg?alt=media&token=26605068-b8ff-4f58-9309-5c12950c02da"
+            }
             alt="Photo blog"
             width={300}
             height={300}
@@ -94,7 +102,9 @@ const AboutUsModernSociety = () => {
           />
           <div className="flex flex-row gap-4">
             <Image
-              src={"/o_nas3.jpg"}
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fo_nas3.jpg?alt=media&token=725ca796-62d9-46d7-a2d1-c4ded430a588"
+              }
               alt="Photo blog"
               width={200}
               height={200}
@@ -104,7 +114,9 @@ const AboutUsModernSociety = () => {
               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJUlEQVR4nAEaAOX/AJ+ZmP/37sLCty86GwCGjV/i3MqtrJ4ABwDGvA1sfmGyygAAAABJRU5ErkJggg=="
             />
             <Image
-              src={"/o_nas4.jpg"}
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fo_nas4.jpg?alt=media&token=ecf9634c-ce0d-45d9-b9d5-f205702ee498"
+              }
               alt="Photo blog"
               width={200}
               height={200}
@@ -116,7 +128,9 @@ const AboutUsModernSociety = () => {
           </div>
 
           <Image
-            src={"/bratislava1.jpg"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fbratislava1.jpg?alt=media&token=abec8713-73bf-4f79-97a3-87da24c97f35"
+            }
             alt="Photo blog"
             width={200}
             height={200}

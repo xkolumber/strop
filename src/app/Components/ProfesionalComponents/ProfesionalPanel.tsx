@@ -7,7 +7,9 @@ const ProfesionalPanel = () => {
     <div className="main_section bg-secondary">
       <div className="flex flex-col md:flex-row md:gap-6">
         <Image
-          src={"/panel.jpg"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fpanel.jpg?alt=media&token=4fa05e2e-1228-4aa1-9bae-d8d0eea595d6"
+          }
           alt="panel"
           width={500}
           height={500}

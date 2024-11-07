@@ -176,94 +176,27 @@ const CeilingPanelIntro = ({ data }: Props) => {
             </Link>
           </div>
         </div>
+        <Image
+          src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fpanely_zoom_out.jpg?alt=media&token=2e0ccbbe-73dc-4cc1-bff9-d0d9a23d3de2"
+          alt="panel"
+          width={1920}
+          height={1080}
+          className="w-full  rounded-[8px]"
+        />
 
-        <div className="relative w-full md:h-[220px] lg:h-[270px] xl:h-[320px] 2xl:h-[350px] 3xl:h-[420px] hidden md:flex cursor-pointer videoo">
-          <video
-            muted
-            playsInline
-            autoPlay
-            preload="metadata"
-            className="w-full  object-contain absolute z-10 "
-          >
-            <source
-              src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fanimacia%20(online-video-cutter.com)%20(1).mp4?alt=media&token=7ee0851c-eadd-4b89-ba7b-d57330856df8"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video>
-          <div
-            className={`absolute top-0 left-0 w-[20%] h-full  z-20 `}
-            onClick={() => handleClick("200")}
-          ></div>
-
-          <div
-            className="absolute top-0 left-[20%] w-[20%] h-full z-20"
-            onClick={() => handleClick("265")}
-          ></div>
-
-          <div
-            className="absolute top-0 left-[40%] w-[20%] h-full z-20"
-            onClick={() => handleClick("320")}
-          ></div>
-
-          <div
-            className="absolute top-0 left-[60%] w-[20%] h-full z-20"
-            onClick={() => handleClick("400")}
-          ></div>
-
-          <div
-            className="absolute top-0 left-[80%] w-[20%] h-full z-20"
-            onClick={() => handleClick("500")}
-          ></div>
-
-          <Skeleton
-            className="absolute top-0 left-0 w-full h-full"
-            height={400}
-            borderRadius={8}
-            baseColor="#c4c4c4"
-          />
-        </div>
-
-        <div className="scroll-container md:hidden">
-          {data.map((button, index) => (
-            <div
-              className="button-wrapper"
-              onClick={() => handleClick(button.slug)}
-              key={index}
-            >
-              <ButtonElementPanel
-                text={`${button.nazov}`}
-                isChoosen={button.slug === choosenType}
-              />
-            </div>
-          ))}
-        </div>
-
-        <h2 className=" flex flex-row gap-2">
-          Panely{" "}
-          <span className="text-secondary">
-            {choosenPanel ? (
-              choosenPanel?.nazov
-            ) : (
-              <Skeleton width={70} borderRadius={8} baseColor="#ededed" />
-            )}
-          </span>
-        </h2>
-        <p>
-          {" "}
-          {choosenPanel ? (
-            choosenPanel?.popis1
-          ) : (
-            <Skeleton count={3} borderRadius={8} baseColor="#ededed" />
-          )}
+        <h2 className="mt-16">Stropné panely</h2>
+        <p className="pt-4 xl:max-w-[70%]">
+          Panely FF200 sú navrhnuté najmä pre stropné a strešné konštrukcie. Ich
+          všestrannosť spočíva v tom, že môžu byť uložené ako nosník, ale dajú
+          sa použiť aj pre konzolové uloženie. Technológia prepínacích lán
+          umožňuje dosihnuť nadvýšenie panelov (max. l/300), ktoré sa stanovuje
+          v závislosti od viacerých faktorov.
         </p>
-        <p className="mt-8">
-          {" "}
-          {choosenPanel ? (
-            choosenPanel?.popis2
-          ) : (
-            <Skeleton count={6} borderRadius={8} baseColor="#ededed" />
-          )}
+        <p className="pt-8 xl:max-w-[70%]">
+          Pre optimálne výsledky je vhodné voliť vyššie prierezy, ktoré sú viac
+          vystužené. Vzhľadom k nadvýšeniu dielcov je potrebné zvoliť hrúbku
+          skladby podlahy minimálne 75 milimetrov, čím sa zabezpečí nielen
+          stabilita, ale aj dlhodoba spoľahlivosť konštrukcie.
         </p>
       </div>
 
@@ -433,7 +366,9 @@ const CeilingPanelIntro = ({ data }: Props) => {
               </div>
             </div>
             <Image
-              src={"/panel.jpg"}
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fpanel.jpg?alt=media&token=4fa05e2e-1228-4aa1-9bae-d8d0eea595d6"
+              }
               alt="panel"
               width={500}
               height={500}

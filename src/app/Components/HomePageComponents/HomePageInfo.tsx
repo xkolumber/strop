@@ -38,11 +38,13 @@ const HomePageInfo = () => {
           </div>
 
           <Image
-            src={"/doprava.jpg"}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fdoprava.jpg?alt=media&token=4c077938-dc46-483d-b343-5946fd4fc8ff"
+            }
             alt="panel"
             width={500}
             height={500}
-            className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] lg:max-h-none"
+            className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] xl:max-h-[700px]"
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
           />

@@ -16,7 +16,7 @@ const page = () => {
 
       {/* <AboutUsOurTeam /> */}
 
-      <HomePageBlogSection colorGray={true} />
+      <HomePageBlogSection colorGray={false} />
       <HomePageInfo />
     </div>
   );

@@ -3,7 +3,7 @@ import HomePageBlogSection from "./Components/HomePageComponents/HomePageBlogSec
 import HomePageBratislava from "./Components/HomePageComponents/HomePageBratislava";
 import HomePageBuildFast from "./Components/HomePageComponents/HomePageBuildFast";
 import HomePageInfo from "./Components/HomePageComponents/HomePageInfo";
-import HomePagePanelServer from "./Components/HomePageComponents/HomePagePanelServer";
+import HomePagePanel from "./Components/HomePageComponents/HomePagePanel";
 import HomePageTechnical from "./Components/HomePageComponents/HomePageTechnical";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <HomePageBestSolution />
       <HomePageBuildFast />
 
-      <HomePagePanelServer />
+      <HomePagePanel />
       <HomePageBratislava />
       <HomePageBlogSection colorGray={false} />
       <HomePageTechnical />

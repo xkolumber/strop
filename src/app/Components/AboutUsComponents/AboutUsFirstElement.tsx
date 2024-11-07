@@ -24,7 +24,9 @@ const AboutUsFirstElement = () => {
           </div>
         </div>
         <Image
-          src={"/strop_panel.jpg"}
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fstrop_panel.jpg?alt=media&token=6541cdae-f577-40b8-8360-2024ec549e36"
+          }
           alt="Intro"
           width={500}
           height={500}
