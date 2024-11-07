@@ -183,3 +183,26 @@ export async function GetThreeBlogs() {
     return [];
   }
 }
+
+export async function GetPanelyClient() {
+  unstable_noStore();
+  const db = getFirestore(app);
+
+  try {
+    const panelyCollectionRef = collection(db, "panely");
+    const querySnapshot = await getDocs(panelyCollectionRef);
+
+    const panelyProducts: PanelProduct[] = querySnapshot.docs.map((doc) => ({
+      ...(doc.data() as PanelProduct),
+      id: doc.id,
+    }));
+
+    const final_data = panelyProducts.sort((a, b) => {
+      return Number(a.slug) - Number(b.slug);
+    });
+    return final_data;
+  } catch (error) {
+    console.error("Error fetching photos:", error);
+    return [];
+  }
+}

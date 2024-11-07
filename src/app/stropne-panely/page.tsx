@@ -1,47 +1,16 @@
-import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { unstable_noStore } from "next/cache";
-import { Suspense } from "react";
-import { ClipLoader } from "react-spinners";
-import CeilingPanelWholeSection from "../Components/CeilingPanel/CeilingPanelWholeSection";
-import { app } from "../firebase/config";
-import { PanelProduct } from "../firebase/interface";
-
-async function GetData() {
-  unstable_noStore();
-  const db = getFirestore(app);
-
-  try {
-    const panelyCollectionRef = collection(db, "panely");
-    const querySnapshot = await getDocs(panelyCollectionRef);
-
-    const panelyProducts: PanelProduct[] = querySnapshot.docs.map((doc) => ({
-      ...(doc.data() as PanelProduct),
-      id: doc.id,
-    }));
-
-    const final_data = panelyProducts.sort((a, b) => {
-      return Number(a.slug) - Number(b.slug);
-    });
-
-    return <CeilingPanelWholeSection data={final_data} />;
-  } catch (error) {
-    console.error("Error fetching photos:", error);
-    return [];
-  }
-}
+import CeilingFirstElement from "../Components/CeilingPanel/CeilingFirstElement";
+import CeilingPanelIntroData from "../Components/CeilingPanel/CeilingPanelIntroData";
+import HomePageBratislava from "../Components/HomePageComponents/HomePageBratislava";
+import HomePageInfo from "../Components/HomePageComponents/HomePageInfo";
 
 export default function Page() {
   return (
     <>
-      <Suspense
-        fallback={
-          <div className="main_section additional_padding min-h-[1800px]">
-            <ClipLoader size={20} color={"#00000"} loading={true} />
-          </div>
-        }
-      >
-        <GetData />
-      </Suspense>
+      <CeilingFirstElement />
+      <CeilingPanelIntroData />
+
+      <HomePageBratislava />
+      <HomePageInfo />
     </>
   );
 }
