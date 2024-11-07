@@ -26,12 +26,12 @@ const CeilingFirstElement = () => (
       height={1080}
       className="w-full  rounded-[8px]"
       placeholder="blur"
-      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNwdbJesWC2v58/AxMDw///r89f2b9z99yM3AQAitAMJTwYjEYAAAAASUVORK5CYII="
     />
 
     <h2 className="mt-16">Stropné panely</h2>
     <p className="pt-4 xl:max-w-[70%]">
-      Panely FF200 sú navrhnuté najmä pre stropné a strešné konštrukcie. Ich
+      Panely sú navrhnuté najmä pre stropné a strešné konštrukcie. Ich
       všestrannosť spočíva v tom, že môžu byť uložené ako nosník, ale dajú sa
       použiť aj pre konzolové uloženie. Technológia prepínacích lán umožňuje
       dosihnuť nadvýšenie panelov (max. l/300), ktoré sa stanovuje v závislosti

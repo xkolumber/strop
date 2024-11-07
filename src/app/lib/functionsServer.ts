@@ -184,6 +184,29 @@ export async function GetThreeBlogs() {
   }
 }
 
+export async function GetAllBlogs() {
+  try {
+    const query = `*[_type == "blog"] | order(_createdAt desc)`;
+    const data = await client.fetch(query);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+export async function GetBlogBySlug(slug: string) {
+  try {
+    const query = `*[_type == "blog" && slug.current =="${slug}"][0]`;
+    const data = await client.fetch(query);
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function GetPanelyClient() {
   unstable_noStore();
   const db = getFirestore(app);

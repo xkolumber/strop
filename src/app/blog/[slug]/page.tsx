@@ -1,21 +1,4 @@
-import { Suspense } from "react";
-import { ClipLoader } from "react-spinners";
-import { unstable_noStore } from "next/cache";
-import { client } from "@/app/sanity-setting/sanity";
-import BlogPage from "@/app/Components/BlogPage";
-
-async function GetData({ params }: Props) {
-  try {
-    unstable_noStore();
-    const query = `*[_type == "blog" && slug.current =="${params.slug}"][0]`;
-    const data = await client.fetch(query);
-
-    return <BlogPage data={data} />;
-  } catch (error) {
-    console.error("Error fetching photos:", error);
-    return [];
-  }
-}
+import BlogPageSlug from "@/app/Components/BlogSectionComponents/BlogPageSlug";
 
 type Props = {
   params: { slug: string };
@@ -24,19 +7,7 @@ type Props = {
 const Page = ({ params }: Props) => {
   return (
     <>
-      <Suspense
-        fallback={
-          <div className="main_section additional_padding min-h-[1800px]">
-            <ClipLoader size={20} color={"#00000"} loading={true} />
-          </div>
-        }
-      >
-        <GetData
-          params={{
-            slug: params.slug,
-          }}
-        />
-      </Suspense>
+      <BlogPageSlug slug={params.slug} />
     </>
   );
 };

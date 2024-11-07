@@ -1,11 +1,10 @@
-import Link from "next/link";
-import React from "react";
-import ButtonElement from "../ButtonElements/ButtonElement";
 import Image from "next/image";
-import IconStar from "../Icons/IconStar";
-import IconUser from "../Icons/IconUser";
+import Link from "next/link";
+import ButtonElement from "../ButtonElements/ButtonElement";
 import IconBuilding from "../Icons/IconBuilding";
 import IconHouse from "../Icons/IconHouse";
+import IconStar from "../Icons/IconStar";
+import IconUser from "../Icons/IconUser";
 
 const about_us_data = [
   {
@@ -27,7 +26,9 @@ const about_us_data = [
 ];
 
 const AboutUsModernSociety = () => {
-  // const url = await getBase64("http://localhost:3000/o_nas4.jpg");
+  // const url = await getBase64(
+  //   "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fpanely_zoom_out.jpg?alt=media&token=2e0ccbbe-73dc-4cc1-bff9-d0d9a23d3de2"
+  // );
   // console.log(url);
   return (
     <div className="main_section additional_padding ">

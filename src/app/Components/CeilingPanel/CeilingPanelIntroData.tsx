@@ -3,6 +3,7 @@ import { PanelProduct } from "@/app/firebase/interface";
 import { GetPanelyClient } from "@/app/lib/functionsServer";
 import { useQuery } from "@tanstack/react-query";
 import CeilingPanelIntro from "./CeilingPanelIntro";
+import CeilingPanelIntroSkeleton from "./CeilingPanelIntroSkeleton";
 
 const CeilingPanelIntroData = () => {
   const { data, error, status, isLoading } = useQuery<PanelProduct[]>({
@@ -13,7 +14,7 @@ const CeilingPanelIntroData = () => {
   });
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <CeilingPanelIntroSkeleton />;
   }
 
   if (error) {
