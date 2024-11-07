@@ -23,16 +23,17 @@ const BlogPageSlug = ({ slug }: Props) => {
 
   const initialElementData = directCachedElement || cachedElement;
 
+  console.log(cachedElement);
+
   const {
     data = initialElementData,
     error,
-    status,
     isLoading,
   } = useQuery<Blog>({
     queryKey: ["blogs", slug],
     queryFn: async () => await GetBlogBySlug(slug),
     staleTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false,
+    enabled: !initialElementData,
   });
 
   if (isLoading) {
@@ -43,7 +44,7 @@ const BlogPageSlug = ({ slug }: Props) => {
     return <p>Chyba pri získavaní dát. {error.message}</p>;
   }
 
-  if (status === "success" && data) {
+  if (data) {
     return (
       <div className="main_section additional_padding">
         <StepBack />
