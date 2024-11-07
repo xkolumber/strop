@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import ButtonElement from "../ButtonElements/ButtonElement";
 import HomePageThreeBlogs from "./HomePageThreeBlogs";
+import HomePageBlogSkeleton from "./HomePageBlogSkeleton";
 
 interface Props {
   colorGray: boolean;
@@ -19,7 +20,7 @@ const HomePageBlogSection = ({ colorGray }: Props) => {
   });
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <HomePageBlogSkeleton />;
   }
 
   if (error) {

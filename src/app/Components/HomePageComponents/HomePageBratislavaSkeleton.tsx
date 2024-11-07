@@ -10,32 +10,16 @@ const HomePageBratislavaSkeleton = () => {
         <div className="flex flex-col md:w-1/2">
           <p>
             {" "}
-            <Skeleton width={300} baseColor="#c4c4c4" />
+            <Skeleton width={"30%"} baseColor="#c4c4c4" />
           </p>
           <h2>
             {" "}
-            <Skeleton width={400} baseColor="#c4c4c4" />
+            <Skeleton width={"50%"} baseColor="#c4c4c4" className="mt-2" />
           </h2>
-          <p>
+          <p className="mt-8">
             {" "}
             <Skeleton count={2} baseColor="#c4c4c4" />
           </p>
-          <Skeleton height={20} baseColor="#c4c4c4" />
-          <Skeleton height={20} baseColor="#c4c4c4" />
-          <Skeleton height={20} baseColor="#c4c4c4" />
-          <Skeleton height={20} baseColor="#c4c4c4" />
-
-          {/* <div className="scroll-container mt-4 !mb-2 md:hidden">
-            {zakazky.map((object, index) => (
-              <div
-                className=""
-                key={index}
-                onClick={() => handleNewChoosenObject(object)}
-              >
-                <ButtonElement text={object.mesto} />
-              </div>
-            ))}
-          </div> */}
         </div>
         <div className="flex flex-col md:w-1/2">
           <div className="relative ">

@@ -4,9 +4,11 @@ import { GetStavbyPopis } from "@/app/lib/functionsServer";
 import { useQuery } from "@tanstack/react-query";
 import "react-loading-skeleton/dist/skeleton.css";
 import HomePageBratislavaClient from "./HomePageBratislavaClient";
+import HomePageBratislavaSkeleton from "./HomePageBratislavaSkeleton";
 
 const HomePageBratislava = () => {
-  const { data, error, status, isLoading } = useQuery<PhotoCityDescription[]>({
+  const isLoading = true;
+  const { data, error, status } = useQuery<PhotoCityDescription[]>({
     queryKey: ["projects"],
     queryFn: async () => await GetStavbyPopis(),
     staleTime: 1000 * 60 * 10,
@@ -14,7 +16,7 @@ const HomePageBratislava = () => {
   });
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return <HomePageBratislavaSkeleton />;
   }
 
   if (error) {
