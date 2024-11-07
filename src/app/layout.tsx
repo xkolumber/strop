@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar";
 import "./globals.css";
 import { AuthContextProvider } from "./auth/Provider";
 import CookieComponent from "./Components/CookieComponent";
+import Provider from "./util/Provider";
 
 export const metadata: Metadata = {
   title: "Strop",
@@ -49,13 +50,15 @@ export default function RootLayout({
   return (
     <html lang="sk">
       <body className={own_font.className}>
-        <AuthContextProvider>
-          <Navbar />
+        <Provider>
+          <AuthContextProvider>
+            <Navbar />
 
-          {children}
-          <Footer />
-          <CookieComponent />
-        </AuthContextProvider>
+            {children}
+            <Footer />
+            <CookieComponent />
+          </AuthContextProvider>
+        </Provider>
       </body>
     </html>
   );

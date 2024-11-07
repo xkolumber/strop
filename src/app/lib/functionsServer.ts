@@ -17,6 +17,7 @@ import {
 } from "../firebase/interface";
 import { unstable_noStore } from "next/cache";
 import { firestore } from "../firebase/configServer";
+import { client } from "../sanity-setting/sanity";
 
 export default async function getBase64(imageUrl: string) {
   try {
@@ -37,7 +38,6 @@ export default async function getBase64(imageUrl: string) {
 }
 
 export async function GetStavbyPopis() {
-  unstable_noStore();
   const db = getFirestore(app);
 
   try {
@@ -165,6 +165,21 @@ export async function GetEmails() {
 
     return emails;
   } catch (error) {
+    return [];
+  }
+}
+
+export async function GetThreeBlogs() {
+  try {
+    const query = `*[_type == "blog"] | order(_createdAt desc) [0...50]`;
+    const allData = await client.fetch(query);
+
+    const shuffledData = allData.sort(() => 0.5 - Math.random());
+    const data = shuffledData.slice(0, 3);
+
+    return data;
+  } catch (error) {
+    console.log(error);
     return [];
   }
 }

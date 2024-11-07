@@ -4,19 +4,16 @@ import Image from "next/image";
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import ButtonElement from "../ButtonElements/ButtonElement";
 import ButtonElementProject from "../ButtonElements/ButtonElementProject";
 
 interface Props {
-  zakazky: PhotoCityDescription[] | [];
+  data: PhotoCityDescription[] | [];
 }
 
-const HomePageBratislavaClient = ({ zakazky }: Props) => {
-  const [choosenCity, setChoosenCity] = useState(zakazky[0].mesto);
-  const [choosenDescription, setChoosenDescription] = useState(
-    zakazky[0].popis
-  );
-  const [choosenPhoto, setChoosenPhoto] = useState(zakazky[0].foto);
+const HomePageBratislavaClient = ({ data }: Props) => {
+  const [choosenCity, setChoosenCity] = useState(data[0].mesto);
+  const [choosenDescription, setChoosenDescription] = useState(data[0].popis);
+  const [choosenPhoto, setChoosenPhoto] = useState(data[0].foto);
 
   const handleNewChoosenObject = (object: PhotoCityDescription) => {
     setChoosenCity(object.mesto);
@@ -32,33 +29,35 @@ const HomePageBratislavaClient = ({ zakazky }: Props) => {
           <h2>{choosenCity}</h2>
           <p className="pt-4">{choosenDescription}</p>
           <div className="scroll-container mt-4 !mb-4 md:hidden">
-            {zakazky.map((object, index) => (
-              <div
-                className={`${object.mesto === choosenCity && ""}`}
-                key={index}
-                onClick={() => handleNewChoosenObject(object)}
-              >
-                <ButtonElementProject
-                  text={object.mesto}
-                  choosenCity={choosenCity}
-                />
-              </div>
-            ))}
+            {data &&
+              data.map((object, index) => (
+                <div
+                  className={`${object.mesto === choosenCity && ""}`}
+                  key={index}
+                  onClick={() => handleNewChoosenObject(object)}
+                >
+                  <ButtonElementProject
+                    text={object.mesto}
+                    choosenCity={choosenCity}
+                  />
+                </div>
+              ))}
           </div>
 
           <div className="flex-wrap gap-8 mt-8 mb-8 hidden md:flex">
-            {zakazky.map((object, index) => (
-              <div
-                className=""
-                key={index}
-                onClick={() => handleNewChoosenObject(object)}
-              >
-                <ButtonElementProject
-                  text={object.mesto}
-                  choosenCity={choosenCity}
-                />
-              </div>
-            ))}
+            {data &&
+              data.map((object, index) => (
+                <div
+                  className=""
+                  key={index}
+                  onClick={() => handleNewChoosenObject(object)}
+                >
+                  <ButtonElementProject
+                    text={object.mesto}
+                    choosenCity={choosenCity}
+                  />
+                </div>
+              ))}
           </div>
         </div>
         <div className="flex flex-col md:w-1/2">

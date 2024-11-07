@@ -1,56 +1,49 @@
-import React, { Suspense } from "react";
-import OneBlogSection from "../OneBlogSection";
-import ButtonElement from "../ButtonElements/ButtonElement";
-import { ClipLoader } from "react-spinners";
-import { unstable_noStore } from "next/cache";
-import { client } from "@/app/sanity-setting/sanity";
-import HomePageThreeBlogs from "./HomePageThreeBlogs";
+"use client";
+import { Blog } from "@/app/firebase/interface";
+import { GetThreeBlogs } from "@/app/lib/functionsServer";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import getBase64 from "@/app/lib/functionsServer";
-
-async function GetData() {
-  try {
-    unstable_noStore();
-    const query = `*[_type == "blog"] | order(_createdAt desc) [0...50]`;
-    const allData = await client.fetch(query);
-
-    const shuffledData = allData.sort(() => 0.5 - Math.random());
-    const data = shuffledData.slice(0, 3);
-
-    return <HomePageThreeBlogs data={data} />;
-  } catch (error) {
-    console.error("Error fetching photos:", error);
-    return [];
-  }
-}
+import ButtonElement from "../ButtonElements/ButtonElement";
+import HomePageThreeBlogs from "./HomePageThreeBlogs";
 
 interface Props {
   colorGray: boolean;
 }
 
 const HomePageBlogSection = ({ colorGray }: Props) => {
-  return (
-    <div className={`${colorGray && "bg-primary"}`}>
-      <div className={`main_section `}>
-        <p className="mb-4">[ Blog ]</p>
-        <Suspense
-          fallback={
-            <div className="min-h-[600px]">
-              <ClipLoader size={20} color={"#00000"} loading={true} />
-            </div>
-          }
-        >
-          <GetData />
-        </Suspense>
+  const { data, error, status, isLoading } = useQuery<Blog[]>({
+    queryKey: ["homepage_blogs"],
+    queryFn: async () => await GetThreeBlogs(),
+    staleTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
+  });
 
-        <div className="mt-8 2xl:mt-16">
-          <Link href={"/blog"}>
-            <ButtonElement text="Všetky blogy" />
-          </Link>
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
+
+  if (error) {
+    return <p>Chyba pri získavaní dát. {error.message}</p>;
+  }
+  if (status === "success") {
+    return (
+      data && (
+        <div>
+          <div className={`${colorGray && "bg-primary"}`}>
+            <div className={`main_section `}>
+              <p className="mb-4">[ Blog ]</p>
+              <HomePageThreeBlogs data={data} />
+              <div className="mt-8 2xl:mt-16">
+                <Link href={"/blog"}>
+                  <ButtonElement text="Všetky blogy" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      )
+    );
+  }
 };
 
 export default HomePageBlogSection;
