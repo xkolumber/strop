@@ -1,10 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import ButtonElement from "../ButtonElements/ButtonElement";
-import IconPlus from "../Icons/IconPlus";
 import Link from "next/link";
-import { PanelProductHomePage } from "@/app/firebase/interface";
+import ButtonElement from "../ButtonElements/ButtonElement";
 
 export function createSlug(title: string): string {
   const slug = title
@@ -21,8 +18,6 @@ export function createSlug(title: string): string {
 }
 
 const HomePagePanel = () => {
-  // const [choosenIndex, setChoosenIndex] = useState(0);
-
   return (
     <div className="main_section ">
       <div className="flex flex-col md:flex-row md:gap-6 xl:gap-8 2xl:gap-12 ">
@@ -66,6 +61,8 @@ const HomePagePanel = () => {
             width={500}
             height={500}
             className="w-full md:w-1/2  md:hidden mt-8 rounded-[8px]"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNwdbJesWC2v58/AxMDw///r89f2b9z99yM3AQAitAMJTwYjEYAAAAASUVORK5CYII="
           />
         </div>
       </div>
