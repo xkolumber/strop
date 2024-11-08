@@ -60,7 +60,7 @@ const HomePageBratislavaClient = ({ data }: Props) => {
               ))}
           </div>
         </div>
-        <div className="flex flex-col md:w-1/2">
+        <div className="flex flex-col md:w-1/2 mt-4 md:mt-0">
           <div className="relative ">
             {choosenPhoto && (
               <Image

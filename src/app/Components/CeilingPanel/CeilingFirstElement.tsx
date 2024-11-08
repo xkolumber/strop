@@ -24,7 +24,7 @@ const CeilingFirstElement = () => (
       alt="panel"
       width={1920}
       height={1080}
-      className="w-full  rounded-[8px]"
+      className="w-full  rounded-[8px] h-[220px] md:h-[auto] object-cover"
       placeholder="blur"
       blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNwdbJesWC2v58/AxMDw///r89f2b9z99yM3AQAitAMJTwYjEYAAAAASUVORK5CYII="
     />

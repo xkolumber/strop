@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import IconCloseButton from "./Icons/IconCloseButton";
 import ButtonElement from "./ButtonElements/ButtonElement";
 import ButtonElementNavbar from "./ButtonElements/ButtonElementNavbar";
+import { navbar_data } from "../lib/data";
 
 const Navbar = () => {
   const [openWindow, setOpenWindow] = useState(false);
@@ -44,6 +45,7 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [openWindow]);
+  console.log(pathname);
 
   return (
     <nav className={`navbar `}>
@@ -58,36 +60,15 @@ const Navbar = () => {
           />
         </Link>
         <div className="hidden lg:flex flex-row gap-12 items-center">
-          <Link
-            href={"/"}
-            className={`${pathname === "/" && "text-secondary"}`}
-          >
-            Domov
-          </Link>
-          <Link
-            href={"/o-nas"}
-            className={`${pathname === "/o-nas" && "text-secondary"}`}
-          >
-            O nás
-          </Link>
-          <Link
-            href={"/stropne-panely"}
-            className={`${pathname === "/stropne-panely" && "text-secondary"}`}
-          >
-            Stropné panely
-          </Link>
-          <Link
-            href={"/blog"}
-            className={`${pathname.includes("/blog") && "text-secondary"}`}
-          >
-            Blog
-          </Link>
-          <Link
-            href={"/kontakt"}
-            className={`${pathname === "/kontakt" && "text-secondary"}`}
-          >
-            Kontakt
-          </Link>
+          {navbar_data.map((object, index) => (
+            <Link
+              href={`${object.link === "/domov" ? "/" : `${object.link} `}`}
+              className={`${pathname.startsWith(object.link) && "text-secondary"} ${pathname === "/" && object.link === "/domov" && "text-secondary"}`}
+              key={index}
+            >
+              {object.nazov}
+            </Link>
+          ))}
         </div>
 
         <div className="navbar_second_group2   ">
@@ -117,34 +98,18 @@ const Navbar = () => {
             </div>
           </span>
 
-          <Link
-            href={"/o-nas"}
-            className="nav__item"
-            onClick={() => clickedButtonClose()}
-          >
-            O nás
-          </Link>
-          <Link
-            href={"/stropne-panely"}
-            className="nav__item"
-            onClick={() => clickedButtonClose()}
-          >
-            Stropné panely
-          </Link>
-          <Link
-            href={"/blog"}
-            className="nav__item"
-            onClick={() => clickedButtonClose()}
-          >
-            Blog
-          </Link>
-          <Link
-            href={"/kontakt"}
-            className="nav__item"
-            onClick={() => clickedButtonClose()}
-          >
-            Kontakt
-          </Link>
+          <div className="flex flex-col justify-end items-end">
+            {navbar_data.map((object, index) => (
+              <Link
+                href={`${object.link === "/domov" ? "/" : `${object.link} `}`}
+                className={`nav__item ${pathname.startsWith(object.link) && "text-secondary"} ${pathname === "/" && object.link === "/domov" && "text-secondary"} `}
+                key={index}
+                onClick={() => clickedButtonClose()}
+              >
+                {object.nazov}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

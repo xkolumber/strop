@@ -26,7 +26,7 @@ const HomePageBlogSection = ({ colorGray }: Props) => {
   if (error) {
     return <p>Chyba pri získavaní dát. {error.message}</p>;
   }
-  if (status === "success") {
+  if (data) {
     return (
       data && (
         <div>
