@@ -20,7 +20,7 @@ const CeilingFirstElement = () => (
       </div>
     </div>
     <Image
-      src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fpanely_zoom_out.jpg?alt=media&token=2e0ccbbe-73dc-4cc1-bff9-d0d9a23d3de2"
+      src="https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fstrop_min.png?alt=media&token=fd5cb309-6229-4798-93e1-c7807d089ada"
       alt="panel"
       width={1920}
       height={1080}
