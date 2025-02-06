@@ -3,6 +3,7 @@ import { useAuth } from "@/app/auth/Provider";
 import { PanelProductLoad } from "@/app/firebase/interface";
 
 import { AdminAddNewPanel } from "@/app/lib/actions";
+import { useQueryClient } from "@tanstack/react-query";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,10 +12,11 @@ import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
 const AdminNewPanel = () => {
+  const queryClient = useQueryClient();
+
   const router = useRouter();
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const handleChange = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -88,6 +90,7 @@ const AdminNewPanel = () => {
       );
       if (response === "success") {
         toast.success("Produkt bol úspešne pridaný");
+        await queryClient.refetchQueries({ queryKey: ["admin_panels"] });
 
         router.push("/admin");
       } else {
@@ -107,10 +110,7 @@ const AdminNewPanel = () => {
         <>
           <Toaster />
 
-          <form
-            className=" products_admin main_section additional_padding"
-            onSubmit={handleSaveProduct}
-          >
+          <form className=" products_admin" onSubmit={handleSaveProduct}>
             <Link href={"/admin"}>
               <p className="hover:underline ease-in">Späť</p>
             </Link>

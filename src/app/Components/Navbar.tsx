@@ -5,20 +5,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { usePathname, useRouter } from "next/navigation";
-import IconHamburger from "./Icons/IconHamburger";
 import { useEffect, useRef, useState } from "react";
+import IconHamburger from "./Icons/IconHamburger";
 
-import IconCloseButton from "./Icons/IconCloseButton";
-import ButtonElement from "./ButtonElements/ButtonElement";
-import ButtonElementNavbar from "./ButtonElements/ButtonElementNavbar";
 import { navbar_data } from "../lib/data";
+import ButtonElementNavbar from "./ButtonElements/ButtonElementNavbar";
+import IconCloseButton from "./Icons/IconCloseButton";
 
 const Navbar = () => {
   const [openWindow, setOpenWindow] = useState(false);
 
-  const router = useRouter();
   const popupRef = useRef<HTMLDivElement>(null);
   const [closeClicked, setCloseClicked] = useState(false);
+
   const pathname = usePathname();
 
   const clickedButtonClose = () => {
@@ -45,10 +44,11 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [openWindow]);
-  console.log(pathname);
 
   return (
-    <nav className={`navbar `}>
+    <nav
+      className={`navbar   ${pathname.startsWith("/admin") ? "!hidden" : ""} `}
+    >
       <div className="main_section flex flex-row justify-between !pt-0 !pb-0 items-center">
         <Link href="/">
           <Image

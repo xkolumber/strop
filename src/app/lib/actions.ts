@@ -6,10 +6,6 @@ import { DownloadPdf } from "../firebase/interface";
 import { firestore } from "../firebase/configServer";
 import { createSlug } from "./functions";
 
-export async function doRevalidate(pathname: string) {
-  revalidatePath(pathname);
-}
-
 export async function AdminActualizePanel(
   foto: string,
   nazov: string,
@@ -51,7 +47,6 @@ export async function AdminActualizePanel(
     rezy2: rezy2,
     slug: createSlug(nazov),
   });
-  revalidatePath(`/admin/produkty/[${slug}]/page`, "page");
   return "success";
 }
 
@@ -90,7 +85,6 @@ export async function AdminActualizePdf(
   await produktyCollectionRef.doc(docId).update({
     download_file: updatedDownloadFile,
   });
-  revalidatePath(`/admin/produkty/[${slug}]/page`, "page");
   return "success";
 }
 
@@ -126,7 +120,6 @@ export async function AdminAddPdf(
   await produktyCollectionRef.doc(docId).update({
     download_file: all_pdf_objects,
   });
-  revalidatePath(`/admin/produkty/[${slug}]/page`, "page");
   return "success";
 }
 
@@ -156,7 +149,6 @@ export async function AdminAddDeletePDf(
   await produktyCollectionRef.doc(docId).update({
     download_file: updatedDownloadFile,
   });
-  revalidatePath(`/admin/produkty/[${slug}]/page`, "page");
   return "success";
 }
 
@@ -173,7 +165,6 @@ export async function AdminAddNewStavbyPopisy(
       mesto: newCity,
       popis: newDescription,
     });
-    revalidatePath("/admin/pridanie-foto-popis");
     return "success";
   } catch (error) {
     return "false";
@@ -193,7 +184,6 @@ export async function AdminActualizeStavbyPopisy(
       foto: foto,
       popis: popis,
     });
-    revalidatePath("/admin/pridanie-foto-popis");
     return "success";
   } catch (error) {
     console.error("Error updating document:", error);
@@ -206,7 +196,6 @@ export async function AdminDeleteCertainStavbyPopisy(id: string) {
 
   try {
     await stavbyCollectionRef.doc(id).delete();
-    revalidatePath("/admin/pridanie-foto-popis");
     return "success";
   } catch (error) {
     console.error("Error updating document:", error);
@@ -245,7 +234,6 @@ export async function AdminAddNewPanel(
       slug: createSlug(nazov),
       download_file: [],
     });
-    revalidatePath("/admin/pridanie-foto-popis");
     return "success";
   } catch (error) {
     return "false";

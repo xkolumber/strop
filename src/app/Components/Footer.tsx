@@ -1,16 +1,16 @@
 "use client";
 import Image from "next/image";
-import React from "react";
-import IconFooterFacebook from "./Icons/IconFooterFacebook";
-import IconFooterLinkedIn from "./Icons/IconFooterLinkedIn";
-import IconFooterInstagram from "./Icons/IconFooterInstagram";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import IconFooterFacebook from "./Icons/IconFooterFacebook";
+import IconFooterInstagram from "./Icons/IconFooterInstagram";
 
 const Footer = () => {
   const pathname = usePathname();
   return (
-    <footer className={`bg-black  w-full ${pathname === "/admin" && "hidden"}`}>
+    <footer
+      className={`bg-black  w-full  ${pathname.startsWith("/admin") ? "!hidden" : ""}`}
+    >
       <div className="main_section">
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className=" flex flex-col md:flex-row gap-6 md:gap-24 xl:gap-52 md:mt-0">

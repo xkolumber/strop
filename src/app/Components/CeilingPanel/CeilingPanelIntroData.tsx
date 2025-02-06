@@ -6,23 +6,21 @@ import CeilingPanelIntro from "./CeilingPanelIntro";
 import CeilingPanelIntroSkeleton from "./CeilingPanelIntroSkeleton";
 
 const CeilingPanelIntroData = () => {
-  const { data, error, status, isLoading } = useQuery<PanelProduct[]>({
+  const { data, error, isLoading } = useQuery<PanelProduct[]>({
     queryKey: ["panels"],
     queryFn: async () => await GetPanelyClient(),
     staleTime: 1000 * 60 * 10,
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) {
-    return <CeilingPanelIntroSkeleton />;
-  }
+  return (
+    <>
+      {isLoading && <CeilingPanelIntroSkeleton />}
+      {error && <p>Chyba pri získavaní dát. {error.message}</p>}
 
-  if (error) {
-    return <p>Chyba pri získavaní dát. {error.message}</p>;
-  }
-  if (status === "success" && data) {
-    return <CeilingPanelIntro data={data} />;
-  }
+      {data && <CeilingPanelIntro data={data} />}
+    </>
+  );
 };
 
 export default CeilingPanelIntroData;

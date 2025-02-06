@@ -1,51 +1,23 @@
 "use client";
-import { PanelProduct, PanelProductSlugTitle } from "@/app/firebase/interface";
-import React from "react";
-import ButtonElement from "../ButtonElements/ButtonElement";
+import { PanelProductSlugTitle } from "@/app/firebase/interface";
+import { GetPanely } from "@/app/lib/functionsServer";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useAuth } from "@/app/auth/Provider";
-import { useRouter } from "next/navigation";
+import { ClipLoader } from "react-spinners";
+import ButtonElement from "../ButtonElements/ButtonElement";
 
-interface Props {
-  data: PanelProductSlugTitle[];
-}
+const AdminPage = () => {
+  const { data, error, isLoading } = useQuery<PanelProductSlugTitle[]>({
+    queryKey: ["admin_panels"],
+    queryFn: async () => await GetPanely(),
+    staleTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
+  });
 
-const AdminPage = ({ data }: Props) => {
-  const { logout } = useAuth();
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      router.push("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
-    <div className="main_section additional_padding min-h-[600px]">
-      <div className="flex flex-row justify-between  mb-12">
-        <h5>Admin</h5>
-        <p
-          onClick={handleLogout}
-          className="text-black font-medium cursor-pointer"
-        >
-          Odhlásiť sa
-        </p>
-      </div>
-
-      <div className="flex flex-row gap-4">
-        {data.map((product, index) => (
-          <Link
-            className=""
-            href={`/admin/produkty/${product.slug}`}
-            key={index}
-          >
-            <ButtonElement text={`${product.nazov}`} />
-          </Link>
-        ))}
-      </div>
-      <div className="mt-6">
+    <div className=" ">
+      <h2>Panely</h2>
+      <div className="mt-4 mb-4">
         <Link
           href={"/admin/novy-panel"}
           className="text-black mb-8 underline font-normal "
@@ -53,24 +25,23 @@ const AdminPage = ({ data }: Props) => {
           Pridať nový panel
         </Link>
       </div>
-      <div className="flex flex-col gap-4 mt-12">
-        {" "}
-        <Link
-          href={"/admin/pridanie-foto-popis"}
-          className="text-black  font-normal underline"
-        >
-          Popisy ku stavbám
-        </Link>
-      </div>
-      <div className="flex flex-col gap-4">
-        {" "}
-        <Link
-          href={"/admin/databaza-kontaktov"}
-          className="text-black mb-8 font-normal underline"
-        >
-          Databáza kontaktov z webu
-        </Link>
-      </div>
+
+      {isLoading && <ClipLoader size={20} color={"#00000"} loading={true} />}
+      {error && <p>Chyba pri získavaní dát. {error.message}</p>}
+
+      {data && (
+        <div className="flex flex-row gap-4">
+          {data.map((product, index) => (
+            <Link
+              className=""
+              href={`/admin/produkty/${product.slug}`}
+              key={index}
+            >
+              <ButtonElement text={`${product.nazov}`} />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
 } from "firebase/firestore";
 import { getPlaiceholder } from "plaiceholder";
 import { app } from "../firebase/config";
+import { firestore } from "../firebase/configServer";
 import {
   Email,
   PanelProduct,
@@ -15,8 +16,6 @@ import {
   PanelProductSlugTitle,
   PhotoCityDescription,
 } from "../firebase/interface";
-import { unstable_noStore } from "next/cache";
-import { firestore } from "../firebase/configServer";
 import { client } from "../sanity-setting/sanity";
 
 export default async function getBase64(imageUrl: string) {
@@ -61,7 +60,6 @@ export async function GetStavbyPopis() {
 }
 
 export async function GetPanely() {
-  unstable_noStore();
   const db = getFirestore(app);
 
   try {
@@ -85,8 +83,6 @@ export async function GetPanely() {
 }
 
 export async function GetCertainPanel(slug: string) {
-  unstable_noStore();
-
   try {
     const db = getFirestore(app);
     const q = query(collection(db, "panely"), where("slug", "==", slug));
@@ -99,12 +95,11 @@ export async function GetCertainPanel(slug: string) {
       id: doc.id,
     };
   } catch (error) {
-    return;
+    throw new Error();
   }
 }
 
 export async function GetStavbyPopisy() {
-  unstable_noStore();
   const db = getFirestore(app);
 
   try {
@@ -126,7 +121,6 @@ export async function GetStavbyPopisy() {
 }
 
 export async function GetHomePagePanels() {
-  unstable_noStore();
   const db = getFirestore(app);
 
   try {
@@ -152,8 +146,6 @@ export async function GetHomePagePanels() {
 }
 
 export async function GetEmails() {
-  unstable_noStore();
-
   try {
     const emailsCollectionRef = firestore.collection("emaily");
     const querySnapshot = await emailsCollectionRef.get();
@@ -208,7 +200,6 @@ export async function GetBlogBySlug(slug: string) {
 }
 
 export async function GetPanelyClient() {
-  unstable_noStore();
   const db = getFirestore(app);
 
   try {
