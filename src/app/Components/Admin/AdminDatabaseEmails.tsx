@@ -3,8 +3,20 @@ import { Email } from "@/app/firebase/interface";
 import { GetEmails } from "@/app/lib/functionsServer";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import React from "react";
 import { ClipLoader } from "react-spinners";
+
+export function formatDateComment(date: string) {
+  const d = new Date(date);
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+
+  return `${day}.${month}.${year} ${hours}:${minutes}`;
+}
 
 const AdminDatabaseEmails = () => {
   const { data, error, isLoading } = useQuery<Email[]>({
@@ -42,7 +54,7 @@ const AdminDatabaseEmails = () => {
               key={index}
             >
               <p>{object.email}</p>
-              <p className="text-center">{object.datum}</p>
+              <p className="text-center">{formatDateComment(object.datum)}</p>
               <div>
                 {object.linky.map((object2, index2) => (
                   <p className="text-right" key={index2}>
