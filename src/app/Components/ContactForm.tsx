@@ -5,8 +5,8 @@ import { FieldValues, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { sendEmailContactForm } from "../lib/actions";
 import ButtonElement from "./ButtonElements/ButtonElement";
-import { ClipLoader } from "react-spinners";
 
 interface FormData {
   name: string;
@@ -27,31 +27,14 @@ const ContactForm = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/send-form", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          tel_number: data.tel_number,
-          interest: data.interest,
-          place: data.place,
-          date: data.date,
-          message: data.message,
-        }),
-      });
+      const response = await sendEmailContactForm(data);
 
-      if (response.ok) {
+      if (response.data?.id) {
         reset();
         toast.success("Správa bola úspešne odoslaná");
         console.log("Email sent successfully!");
-        setIsLoading(false);
-      } else {
-        console.error("Failed to send email");
-        setIsLoading(false);
       }
+      setIsLoading(false);
     } catch (error) {
       console.error("Error sending email:", error);
       setIsLoading(false);
@@ -141,9 +124,7 @@ const ContactForm = () => {
           </div>
 
           <button className="mt-8 mb-8" type="submit" disabled={isLoading}>
-            <ButtonElement
-              text={`${isLoading ? "Zasielanie..." : "Odoslať"} `}
-            />
+            <ButtonElement text="Odoslať" isLoading={isLoading} />
           </button>
         </form>
 

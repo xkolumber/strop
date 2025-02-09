@@ -14,6 +14,7 @@ import {
 import { Tailwind } from "@react-email/tailwind";
 
 const EmailSentPdfToUser = () => {
+  const actual_year = new Date().getFullYear();
   return (
     <Html>
       <Tailwind
@@ -99,7 +100,7 @@ const EmailSentPdfToUser = () => {
               </Column>
             </Row>
             <Text className="text-center text-gray-400 mb-45">
-              © 2024 | Strop, SLOVENSKO |{" "}
+              © {actual_year} | Strop, SLOVENSKO |{" "}
               <Link
                 href="https://www.energysportrent.sk"
                 className=" text-gray-400"

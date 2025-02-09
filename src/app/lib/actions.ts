@@ -1,10 +1,14 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { DownloadPdf } from "../firebase/interface";
 
 import { firestore } from "../firebase/configServer";
 import { createSlug } from "./functions";
+import { Resend } from "resend";
+import EmailSentPdfToUser from "../../../emails/EmailSentPdfToUser";
+import { FieldValue } from "firebase-admin/firestore";
+import { FieldValues } from "react-hook-form";
+import { EmailContactPage } from "../Components/EmailContactPage";
 
 export async function AdminActualizePanel(
   foto: string,
@@ -252,21 +256,73 @@ export async function AdminDeletePanel(id: string) {
   }
 }
 
-export async function AdminAddNewEmail(
-  email: string,
-  links: DownloadPdf[],
-  datum: string
-) {
+export async function AdminAddNewEmail(email: string, links: DownloadPdf[]) {
   const emailsCollectionRef = firestore.collection("emaily");
 
   try {
     await emailsCollectionRef.add({
       email: email,
       linky: links,
-      datum: datum,
+      datum: new Date().toISOString(),
     });
     return "success";
   } catch (error) {
     return "false";
+  }
+}
+
+export async function sendEmailtoCustomer(email: string, links: DownloadPdf[]) {
+  const resend = new Resend(process.env.RESEND_API_KEY!);
+
+  const attachments = links.map((object: DownloadPdf, index: number) => ({
+    filename: `${object.nazov}.pdf`,
+    path: object.pdf_link,
+  }));
+
+  try {
+    const data = await resend.emails.send({
+      from: "info@strop.sk",
+      to: email,
+      subject: links.length === 1 ? `Strop | Pdf súbor` : "Strop | Pdf súbory",
+      react: EmailSentPdfToUser(),
+      attachments: attachments,
+    });
+    return data;
+  } catch (error) {
+    throw new Error();
+  }
+}
+
+export async function sendEmailContactForm(data: FieldValues) {
+  const resend = new Resend(process.env.RESEND_API_KEY!);
+
+  const name = data.name;
+  const email = data.email;
+  const tel_number = data.tel_number;
+  const interest = data.interest;
+  const place = data.place;
+  const date = data.date;
+  const message = data.message;
+
+  const emailHtml = EmailContactPage({
+    name,
+    email,
+    tel_number,
+    interest,
+    place,
+    date,
+    message,
+  });
+
+  try {
+    const data = await resend.emails.send({
+      from: "info@strop.sk",
+      to: "lubosk158@gmail.com",
+      subject: "Dotaz od klienta z webstránky",
+      html: emailHtml,
+    });
+    return data;
+  } catch (error) {
+    throw new Error();
   }
 }

@@ -155,6 +155,10 @@ export async function GetEmails() {
       datum: doc.data().datum,
     }));
 
+    emails.sort(
+      (a, b) => new Date(b.datum).getTime() - new Date(a.datum).getTime()
+    );
+
     return emails;
   } catch (error) {
     return [];

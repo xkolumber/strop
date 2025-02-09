@@ -1,21 +1,18 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import ButtonElement from "../ButtonElements/ButtonElement";
-import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { createSlug } from "../HomePageComponents/HomePagePanel";
-import ButtonElementPanel from "../ButtonElements/ButtonElementPanel";
 import { DownloadPdf, PanelProduct } from "@/app/firebase/interface";
-import toast, { Toaster } from "react-hot-toast";
-import { useForm } from "react-hook-form";
-import ButtonElementNavbar from "../ButtonElements/ButtonElementNavbar";
-import IconDownload from "../Icons/IconDownload";
-import IconCheck from "../Icons/IconCheck";
-import { ClipLoader } from "react-spinners";
+import { AdminAddNewEmail, sendEmailtoCustomer } from "@/app/lib/actions";
+import Image from "next/image";
 import Link from "next/link";
-import BackgroundVideo from "../BackgroundVideo";
-import Skeleton from "react-loading-skeleton";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import "react-loading-skeleton/dist/skeleton.css";
+import ButtonElement from "../ButtonElements/ButtonElement";
+import ButtonElementNavbar from "../ButtonElements/ButtonElementNavbar";
+import ButtonElementPanel from "../ButtonElements/ButtonElementPanel";
+import IconCheck from "../Icons/IconCheck";
+import IconDownload from "../Icons/IconDownload";
 
 interface Props {
   data: PanelProduct[];
@@ -129,18 +126,12 @@ const CeilingPanelIntro = ({ data }: Props) => {
 
     try {
       setIsLoading(true);
-      const response = await fetch("/api/send-pdf-to-client", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: finalEmail,
-          links: choosenLinks,
-        }),
-      });
 
-      if (response.ok) {
+      const response = await sendEmailtoCustomer(finalEmail, choosenLinks);
+
+      if (response.data?.id) {
+        await AdminAddNewEmail(finalEmail, choosenLinks);
+
         reset();
         console.log("Email sent successfully!");
         setIsLoading(false);
@@ -149,9 +140,6 @@ const CeilingPanelIntro = ({ data }: Props) => {
         setCheckData(false);
         setFinalMessage(true);
         setChoosenLinks([]);
-      } else {
-        console.error("Failed to send email");
-        setIsLoading(false);
       }
     } catch (error) {
       console.error("Error sending email:", error);
@@ -227,7 +215,15 @@ const CeilingPanelIntro = ({ data }: Props) => {
                 >
                   {one_object.nazov}
                 </p>
-                <IconDownload isHovered={hoveredItem === index} />
+                <div className="">
+                  {" "}
+                  <IconDownload
+                    isHovered={hoveredItem === index}
+                    isChosen={choosenLinks.some(
+                      (object) => object.pdf_link === one_object.pdf_link
+                    )}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -263,19 +259,16 @@ const CeilingPanelIntro = ({ data }: Props) => {
                     <p className="text-white">Súhlasím so spracovaním údajov</p>
                   </div>
                   <div className="flex flex-row gap-4 mt-4 w-full justify-center items-center">
-                    <div
+                    <button
                       className=" flex justify-center "
                       onClick={() => handleSendEmail()}
+                      disabled={isLoading}
                     >
-                      <ButtonElementNavbar text="Odoslať" />
-                    </div>
-                    {isLoading && (
-                      <ClipLoader
-                        size={20}
-                        color={"#ffffff"}
-                        loading={isLoading}
+                      <ButtonElementNavbar
+                        text="Odoslať"
+                        isLoading={isLoading}
                       />
-                    )}
+                    </button>
                   </div>
                 </form>
               </div>
