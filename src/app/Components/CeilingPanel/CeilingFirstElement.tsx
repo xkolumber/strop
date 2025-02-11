@@ -10,8 +10,8 @@ const CeilingFirstElement = () => (
 
       <div className="flex flex-col md:w-[40%]">
         <p className="">
-          Naše stropné panely 200, 265, 320, 400, 500 sú určené predovšetkým pre
-          stropné a strešné konštrukcie. Vďaka ich kvalite sú zaručene
+          Naše stropné panely 160,200, 265, 320, 400, 500 sú určené predovšetkým
+          pre stropné a strešné konštrukcie. Vďaka ich kvalite sú zaručene
           spoľahlivou investíciou do vašej stavby.
         </p>
         <Link className="flex flex-row gap-4 mt-4" href={"/kontakt"}>
@@ -31,16 +31,16 @@ const CeilingFirstElement = () => (
 
     <h2 className="mt-16">Stropné panely</h2>
     <p className="pt-4 xl:max-w-[70%]">
-      Panely sú navrhnuté najmä pre stropné a strešné konštrukcie. Ich
-      všestrannosť spočíva v tom, že môžu byť uložené ako nosník, ale dajú sa
-      použiť aj pre konzolové uloženie. Technológia prepínacích lán umožňuje
-      dosihnuť nadvýšenie panelov (max. l/300), ktoré sa stanovuje v závislosti
-      od viacerých faktorov.
+      Panely sú určené najmä pre stropné a strešné konštrukcie. Ich všestrannosť
+      spočíva v tom, že môžu byť uložené ako prostý nosník, ale dajú sa použiť
+      aj pre konzolové uloženie. Technológia prepínacích lán umožňuje dosihnuť
+      nadvýšenie panelov (max. l/300), ktoré sa stanovuje v závislosti od
+      viacerých faktorov.
     </p>
     <p className="pt-8 xl:max-w-[70%]">
       Pre optimálne výsledky je vhodné voliť vyššie prierezy, ktoré sú viac
       vystužené. Vzhľadom k nadvýšeniu dielcov je potrebné zvoliť hrúbku skladby
-      podlahy minimálne 75 milimetrov, čím sa zabezpečí nielen stabilita, ale aj
+      podlahy minimálne 60 milimetrov, čím sa zabezpečí nielen stabilita, ale aj
       dlhodoba spoľahlivosť konštrukcie.
     </p>
   </div>

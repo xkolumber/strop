@@ -46,9 +46,15 @@ const Footer = () => {
             <div className="flex flex-col">
               <a
                 className="text-white hover:text-secondary"
-                href="mailto:ferrobeton@strop.sk?subject=Otázka"
+                href="mailto:info@strop.sk?subject=Otázka"
               >
-                ferrobeton@strop.sk
+                info@strop.sk
+              </a>
+              <a
+                className="text-white hover:text-secondary"
+                href="mailto:projekty@strop.sk?subject=Otázka"
+              >
+                projekty@strop.sk
               </a>
 
               <div
@@ -71,7 +77,7 @@ const Footer = () => {
                 </a>
               </div>
 
-              <div className="flex flex-row gap-4 mt-2">
+              <div className="flex flex-row gap-8 mt-2">
                 <Link href={"https://www.facebook.com/STROPSK"}>
                   <IconFooterFacebook />
                 </Link>

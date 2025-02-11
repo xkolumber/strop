@@ -34,21 +34,26 @@ const HomePagePanel = () => {
         <div className="justify-between flex flex-col md:w-1/2 ">
           <div className="flex flex-col">
             <p>[Produkty]</p>
-            <h2>Stropné panely 200, 265, 320, 400</h2>
+            <h2>Stropné panely 160, 200, 265, 320, 400</h2>
             <p className="mt-4">
               Vďaka nízkej váhe a špeciálnemu spôsobu výroby sú dutinové panely
               vhodné aj pre tie najnáročnejšie projekty. Veľkou výhodou našich
               panelov je aj variabilita možností uloženia. Priestupy a otvory
               podľa individuálnych požiadaviek môžeme pripraviť už pri výrobe,
-              vrátane otvorov pre schodiská a priestupy väčších rozmerov.
-              Detaily a technické riešenia sú pripravuje naše oddelenie
-              projekcie, takže náš zákazník vopred vie, ako bude jeho riešenie
-              vyzerať.
+              vrátane otvorov pre schodiská, svetlíky, vzduchotechniku,
+              rekuperácie a pod. Detaily a technické riešenia skladby navrhuje
+              naše oddelenie projekcie, takže náš zákazník vopred vie, ako bude
+              jeho riešenie vyzerať.
             </p>
             <p className="mt-4 line-clamp-5 2xl:line-clamp-[8]">
               Dutinové panely s hrúbkou 200 mm sa vyrábajú v troch rôznych
               pevnostných kategóriách: základný model (200/1) zosilnený model
               (200/2) a najpevnejší panel (200/3).{" "}
+            </p>
+            <p className="mt-4 line-clamp-5 2xl:line-clamp-[8]">
+              Všetky typy panelov sa vyrábajú vo viacerých pevnostných
+              kategóriách. Sú rozlížené pevnostným znakom 1-4 uvedeným za
+              lomítkom v označení panelu. (napr EHC200/1 alebo EHC265/3 )
             </p>
             <Link className="" href={`/stropne-panely`}>
               <div className="mt-8 mb-8">

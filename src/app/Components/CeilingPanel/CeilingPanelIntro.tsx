@@ -35,6 +35,8 @@ const CeilingPanelIntro = ({ data }: Props) => {
     const searchParams = new URLSearchParams(window.location.search);
     const search = searchParams.get("typ");
 
+    console.log(search);
+
     if (search != null) {
       setChoosenType(search.toLowerCase());
       const panel = data.find((panel) => panel.slug === search);
@@ -50,6 +52,7 @@ const CeilingPanelIntro = ({ data }: Props) => {
     } else {
       const defaultPanel = data.find((panel) => panel.slug === "200");
       setChoosenPanel(defaultPanel);
+      setChoosenType("200");
       const url = new URL(window.location.href);
       url.searchParams.set("typ", "200");
       window.history.replaceState({}, "", url.toString());
