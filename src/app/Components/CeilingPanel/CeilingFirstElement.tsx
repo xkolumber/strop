@@ -10,9 +10,9 @@ const CeilingFirstElement = () => (
 
       <div className="flex flex-col md:w-[40%]">
         <p className="">
-          Naše stropné panely 160,200, 265, 320, 400, 500 sú určené predovšetkým
-          pre stropné a strešné konštrukcie. Vďaka ich kvalite sú zaručene
-          spoľahlivou investíciou do vašej stavby.
+          Naše stropné panely 160, 200, 265, 320, 400, 500 sú určené
+          predovšetkým pre stropné a strešné konštrukcie. Vďaka ich kvalite sú
+          zaručene spoľahlivou investíciou do vašej stavby.
         </p>
         <Link className="flex flex-row gap-4 mt-4" href={"/kontakt"}>
           <ButtonElement text="Kontaktujte nás" />
