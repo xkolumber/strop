@@ -317,8 +317,9 @@ export async function sendEmailContactForm(data: FieldValues) {
   try {
     const data = await resend.emails.send({
       from: "info@strop.sk",
-      to: "lubosk158@gmail.com",
-      subject: "Dotaz od klienta z webstránky",
+      to: "info@strop.sk",
+      cc: "projekty@strop.sk",
+      subject: "Dotaz od klienta z webstránky | STROP.sk",
       html: emailHtml,
     });
     return data;
