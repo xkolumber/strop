@@ -7,6 +7,8 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { sendEmailContactForm } from "../lib/actions";
 import ButtonElement from "./ButtonElements/ButtonElement";
+import BackgroundVideo from "./BackgroundVideo";
+import VideoContact from "./VideoContact";
 
 interface FormData {
   name: string;
@@ -44,10 +46,10 @@ const ContactForm = () => {
   return (
     <>
       <Toaster />
-      <div className="flex flex-col md:flex-row justify-center gap-12 main_section additional_padding">
+      <div className="flex flex-col lg:flex-row justify-center gap-12 lg:gap-20 main_section additional_padding">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="contact_form w-full md:w-1/2  flex flex-col"
+          className="contact_form w-full lg:w-1/2  flex flex-col"
         >
           {/* <StepBack /> */}
           <h1 className="text-fifthtiary mb-4">Kontaktujte nás</h1>
@@ -128,19 +130,7 @@ const ContactForm = () => {
           </button>
         </form>
 
-        <Image
-          src={
-            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fkontakt.jpg?alt=media&token=a1f83dc8-4ef7-4e3b-80ab-4cace9ed232f"
-          }
-          alt="Photo blog"
-          width={1000}
-          height={1000}
-          quality={100}
-          priority={true}
-          className="w-full md:w-1/2 h-initial rounded-[8px] object-cover hidden md:flex"
-          placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANH//0GU20KU2kCc7QCfwOEACS0sVWy13v8Ap66tbHd6wMXKhpOfALKwlKCjg6qqj39/ZevpHFZ6OZ4bAAAAAElFTkSuQmCC"
-        />
+        <VideoContact />
       </div>
     </>
   );

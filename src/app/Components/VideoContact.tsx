@@ -2,13 +2,9 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-interface Props {
-  videoSource: string;
-}
-
-const BackgroundVideo = ({ videoSource }: Props) => {
+const VideoContact = () => {
   return (
-    <div className="relative w-full h-full 3xl:h-[800px]">
+    <div className="relative w-full lg:w-1/2  h-[250px] md:h-[400px] lg:h-[600px] rounded-[8px] object-cover flex">
       <video
         loop
         muted
@@ -17,7 +13,12 @@ const BackgroundVideo = ({ videoSource }: Props) => {
         preload="metadata"
         className="w-full h-full object-cover rounded-[8px] absolute top-0 z-10 "
       >
-        <source src={videoSource} type="video/mp4" />
+        <source
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/videa%2Fvideo_strop_kontakt.mp4?alt=media&token=656cbdcd-2dcb-4f6c-939c-f40652e362e0"
+          }
+          type="video/mp4"
+        />
         Your browser does not support the video tag.
       </video>
 
@@ -31,4 +32,6 @@ const BackgroundVideo = ({ videoSource }: Props) => {
   );
 };
 
-export default BackgroundVideo;
+export default VideoContact;
+
+// w-full md:w-1/2 h-initial rounded-[8px] object-cover hidden md:flex
