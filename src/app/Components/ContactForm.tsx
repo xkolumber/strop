@@ -130,7 +130,21 @@ const ContactForm = () => {
           </button>
         </form>
 
-        <VideoContact />
+        <Image
+          src={
+            "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fcontact_photo.png?alt=media&token=48202c42-ac40-4d50-9820-6a7c924d823f"
+          }
+          alt="Photo blog"
+          width={800}
+          height={800}
+          quality={100}
+          priority={true}
+          className="w-full md:w-1/2 h-initial rounded-[8px] object-cover hidden md:flex"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANH//0GU20KU2kCc7QCfwOEACS0sVWy13v8Ap66tbHd6wMXKhpOfALKwlKCjg6qqj39/ZevpHFZ6OZ4bAAAAAElFTkSuQmCC"
+        />
+
+        {/* <VideoContact /> */}
       </div>
     </>
   );
