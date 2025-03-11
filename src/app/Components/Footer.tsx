@@ -15,9 +15,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className=" flex flex-col md:flex-row gap-6 md:gap-24 xl:gap-52 md:mt-0">
             <div className="flex flex-col ">
-              <p className="text-white">
-                OC Avion, Ivánska cesta 16, 821 04 Bratislava
-              </p>
+              <p className="text-white">Ľubochnianska 4, Bratislava 83104</p>
               <p className="text-white">Pon - Pia 9:00 - 17:00</p>
               <p className="text-white">Všeobecné obchodné podmienky</p>
             </div>
