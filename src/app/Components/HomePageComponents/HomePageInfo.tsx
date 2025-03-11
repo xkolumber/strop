@@ -1,10 +1,7 @@
 "use client";
 import Image from "next/image";
-import ButtonElement from "../ButtonElements/ButtonElement";
-import { usePathname } from "next/navigation";
 
 const HomePageInfo = () => {
-  const pathname = usePathname();
   return (
     <div className="bg-secondary">
       <div className="main_section   lg:max-h-[900px]">

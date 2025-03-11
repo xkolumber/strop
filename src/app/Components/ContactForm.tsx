@@ -46,7 +46,7 @@ const ContactForm = () => {
   return (
     <>
       <Toaster />
-      <div className="flex flex-col lg:flex-row justify-center gap-12 lg:gap-20 main_section additional_padding">
+      <div className="flex flex-col lg:flex-row justify-center gap-12 main_section additional_padding">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="contact_form w-full lg:w-1/2  flex flex-col"
@@ -54,7 +54,7 @@ const ContactForm = () => {
           {/* <StepBack /> */}
           <h1 className="text-fifthtiary mb-4">Kontaktujte nás</h1>
 
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row md:gap-4">
             <input
               type="text"
               id="meno"
@@ -74,7 +74,7 @@ const ContactForm = () => {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row md:gap-4">
             <input
               type="text"
               id="tel_number"
@@ -94,7 +94,7 @@ const ContactForm = () => {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row md:gap-4">
             <input
               type="text"
               id="place"
@@ -135,11 +135,11 @@ const ContactForm = () => {
             "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fcontact_photo.png?alt=media&token=48202c42-ac40-4d50-9820-6a7c924d823f"
           }
           alt="Photo blog"
-          width={800}
-          height={800}
+          width={500}
+          height={500}
           quality={100}
           priority={true}
-          className="w-full lg:w-1/2 h-initial rounded-[8px] object-cover hidden md:flex"
+          className="w-full lg:w-1/2  h-initial rounded-[8px] object-cover hidden md:flex "
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANH//0GU20KU2kCc7QCfwOEACS0sVWy13v8Ap66tbHd6wMXKhpOfALKwlKCjg6qqj39/ZevpHFZ6OZ4bAAAAAElFTkSuQmCC"
         />
