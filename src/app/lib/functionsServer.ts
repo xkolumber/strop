@@ -1,4 +1,7 @@
 "use server";
+
+import { getFirestore as getFirestoreAdmin } from "firebase-admin/firestore";
+
 import {
   collection,
   getDocs,
@@ -49,6 +52,7 @@ export async function GetStavbyPopis() {
         mesto: doc.data().mesto,
         popis: doc.data().popis,
         id: doc.id,
+        fotky: doc.data().fotky,
       })
     );
 
@@ -112,6 +116,7 @@ export async function GetStavbyPopisy() {
         mesto: doc.data().mesto,
         popis: doc.data().popis,
         id: doc.id,
+        fotky: doc.data().fotky,
       })
     );
     return panelyProducts;
@@ -222,5 +227,36 @@ export async function GetPanelyClient() {
   } catch (error) {
     console.error("Error fetching photos:", error);
     return [];
+  }
+}
+
+export async function AdminaDeleteMoodPhoto(
+  docId: string,
+  delete_photo: string
+) {
+  const db = getFirestoreAdmin();
+
+  try {
+    const docRef = db.collection("stavby_popisy").doc(docId);
+    const docSnapshot = await docRef.get();
+
+    if (!docSnapshot.exists) {
+      throw new Error("Document not found.");
+    }
+
+    let moodove_photo = docSnapshot.data()?.fotky || [];
+
+    moodove_photo = moodove_photo.filter(
+      (item: string) => item !== delete_photo
+    );
+
+    await docRef.update({
+      fotky: moodove_photo,
+    });
+
+    return "success";
+  } catch (error) {
+    console.error("Database Error: Failed", error);
+    return "false";
   }
 }

@@ -1,14 +1,13 @@
 "use server";
 
-import { DownloadPdf } from "../firebase/interface";
+import { DownloadPdf, PhotoCityDescription } from "../firebase/interface";
 
-import { firestore } from "../firebase/configServer";
-import { createSlug } from "./functions";
+import { FieldValues } from "react-hook-form";
 import { Resend } from "resend";
 import EmailSentPdfToUser from "../../../emails/EmailSentPdfToUser";
-import { FieldValue } from "firebase-admin/firestore";
-import { FieldValues } from "react-hook-form";
 import { EmailContactPage } from "../Components/EmailContactPage";
+import { firestore } from "../firebase/configServer";
+import { createSlug } from "./functions";
 
 export async function AdminActualizePanel(
   foto: string,
@@ -168,6 +167,7 @@ export async function AdminAddNewStavbyPopisy(
       foto: url_foto,
       mesto: newCity,
       popis: newDescription,
+      fotky: [],
     });
     return "success";
   } catch (error) {
@@ -179,14 +179,19 @@ export async function AdminActualizeStavbyPopisy(
   id: string,
   mesto: string,
   foto: string,
-  popis: string
+  popis: string,
+  uploadedPhotos: string[],
+  previousPhotos: string[]
 ) {
   const stavbyCollectionRef = firestore.collection("stavby_popisy");
+
+  const final_photos = [...previousPhotos, ...uploadedPhotos];
   try {
     await stavbyCollectionRef.doc(id).update({
       mesto: mesto,
       foto: foto,
       popis: popis,
+      fotky: final_photos,
     });
     return "success";
   } catch (error) {

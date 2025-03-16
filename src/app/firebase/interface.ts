@@ -86,6 +86,7 @@ export interface PhotoCityDescription {
   mesto: string;
   popis: string;
   id: string;
+  fotky: string[];
 }
 
 export interface Email {
