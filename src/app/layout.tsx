@@ -6,6 +6,7 @@ import "./globals.css";
 import { AuthContextProvider } from "./auth/Provider";
 import CookieComponent from "./Components/CookieComponent";
 import Provider from "./util/Provider";
+import GoogleAnalyticsScript from "./Components/GoogleAnalyticsScript";
 
 export const metadata: Metadata = {
   title: "Strop",
@@ -50,6 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sk">
+      <GoogleAnalyticsScript />
       <body className={own_font.className}>
         <Provider>
           <AuthContextProvider>
