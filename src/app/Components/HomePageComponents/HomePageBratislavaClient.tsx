@@ -124,8 +124,8 @@ const HomePageBratislavaClient = ({ data, first_project }: Props) => {
               <Image
                 src={choosenObject?.foto}
                 alt="panel"
-                width={800}
-                height={800}
+                width={400}
+                height={400}
                 quality={75}
                 priority
                 onClick={() => handleOpenGallery(choosenObject, -1)}
@@ -145,8 +145,8 @@ const HomePageBratislavaClient = ({ data, first_project }: Props) => {
                     key={index}
                     src={object}
                     alt="panel"
-                    width={500}
-                    height={400}
+                    width={200}
+                    height={100}
                     quality={1}
                     className="rounded-[8px] object-cover h-[160px] cursor-pointer z-10 relative"
                     onClick={() => handleOpenGallery(choosenObject, index)}
