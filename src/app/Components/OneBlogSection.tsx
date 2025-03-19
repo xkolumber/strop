@@ -24,9 +24,9 @@ const OneBlogSection = ({ photo, title, slug, description }: Props) => {
           height={500}
           className="w-full  rounded-t-3xl  hover:scale-[1.02] transition-transform duration-100 ease-in object-cover h-full "
           priority={true}
-          quality={100}
+          quality={50}
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ER9HZYAAAAASUVORK5CYII="
         />
       </div>
 

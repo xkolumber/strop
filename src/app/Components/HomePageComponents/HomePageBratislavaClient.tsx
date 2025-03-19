@@ -131,7 +131,7 @@ const HomePageBratislavaClient = ({ data, first_project }: Props) => {
                 onClick={() => handleOpenGallery(choosenObject, -1)}
                 className="w-full cursor-pointer rounded-[8px] object-cover relative  z-10 h-[250px] md:h-[350px] 2xl:h-[400px] 3xl:h-[520px]"
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAAKUlEQVR42mNkYGBgYGD4z4AGjIgoEKDqBQYj4hNwShFPQGAGCUVAHyMABTgA04cKggAAAABJRU5ErkJggg=="
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ER9HZYAAAAASUVORK5CYII="
               />
             )}
           </div>
@@ -147,11 +147,11 @@ const HomePageBratislavaClient = ({ data, first_project }: Props) => {
                     alt="panel"
                     width={500}
                     height={400}
-                    quality={50}
+                    quality={1}
                     className="rounded-[8px] object-cover h-[160px] cursor-pointer z-10 relative"
                     onClick={() => handleOpenGallery(choosenObject, index)}
                     placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAAKUlEQVR42mNkYGBgYGD4z4AGjIgoEKDqBQYj4hNwShFPQGAGCUVAHyMABTgA04cKggAAAABJRU5ErkJggg=="
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ER9HZYAAAAASUVORK5CYII="
                   />
                 </div>
               ))}
