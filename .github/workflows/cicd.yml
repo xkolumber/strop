@@ -26,6 +26,15 @@ jobs:
           # Install dependencies for the .sanity folder
           cd sanity && npm install
 
+      - name: Set environment variables
+        run: |
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> $GITHUB_ENV
+          echo "ADMIN_UID=${{ secrets.ADMIN_UID }}" >> $GITHUB_ENV
+          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
+          echo "FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}" >> $GITHUB_ENV
+          echo "FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}" >> $GITHUB_ENV
+          echo "ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }}" >> $GITHUB_ENV
+
       - name: Build the app (if needed)
         run: npm run build
 
