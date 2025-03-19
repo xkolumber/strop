@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -51,9 +49,10 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no -T root@173.249.47.149 << 'EOF'
-            cd strop
-            git pull origin main  # Pull the latest changes from the repository
-            npm install --include=optional sharp  # Only install if changes to dependencies are needed
-            cd sanity && npm install
-            pm2 reload strop  # Reload the app using pm2 (or your app manager)
-          EOF
+             cd strop
+             git fetch origin main  # Fetch the latest changes explicitly
+             git reset --hard origin/main  # Ensure the local repository is in sync with remote
+             npm install --include=optional sharp  # Only install if changes to dependencies are needed
+             cd sanity && npm install
+             pm2 reload strop  # Reload the app using pm2 (or your app manager)
+           EOF
