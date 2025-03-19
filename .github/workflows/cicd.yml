@@ -12,13 +12,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "20"
 
-      - name: Install dependencies
+      - name: Check for changes in package or source files
+        id: check_changes
+        run: |
+          # Check if there are changes in package files (package.json, package-lock.json, sanity/package.json)
+          git diff --exit-code --quiet HEAD^ HEAD -- package.json package-lock.json sanity/package.json
+          echo "Changes detected in package files or source code"
+
+      - name: Install dependencies (if needed)
+        if: steps.check_changes.outcome == 'failure'
         run: |
           # Install dependencies for the main project
           npm install
@@ -26,16 +36,8 @@ jobs:
           # Install dependencies for the .sanity folder
           cd sanity && npm install
 
-      - name: Set environment variables
-        run: |
-          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> $GITHUB_ENV
-          echo "ADMIN_UID=${{ secrets.ADMIN_UID }}" >> $GITHUB_ENV
-          echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
-          echo "FIREBASE_PRIVATE_KEY=\"${{ secrets.FIREBASE_PRIVATE_KEY }}\"" >> $GITHUB_ENV
-          echo "FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}" >> $GITHUB_ENV
-          echo "ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }}" >> $GITHUB_ENV
-
       - name: Build the app (if needed)
+        if: steps.check_changes.outcome == 'failure'
         run: npm run build
 
       - name: Upload SSH private key to GitHub Secrets
@@ -51,7 +53,7 @@ jobs:
           ssh -i private_key.pem -o StrictHostKeyChecking=no -T root@173.249.47.149 << 'EOF'
             cd strop
             git pull origin main  # Pull the latest changes from the repository
-            npm install --include=optional sharp
+            npm install --include=optional sharp  # Only install if changes to dependencies are needed
             cd sanity && npm install
-            pm2 restart strop  # Restart the app using pm2 (or your app manager)
+            pm2 reload strop  # Reload the app using pm2 (or your app manager)
           EOF
