@@ -49,9 +49,9 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no -T user@173.249.47.149 << 'EOF'
-            cd /path/to/your/app
+            cd strop
             git pull origin main  # Pull the latest changes from the repository
             npm install  # Install any new dependencies
-            npm install --prefix .sanity  # Install dependencies for the .sanity folder
+            npm install --prefix sanity  
             pm2 restart strop  # Restart the app using pm2 (or your app manager)
           EOF
