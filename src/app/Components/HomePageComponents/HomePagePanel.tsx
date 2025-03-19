@@ -26,6 +26,7 @@ const HomePagePanel = () => {
           alt="panel"
           width={800}
           height={800}
+          quality={75}
           className="w-full md:w-1/2 hidden md:block h-auto  object-cover rounded-[8px]"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNwdbJesWC2v58/AxMDw///r89f2b9z99yM3AQAitAMJTwYjEYAAAAASUVORK5CYII="

@@ -3,7 +3,7 @@ import React from "react";
 interface Props {
   isHovered: boolean;
   text: string;
-  choosenCity: string;
+  choosenCity: string | null | undefined;
 }
 
 const IconArrowProject = ({ isHovered, text, choosenCity }: Props) => {

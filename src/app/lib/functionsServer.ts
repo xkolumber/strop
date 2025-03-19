@@ -4,8 +4,11 @@ import { getFirestore as getFirestoreAdmin } from "firebase-admin/firestore";
 
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   getFirestore,
+  limit,
   query,
   where,
 } from "firebase/firestore";
@@ -18,6 +21,7 @@ import {
   PanelProductHomePage,
   PanelProductSlugTitle,
   PhotoCityDescription,
+  PhotoCityDescriptionBasic,
 } from "../firebase/interface";
 import { client } from "../sanity-setting/sanity";
 
@@ -60,6 +64,88 @@ export async function GetStavbyPopis() {
   } catch (error) {
     console.error("Error fetching photos:", error);
     return [];
+  }
+}
+
+export async function GetStavyBasic() {
+  const db = getFirestore(app);
+
+  try {
+    const panelyCollectionRef = collection(db, "stavby_popisy");
+    const querySnapshot = await getDocs(panelyCollectionRef);
+
+    const panelyProducts: PhotoCityDescriptionBasic[] = querySnapshot.docs.map(
+      (doc) => ({
+        foto: doc.data().foto,
+        mesto: doc.data().mesto,
+        id: doc.id,
+        popis: doc.data().fotky,
+      })
+    );
+
+    return panelyProducts;
+  } catch (error) {
+    console.error("Error fetching photos:", error);
+    return [];
+  }
+}
+
+export async function GetFirstProject(): Promise<PhotoCityDescription | null> {
+  const db = getFirestore(app);
+
+  try {
+    const panelyCollectionRef = collection(db, "stavby_popisy");
+    const q = query(panelyCollectionRef, limit(1));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const doc = querySnapshot.docs[0];
+      const data = doc.data();
+
+      const result: PhotoCityDescription = {
+        foto: data.foto || "",
+        mesto: data.mesto || "",
+        popis: data.popis || "",
+        id: doc.id,
+        fotky: doc.data().fotky,
+      };
+
+      return result;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching first photo:", error);
+    return null;
+  }
+}
+
+export async function GetProjectById(
+  id: string
+): Promise<PhotoCityDescription | null> {
+  const db = getFirestore(app);
+
+  try {
+    const docRef = doc(db, "stavby_popisy", id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const result: PhotoCityDescription = {
+        foto: data.foto || "",
+        mesto: data.mesto || "",
+        popis: data.popis || "",
+        id: docSnap.id,
+        fotky: data.fotky,
+      };
+
+      return result;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching project by ID:", error);
+    return null;
   }
 }
 

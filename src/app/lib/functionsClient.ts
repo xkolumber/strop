@@ -1,4 +1,5 @@
 import imageCompression from "browser-image-compression";
+import { PhotoCityDescriptionBasic } from "../firebase/interface";
 
 export async function CompressImage(file: File) {
   try {
@@ -12,5 +13,21 @@ export async function CompressImage(file: File) {
     return compressedFile;
   } catch (error) {
     return null;
+  }
+}
+
+export function getCity(
+  cities: PhotoCityDescriptionBasic[],
+  id: string | null
+) {
+  if (id === null) {
+    return "";
+  }
+  const city_name = cities.find((item) => item.id === id);
+
+  if (city_name) {
+    return city_name.mesto;
+  } else {
+    return "";
   }
 }

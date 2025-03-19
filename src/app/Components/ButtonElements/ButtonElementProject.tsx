@@ -1,11 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import IconArrow from "../Icons/IconArrow";
+import { useState } from "react";
 import IconArrowProject from "../Icons/IconArrowProject";
 
 interface Props {
   text: string;
-  choosenCity: string;
+  choosenCity: string | null | undefined;
 }
 
 const ButtonElementProject = ({ text, choosenCity }: Props) => {

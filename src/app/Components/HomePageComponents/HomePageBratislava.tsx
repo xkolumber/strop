@@ -1,15 +1,33 @@
 "use client";
-import { PhotoCityDescription } from "@/app/firebase/interface";
-import { GetStavbyPopis } from "@/app/lib/functionsServer";
+import {
+  PhotoCityDescription,
+  PhotoCityDescriptionBasic,
+} from "@/app/firebase/interface";
+import {
+  GetFirstProject,
+  GetStavbyPopis,
+  GetStavyBasic,
+} from "@/app/lib/functionsServer";
 import { useQuery } from "@tanstack/react-query";
 import "react-loading-skeleton/dist/skeleton.css";
 import HomePageBratislavaClient from "./HomePageBratislavaClient";
 import HomePageBratislavaSkeleton from "./HomePageBratislavaSkeleton";
 
 const HomePageBratislava = () => {
-  const { data, error, status, isLoading } = useQuery<PhotoCityDescription[]>({
+  const { data, error, isLoading } = useQuery<PhotoCityDescriptionBasic[]>({
     queryKey: ["projects"],
-    queryFn: async () => await GetStavbyPopis(),
+    queryFn: async () => await GetStavyBasic(),
+    staleTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
+  });
+
+  const {
+    data: data2,
+    error: error2,
+    isLoading: IsLoading2,
+  } = useQuery<PhotoCityDescription | null | undefined>({
+    queryKey: ["project_first"],
+    queryFn: async () => await GetFirstProject(),
     staleTime: 1000 * 60 * 10,
     refetchOnWindowFocus: false,
   });
@@ -22,7 +40,9 @@ const HomePageBratislava = () => {
     return <p>Chyba pri získavaní dát. {error.message}</p>;
   }
   if (data) {
-    return data && <HomePageBratislavaClient data={data} />;
+    return (
+      data && <HomePageBratislavaClient data={data} first_project={data2} />
+    );
   }
 };
 
