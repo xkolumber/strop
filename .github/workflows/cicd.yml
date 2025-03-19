@@ -48,7 +48,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -i private_key.pem -o StrictHostKeyChecking=no -T user@173.249.47.149 << 'EOF'
+          ssh -i private_key.pem -o StrictHostKeyChecking=no -T root@173.249.47.149 << 'EOF'
             cd strop
             git pull origin main  # Pull the latest changes from the repository
             npm install  # Install any new dependencies
