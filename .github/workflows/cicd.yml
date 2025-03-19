@@ -70,5 +70,5 @@ jobs:
             else
               echo "No changes in sanity dependencies"
             fi
-            pm2 reload strop  # Reload the app using pm2 (or your app manager)
+            pm2 restart strop  # Reload the app using pm2 (or your app manager)
           EOF
