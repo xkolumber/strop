@@ -24,7 +24,7 @@ jobs:
           npm install
 
           # Install dependencies for the .sanity folder
-          cd .sanity && npm install
+          cd sanity && npm install
 
       - name: Build the app (if needed)
         run: npm run build
