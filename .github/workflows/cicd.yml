@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -24,7 +24,7 @@ jobs:
         id: check_changes
         run: |
           # Check if there are changes in package files (package.json, package-lock.json, sanity/package.json)
-          git diff --exit-code --quiet HEAD^ HEAD -- package.json package-lock.json sanity/package.json
+          git diff --exit-code --quiet HEAD~1 HEAD -- package.json package-lock.json sanity/package.json
           echo "Changes detected in package files or source code"
 
       - name: Install dependencies (if needed)
