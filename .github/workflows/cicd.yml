@@ -62,13 +62,8 @@ jobs:
             cd strop
             git fetch origin main  # Fetch the latest changes explicitly
             git reset --hard origin/main  # Ensure the local repository is in sync with remote
+            rm -rf .next  # Delete Next.js build cache
             npm install --include=optional sharp  # Only install if changes to dependencies are needed
-            cd sanity
-            git diff --exit-code --quiet HEAD~1 HEAD -- package.json package-lock.json
-            if [ $? -eq 1 ]; then
-              npm install  # Install dependencies only if there were changes
-            else
-              echo "No changes in sanity dependencies"
-            fi
+            npm run build  # Build the application for production
             pm2 restart strop  # Reload the app using pm2 (or your app manager)
           EOF
