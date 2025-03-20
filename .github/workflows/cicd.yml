@@ -65,5 +65,5 @@ jobs:
             rm -rf .next  # Delete Next.js build cache
             npm install --include=optional sharp  # Only install if changes to dependencies are needed
             npm run build  # Build the application for production
-            pm2 reload strop  # Reload the app using pm2 (or your app manager)
+            pm2 restart strop  # Reload the app using pm2 (or your app manager)
           EOF
