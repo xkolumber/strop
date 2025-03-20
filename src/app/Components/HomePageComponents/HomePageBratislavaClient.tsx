@@ -147,8 +147,8 @@ const HomePageBratislavaClient = ({ data, first_project }: Props) => {
                     alt="panel"
                     width={200}
                     height={100}
-                    quality={1}
-                    className="rounded-[8px] object-cover h-[160px] cursor-pointer z-10 relative"
+                    quality={20}
+                    className="rounded-[8px] object-cover h-[160px] cursor-pointer z-10 relative w-full"
                     onClick={() => handleOpenGallery(choosenObject, index)}
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ER9HZYAAAAASUVORK5CYII="
