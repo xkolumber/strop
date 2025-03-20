@@ -54,13 +54,14 @@ const AboutUsTeamProfesional = () => {
           </div>
           <Image
             src={
-              "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fteam.png?alt=media&token=ac997c07-9df7-4a3a-8879-8fc400601c5e"
+              "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_stavieb_new%2FDSC_7097.webp?alt=media&token=557576a5-8674-4e5c-88d1-b47ed4b7e495"
             }
             alt="panel"
             width={800}
             height={800}
             priority={true}
-            className="w-full xl:w-1/2 h-auto rounded-[8px] object-cover  mt-6 md:mt-0"
+            quality={100}
+            className="w-full xl:w-1/2 h-full md:max-h-[700px] rounded-[8px] object-cover  mt-6 md:mt-0"
           />
         </div>
       </div>
