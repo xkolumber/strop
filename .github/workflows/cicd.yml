@@ -21,8 +21,9 @@ jobs:
 
       - name: Set up Docker Buildx
         run: |
-          docker buildx create --use
-          docker buildx ls
+          docker buildx rm mybuilder || true  # Remove old builder if exists
+          docker buildx create --name mybuilder --use --bootstrap
+          docker buildx inspect mybuilder --bootstrap
 
       - name: Build Docker image
         run: |
