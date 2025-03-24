@@ -27,13 +27,8 @@ FROM node:20-alpine AS sanity-build
 
 WORKDIR /sanity
 
-COPY sanity/package.json sanity/package-lock.json ./ 
-
-RUN npm install --legacy-peer-deps
-
-RUN npm install @sanity/vision --legacy-peer-deps
-
-RUN npm run build
+COPY sanity/package.json sanity/package-lock.json ./
+RUN npm install
 
 FROM node:20-alpine
 
