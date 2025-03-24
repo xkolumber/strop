@@ -30,6 +30,8 @@ WORKDIR /sanity
 COPY sanity/package.json sanity/package-lock.json ./ 
 RUN npm install
 
+RUN npm install @sanity/vision
+
 RUN npm run build
 
 FROM node:20-alpine
