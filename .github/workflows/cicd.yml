@@ -54,5 +54,5 @@ jobs:
              docker stop strop || true
              docker rm strop || true
              docker run -d --name strop -p 3000:3000 --env-file /root/.env.local xkolumber/strop-image:latest
-           EOF
+          EOF
         shell: bash
