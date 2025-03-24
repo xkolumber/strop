@@ -15,39 +15,6 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: "20"
-
-      - name: Check for changes in package or source files
-        id: check_changes
-        run: |
-          git diff --exit-code --quiet HEAD~1 HEAD -- package.json package-lock.json sanity/package.json sanity/package-lock.json
-          if [ $? -eq 0 ]; then
-            echo "No changes detected in package files or source code"
-          else
-            echo "Changes detected in package files or source code"
-          fi
-
-      - name: Install dependencies (if needed)
-        if: steps.check_changes.outcome == 'failure'
-        run: |
-          # Install dependencies for the main project
-          npm ci
-
-          # Check for changes in sanity folder
-          git diff --exit-code --quiet HEAD~1 HEAD -- sanity/package.json sanity/package-lock.json
-          if [ $? -eq 1 ]; then
-            cd sanity && npm ci
-          else
-            echo "No changes in sanity dependencies"
-          fi
-
-      - name: Build the app (if needed)
-        if: steps.check_changes.outcome == 'failure'
-        run: npm run build
-
       - name: Upload SSH private key to GitHub Secrets
         run: echo "$SSH_PRIVATE_KEY" > private_key.pem
         env:
@@ -56,14 +23,19 @@ jobs:
       - name: Set permissions for SSH key
         run: chmod 600 private_key.pem
 
-      - name: Deploy to VPS
+      - name: Deploy Docker container to VPS
         run: |
           ssh -i private_key.pem -o StrictHostKeyChecking=no root@173.249.47.149 << EOF
-            cd strop
-            git fetch origin main  # Fetch the latest changes explicitly
-            git reset --hard origin/main  # Ensure the local repository is in sync with remote
-            rm -rf .next  # Delete Next.js build cache
-            npm install --include=optional sharp  # Only install if changes to dependencies are needed
-            npm run build  # Build the application for production
-            pm2 restart strop  # Reload the app using pm2 (or your app manager)
+            # Pull the latest Docker image from Docker Hub
+            docker pull xkolumber/strop-image:latest
+            
+            # Stop and remove any existing container
+            docker stop strop || true
+            docker rm strop || true
+            
+            # Run the new container
+            docker run -d --name strop -p 3000:3000 --env-file /root/.env.local xkolumber/strop-image:latest
+            
+            # Optionally restart the application using pm2 if necessary
+            # pm2 restart strop || true
           EOF
