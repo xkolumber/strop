@@ -23,30 +23,11 @@ RUN echo "ALLOWED_ORIGIN=${ALLOWED_ORIGIN}" >> .env
 
 RUN npm run build
 
-FROM node:20-alpine AS sanity-build
-
-WORKDIR /sanity
-
-RUN rm -rf node_modules package-lock.json
-RUN npm cache clean --force
-
-COPY sanity/package.json sanity/package-lock.json ./
-
-RUN npm install --legacy-peer-deps
-
-COPY sanity .
-
-RUN ls -la node_modules/@sanity/vision || echo "Sanity Vision not found!"
-
-# Build Sanity
-RUN npm run build
-
 FROM node:20-alpine
 
 WORKDIR /src/app
 
 COPY --from=build /src/app /src/app
-COPY --from=sanity-build /sanity /sanity
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
