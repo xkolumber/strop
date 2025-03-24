@@ -27,16 +27,18 @@ FROM node:20-alpine AS sanity-build
 
 WORKDIR /sanity
 
-RUN npm cache clean --force
 RUN rm -rf node_modules package-lock.json
+RUN npm cache clean --force
+
 COPY sanity/package.json sanity/package-lock.json ./
 
 RUN npm install --legacy-peer-deps
-RUN npm install @sanity/vision --legacy-peer-deps
 
-RUN ls -l node_modules/@sanity/vision # Verify @sanity/vision
-RUN ls -l node_modules # List all modules
+COPY sanity .
 
+RUN ls -la node_modules/@sanity/vision || echo "Sanity Vision not found!"
+
+# Build Sanity
 RUN npm run build
 
 FROM node:20-alpine
