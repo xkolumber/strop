@@ -70,21 +70,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
       let idToken = await userCredential.user.getIdToken(true);
 
-      await fetch("/api/create-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken }),
-      });
-
-      idToken = await userCredential.user.getIdToken(true);
-      const response2 = await fetch("/api/create-session", {
+      const response = await fetch("/api/create-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idToken }),
         credentials: "include",
       });
 
-      const { isAdmin } = await response2.json();
+      const { isAdmin } = await response.json();
 
       setUser({
         uid: userCredential.user.uid,

@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error creating session cookie:", error);
     return NextResponse.json(
-      { error: "Failed to create session cookie." },
+      { error: `Failed to create session cookie.` },
       { status: 500 }
     );
   }
