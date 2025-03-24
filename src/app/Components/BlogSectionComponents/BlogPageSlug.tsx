@@ -7,6 +7,7 @@ import Image from "next/image";
 import ReusablePortableText from "../ReusablePortableText";
 import StepBack from "../StepBack";
 import BlogSlugSkeleton from "./BlogSlugSkeleton";
+import { blur_url } from "@/app/lib/functionsClient";
 
 interface Props {
   slug: string;
@@ -52,13 +53,13 @@ const BlogPageSlug = ({ slug }: Props) => {
         <Image
           src={urlFor(data.photo).url()}
           alt="Blog section"
-          width={1900}
-          height={1080}
+          width={1600}
+          height={800}
           className="w-full rounded-3xl max-h-[800px] object-cover"
           priority={true}
           quality={100}
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+          blurDataURL={blur_url}
         />
         <div className="flex flex-col w-full items-center mt-4 md:mt-12">
           <div className="md:max-w-[70%]">
@@ -77,7 +78,7 @@ const BlogPageSlug = ({ slug }: Props) => {
                 priority={true}
                 quality={100}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+                blurDataURL={blur_url}
               />
             )}
             {data.photo3 && (
@@ -90,7 +91,7 @@ const BlogPageSlug = ({ slug }: Props) => {
                 priority={true}
                 quality={100}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+                blurDataURL={blur_url}
               />
             )}
             {data.content2 && (
@@ -108,7 +109,7 @@ const BlogPageSlug = ({ slug }: Props) => {
                 priority={true}
                 quality={100}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+                blurDataURL={blur_url}
               />
             )}
             {data.content3 && (
@@ -126,7 +127,7 @@ const BlogPageSlug = ({ slug }: Props) => {
                 priority={true}
                 quality={100}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGNg4NK0z2wPL+/k17BmYFBxnjhrZlFRuqSqKQMDu8ab//8fvftU1jUbANs+DosgoxQqAAAAAElFTkSuQmCC"
+                blurDataURL={blur_url}
               />
             )}
           </div>

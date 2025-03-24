@@ -26,10 +26,6 @@ const about_us_data = [
 ];
 
 const AboutUsModernSociety = () => {
-  // const url = await getBase64(
-  //   "https://firebasestorage.googleapis.com/v0/b/strop-8bbc9.appspot.com/o/foto_web%2Fpanely_zoom_out.jpg?alt=media&token=2e0ccbbe-73dc-4cc1-bff9-d0d9a23d3de2"
-  // );
-  // console.log(url);
   return (
     <div className="main_section additional_padding ">
       <p className="mb-2">[ Naša spoločnosť ]</p>

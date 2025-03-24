@@ -9,6 +9,7 @@ import { sendEmailContactForm } from "../lib/actions";
 import ButtonElement from "./ButtonElements/ButtonElement";
 import BackgroundVideo from "./BackgroundVideo";
 import VideoContact from "./VideoContact";
+import { blur_url } from "../lib/functionsClient";
 
 interface FormData {
   name: string;
@@ -141,7 +142,7 @@ const ContactForm = () => {
           priority={true}
           className="w-full lg:w-1/2  h-initial rounded-[8px] object-cover hidden md:flex "
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANH//0GU20KU2kCc7QCfwOEACS0sVWy13v8Ap66tbHd6wMXKhpOfALKwlKCjg6qqj39/ZevpHFZ6OZ4bAAAAAElFTkSuQmCC"
+          blurDataURL={blur_url}
         />
 
         {/* <VideoContact /> */}

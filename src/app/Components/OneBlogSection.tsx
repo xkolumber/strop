@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { urlFor } from "../firebase/interface";
 import Link from "next/link";
+import { blur_url } from "../lib/functionsClient";
 
 interface Props {
   photo: string;
@@ -26,7 +27,7 @@ const OneBlogSection = ({ photo, title, slug, description }: Props) => {
           priority={true}
           quality={50}
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/ER9HZYAAAAASUVORK5CYII="
+          blurDataURL={blur_url}
         />
       </div>
 

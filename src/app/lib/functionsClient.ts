@@ -31,3 +31,6 @@ export function getCity(
     return "";
   }
 }
+
+export const blur_url =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAEklEQVR4nGO4d+/ef2TMQFAAAEr/Ky1dQF2/AAAAAElFTkSuQmCC";

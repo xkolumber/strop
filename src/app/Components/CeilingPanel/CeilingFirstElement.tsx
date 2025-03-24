@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import ButtonElement from "../ButtonElements/ButtonElement";
 import Image from "next/image";
+import { blur_url } from "@/app/lib/functionsClient";
 
 const CeilingFirstElement = () => (
   <div className="main_section additional_padding">
@@ -26,7 +27,7 @@ const CeilingFirstElement = () => (
       height={1080}
       className="w-full  rounded-[8px] h-[220px] md:h-[auto] object-cover"
       placeholder="blur"
-      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNwdbJesWC2v58/AxMDw///r89f2b9z99yM3AQAitAMJTwYjEYAAAAASUVORK5CYII="
+      blurDataURL={blur_url}
     />
 
     <h2 className="mt-16">Stropné panely</h2>

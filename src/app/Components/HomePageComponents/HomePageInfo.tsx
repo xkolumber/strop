@@ -1,4 +1,5 @@
 "use client";
+import { blur_url } from "@/app/lib/functionsClient";
 import Image from "next/image";
 
 const HomePageInfo = () => {
@@ -43,7 +44,7 @@ const HomePageInfo = () => {
             height={500}
             className="w-full lg:w-1/2 h-[inherit] object-cover rounded-[8px] mt-6 md:mt-0 md:max-h-[500px] xl:max-h-[700px]"
             placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAP0lEQVR4nAE0AMv/ANfLye7Ir8C2sWNtdgD/7+yceWkQAAhcWmsAjYOLVj42gGxr69rbACQAB4FhXuvT0rWUgM+fGe8o1ol2AAAAAElFTkSuQmCC"
+            blurDataURL={blur_url}
           />
         </div>
       </div>

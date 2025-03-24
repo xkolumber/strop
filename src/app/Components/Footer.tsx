@@ -90,9 +90,11 @@ const Footer = () => {
         <Image
           src={"/strop_pismo.svg"}
           alt="strop pismo"
-          width={5000}
-          height={5000}
+          width={1920}
+          height={800}
           className="w-full h-full object-cover"
+          quality={100}
+          priority
         />
       </div>
     </footer>
