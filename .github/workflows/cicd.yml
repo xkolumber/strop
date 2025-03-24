@@ -36,6 +36,4 @@ jobs:
             # Run the new container
             docker run -d --name strop -p 3000:3000 --env-file /root/.env.local xkolumber/strop-image:latest
             
-            # Optionally restart the application using pm2 if necessary
-            # pm2 restart strop || true
           EOF
