@@ -35,7 +35,7 @@ const AboutUsModernSociety = () => {
       <p className="mb-2">[ Naša spoločnosť ]</p>
       <h2>
         Moderná spoločnosť s dlhoročnou tradíciou a individuálnym prístupom k
-        zákazníkom od roku 2004
+        zákazníkom od roku 2002
       </h2>
       <p className="max-w-[600px] pt-4">
         Sme architekti snov a budovatelia vízií. Každý projekt, na ktorom

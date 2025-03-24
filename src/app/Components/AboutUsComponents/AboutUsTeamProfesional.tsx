@@ -15,7 +15,7 @@ const AboutUsTeamProfesional = () => {
             <p>[Profesionáli]</p>
             <h2>Tím profesionálov</h2>
             <p className="pt-4">
-              Od roku 2004 sa náš tím STROP SK, s.r.o. vyvíjal a rástol.
+              Od roku 2002 sa náš tím STROP SK, s.r.o. vyvíjal a rástol.
               Neustále sme prinášali inovatívne riešenia pre slovenský stavebný
               priemysel. Naša cesta začala s víziou priniesť modernú technológiu
               predpätých stropných systémov. Spolupracovali sme s renomovanými

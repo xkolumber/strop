@@ -11,7 +11,7 @@ const AboutUsFirstElement = () => {
 
           <div className="flex flex-col ">
             <p className="pt-4">
-              Od roku 2004 sme neustále inovovali a rástli.
+              Od roku 2002 sme neustále inovovali a rástli.
             </p>
             <p>
               Preto dnes prinášame moderné riešenia pre slovenský stavebný
