@@ -11,12 +11,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data_blog = (await GetBlogBySlug(params.slug)) as Blog;
   if (data_blog !== null) {
     const thumbnail_photo = data_blog.photo_thumbnail || data_blog.photo;
+    const firstTextBlock = data_blog.content.find(
+      (block: any) => block.children && block.children.length > 0
+    );
+
+    const description = firstTextBlock?.children?.[0]?.text || "";
+
     return {
       title: data_blog.title,
       description: data_blog.content[0].children[0].text,
       openGraph: {
         title: data_blog.title,
-        description: data_blog.content[0].children[0].text,
+        description: description,
         images: [
           {
             url: urlFor(thumbnail_photo).url(),
