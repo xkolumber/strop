@@ -19,13 +19,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Generate version tag
-        id: version
-        run: |
-          VERSION=$(date +'%Y%m%d%H%M%S') 
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Build Docker image with version tag
+      - name: Build Docker image
         run: |
           docker buildx build \
             --platform linux/amd64 \
@@ -35,12 +29,12 @@ jobs:
             --build-arg FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}" \
             --build-arg FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} \
             --build-arg ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }} \
-            -t xkolumber/strop-image:${{ env.VERSION }} \
-            --push .  # Pushes the image with the versioned tag
+            -t xkolumber/strop-image:latest \
+            --push . # The "." is the build context (current directory)
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push xkolumber/strop-image:${{ env.VERSION }}
+          docker push xkolumber/strop-image:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,9 +50,9 @@ jobs:
       - name: Deploy Docker container to VPS
         run: |
           ssh -i private_key.pem -o ServerAliveInterval=60 -o StrictHostKeyChecking=no root@173.249.47.149 << EOF
-             docker pull xkolumber/strop-image:${{ env.VERSION }}
+             docker pull xkolumber/strop-image:latest
              docker stop strop || true
              docker rm strop || true
-             docker run -d --name strop -p 3000:3000 --env-file /root/.env.local --cpus="4.0" xkolumber/strop-image:${{ env.VERSION }}
+             docker run -d --name strop -p 3000:3000 --env-file /root/.env.local --cpus="4.0" xkolumber/strop-image:latest
           EOF
         shell: bash
