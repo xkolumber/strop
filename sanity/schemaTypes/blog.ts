@@ -1,3 +1,5 @@
+import type {Rule} from '@sanity/types'
+
 export default {
   name: 'blog',
   type: 'document',
@@ -23,6 +25,16 @@ export default {
       options: {
         hotspot: true,
       },
+      validation: (Rule: Rule) => Rule.required().error('Titulná fotka je povinná!'),
+    },
+
+    {
+      name: 'photo_thumbnail',
+      type: 'image',
+      title: 'Náhľadová foto | Facebook',
+      options: {
+        hotspot: true,
+      },
     },
 
     {
@@ -30,6 +42,7 @@ export default {
       type: 'array',
       title: 'Popis',
       of: [{type: 'block'}],
+      validation: (Rule: Rule) => Rule.required().error('Text v tomto poli je povinný!'),
     },
     {
       name: 'photo2',

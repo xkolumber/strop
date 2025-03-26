@@ -72,6 +72,7 @@ export interface Blog {
   };
   _createdAt: string;
   photo: string;
+  photo_thumbnail: string;
   content: any;
   photo2: string;
   photo3: string;
