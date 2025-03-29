@@ -15,8 +15,14 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className=" flex flex-col md:flex-row gap-6 md:gap-24 xl:gap-52 md:mt-0">
             <div className="flex flex-col ">
+              <p className="text-white">STROPSK, s.r.o.</p>
               <p className="text-white">Ľubochnianska 4, Bratislava 83104</p>
-              <p className="text-white">Všeobecné obchodné podmienky</p>
+              <p className="text-white">IČO: 50344234</p>
+              <p className="text-white">DIČ: 2120360836</p>
+              <p className="text-white pt-4">
+                Sme vám k dispozícii telefonicky:
+              </p>
+              <p className="text-white">PO-PIA : 8:00 - 16:00</p>
             </div>
             <div className="flex flex-col">
               <Link className="text-white hover:text-secondary" href={"/"}>
@@ -38,6 +44,9 @@ const Footer = () => {
                 href={"/kontakt"}
               >
                 Kontakt
+              </Link>
+              <Link className="text-white hover:text-secondary" href={"/gdpr"}>
+                GDPR
               </Link>
             </div>
             <div className="flex flex-col">
