@@ -1,8 +1,8 @@
 FROM node:20-alpine AS build
 
-WORKDIR /app  # Now using /app instead of /src/app
+WORKDIR /src/app
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json ./ 
 RUN npm install
 
 COPY . .
@@ -25,9 +25,9 @@ RUN npm run build
 
 FROM node:20-alpine
 
-WORKDIR /app  # Keep the same /app directory
+WORKDIR /src/app
 
-COPY --from=build /app /app
+COPY --from=build /src/app /src/app
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
