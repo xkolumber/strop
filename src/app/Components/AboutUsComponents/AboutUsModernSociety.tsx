@@ -9,7 +9,7 @@ import IconUser from "../Icons/IconUser";
 const about_us_data = [
   {
     icon: <IconStar />,
-    title: "od roku 2002 na Slovenskom trhu",
+    title: "od roku 2002 na slovenskom trhu",
   },
   {
     icon: <IconUser />,
@@ -21,7 +21,7 @@ const about_us_data = [
   },
   {
     icon: <IconHouse />,
-    title: "27 838m² ročne",
+    title: "27 838 m² ročne",
   },
 ];
 
