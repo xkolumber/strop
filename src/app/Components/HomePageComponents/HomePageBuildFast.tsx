@@ -12,7 +12,7 @@ const HomePageBuildFast = () => {
   const data = [
     {
       icon: <IconStar />,
-      text: "20 rokov na slovenskom trhu",
+      text: "od roku 2002 na slovenskom trhu",
     },
     {
       icon: <IconUser />,

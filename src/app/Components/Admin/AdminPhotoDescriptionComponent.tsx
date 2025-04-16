@@ -343,7 +343,7 @@ const AdminPhotoDescriptionComponent = ({ data }: Props) => {
               </div>
               <div className="product_admin_row">
                 <p>Fotky:</p>
-                <div className="flex flex-row gap-4">
+                <div className="flex flex-wrap gap-4">
                   {object.fotky &&
                     object.fotky.map((foto, index) => (
                       <Image
@@ -353,6 +353,7 @@ const AdminPhotoDescriptionComponent = ({ data }: Props) => {
                         height={400}
                         className="w-40 h-40 object-contain cursor-pointer"
                         onClick={() => handleClickedMoodPhoto(foto, object.id)}
+                        quality={25}
                         key={index}
                       />
                     ))}
@@ -365,6 +366,7 @@ const AdminPhotoDescriptionComponent = ({ data }: Props) => {
                         width={400}
                         height={400}
                         className="w-40 h-40 object-contain cursor-pointer"
+                        quality={25}
                         key={index}
                       />
                     ))}

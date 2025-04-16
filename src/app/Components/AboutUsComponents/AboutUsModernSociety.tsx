@@ -9,7 +9,7 @@ import IconUser from "../Icons/IconUser";
 const about_us_data = [
   {
     icon: <IconStar />,
-    title: "19 rokov na Slovenskom trhu",
+    title: "od roku 2002 na Slovenskom trhu",
   },
   {
     icon: <IconUser />,
