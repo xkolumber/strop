@@ -4,7 +4,7 @@ import { PhotoCityDescriptionBasic } from "../firebase/interface";
 export async function CompressImage(file: File) {
   try {
     const options = {
-      maxSizeMB: 1,
+      maxSizeMB: 1.5,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     };
