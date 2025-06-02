@@ -55,6 +55,5 @@ jobs:
              docker stop strop || true
              docker rm strop || true
              docker run -d --name strop --restart=always -p 3000:3000 --env-file /root/.env.local --cpus="4.0" xkolumber/strop-image:${{ env.SHA_SHORT }}
-             docker image prune -f
           EOF
         shell: bash
