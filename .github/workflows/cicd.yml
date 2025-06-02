@@ -27,12 +27,6 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            --build-arg RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} \
-            --build-arg ADMIN_UID=${{ secrets.ADMIN_UID }} \
-            --build-arg FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }} \
-            --build-arg FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}" \
-            --build-arg FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} \
-            --build-arg ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }} \
             -t xkolumber/strop-image:${{ env.SHA_SHORT }} \
             -t xkolumber/strop-image:latest \
             --push .
@@ -51,10 +45,18 @@ jobs:
       - name: Deploy Docker container to VPS
         run: |
           ssh -i private_key.pem -o ServerAliveInterval=60 -o StrictHostKeyChecking=no root@173.249.47.149 << EOF
-             docker pull xkolumber/strop-image:${{ env.SHA_SHORT }}
-             docker stop strop || true
-             docker rm strop || true
-             docker run -d --name strop --restart=always -p 3000:3000 --env-file /root/.env.local --cpus="4.0" xkolumber/strop-image:${{ env.SHA_SHORT }}
-             docker image prune -af
+            docker pull xkolumber/strop-image:${{ env.SHA_SHORT }}
+            docker stop strop || true
+            docker rm strop || true
+            docker run -d --name strop --restart=always -p 3000:3000 \
+              --cpus="4.0" \
+              -e RESEND_API_KEY='${{ secrets.RESEND_API_KEY }}' \
+              -e ADMIN_UID='${{ secrets.ADMIN_UID }}' \
+              -e FIREBASE_PROJECT_ID='${{ secrets.FIREBASE_PROJECT_ID }}' \
+              -e FIREBASE_PRIVATE_KEY='${{ secrets.FIREBASE_PRIVATE_KEY }}' \
+              -e FIREBASE_CLIENT_EMAIL='${{ secrets.FIREBASE_CLIENT_EMAIL }}' \
+              -e ALLOWED_ORIGIN='${{ secrets.ALLOWED_ORIGIN }}' \
+              xkolumber/strop-image:${{ env.SHA_SHORT }}
+            docker image prune -af
           EOF
         shell: bash
