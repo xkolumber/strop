@@ -13,13 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set short SHA as version tag
+        id: vars
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build and push Docker image
         run: |
           docker buildx build \
             --platform linux/amd64 \
@@ -29,19 +33,16 @@ jobs:
             --build-arg FIREBASE_PRIVATE_KEY="${{ secrets.FIREBASE_PRIVATE_KEY }}" \
             --build-arg FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }} \
             --build-arg ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }} \
+            -t xkolumber/strop-image:${{ env.SHA_SHORT }} \
             -t xkolumber/strop-image:latest \
-            --push . # The "." is the build context (current directory)
-
-      - name: Push Docker image to Docker Hub
-        run: |
-          docker push xkolumber/strop-image:latest
+            --push .
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Upload SSH private key to GitHub Secrets
+      - name: Upload SSH private key to GitHub runner
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
@@ -50,9 +51,10 @@ jobs:
       - name: Deploy Docker container to VPS
         run: |
           ssh -i private_key.pem -o ServerAliveInterval=60 -o StrictHostKeyChecking=no root@173.249.47.149 << EOF
-             docker pull xkolumber/strop-image:latest
+             docker pull xkolumber/strop-image:${{ env.SHA_SHORT }}
              docker stop strop || true
              docker rm strop || true
-             docker run -d --name strop --restart=always -p 3000:3000 --env-file /root/.env.local --cpus="4.0" xkolumber/strop-image:latest
+             docker run -d --name strop --restart=always -p 3000:3000 --env-file /root/.env.local --cpus="4.0" xkolumber/strop-image:${{ env.SHA_SHORT }}
+             docker image prune -af
           EOF
         shell: bash

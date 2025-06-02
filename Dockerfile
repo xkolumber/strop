@@ -1,9 +1,12 @@
-FROM node:20-alpine AS build
+# Step 1: Build Stage
+FROM node:20-alpine AS builder
 
-WORKDIR /src/app
+WORKDIR /app
 
-COPY package.json package-lock.json ./ 
-RUN npm install
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
 
 COPY . .
 
@@ -14,20 +17,30 @@ ARG FIREBASE_PRIVATE_KEY
 ARG FIREBASE_CLIENT_EMAIL
 ARG ALLOWED_ORIGIN
 
-RUN echo "RESEND_API_KEY=${RESEND_API_KEY}" >> .env
-RUN echo "ADMIN_UID=${ADMIN_UID}" >> .env
-RUN echo "FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}" >> .env
-RUN echo "FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}" >> .env
-RUN echo "FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}" >> .env
-RUN echo "ALLOWED_ORIGIN=${ALLOWED_ORIGIN}" >> .env
+RUN echo "RESEND_API_KEY=${RESEND_API_KEY}" >> .env && \
+    echo "ADMIN_UID=${ADMIN_UID}" >> .env && \
+    echo "FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}" >> .env && \
+    echo "FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}" >> .env && \
+    echo "FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}" >> .env && \
+    echo "ALLOWED_ORIGIN=${ALLOWED_ORIGIN}" >> .env
 
 RUN npm run build
 
-FROM node:20-alpine
+FROM node:20-alpine AS runner
 
-WORKDIR /src/app
+WORKDIR /app
 
-COPY --from=build /src/app /src/app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+COPY --from=builder /app/.next .next
+COPY --from=builder /app/public public
+COPY --from=builder /app/.env .env
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/middleware.js ./
 
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+ENV NODE_ENV=production
+
+CMD ["npm", "start"]
